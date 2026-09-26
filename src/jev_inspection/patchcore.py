@@ -48,7 +48,11 @@ def fit(root: Path, train: list[str], k, seed: int, backbone: str, device: str, 
     model.feature_extractor.eval()  # frozen backbone: keep BatchNorm in inference mode
     for _, x in _batches(root, train, bs, device):
         model(x)
-    model.subsample_embedding(coreset_ratio(k))
+    if coreset_ratio(k) < 1.0:
+        model.subsample_embedding(coreset_ratio(k))
+    else:  # a 100% coreset is the whole bank; skip the O(N^2) greedy selection that would return it
+        model.memory_bank = torch.vstack(model.embedding_store)
+        model.embedding_store.clear()
     return model.eval()
 
 
