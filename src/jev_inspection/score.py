@@ -236,8 +236,8 @@ def summarise(root: Path, vlm_paths: list[Path], patchcore_path: Path | None, B=
                                                    for m in per_seed[0]}}
 
     by_type = defaultdict(dict)  # descriptive: which defect types each system misses
-    type_systems = dict(systems) | {f"C{k}": pc[k].mean(1) for k in ks if k in ("16", "all")}
-    for n, s in type_systems.items():
+    type_systems = {n: s[:, None] for n, s in systems.items()} | {f"C{k}": pc[k] for k in ks if k in ("16", "all")}
+    for n, m in type_systems.items():  # (images, seeds): AUROC per seed, then the mean, as elsewhere
         for c in tab.categories:
             nrm, anom = tab.idx[c]
             for t in sorted({t for i in anom for t in tab.types[i]}):
@@ -245,6 +245,7 @@ def summarise(root: Path, vlm_paths: list[Path], patchcore_path: Path | None, B=
                 if len(sel) >= 5:
                     ix = np.r_[nrm, sel]
                     y = np.r_[np.zeros(len(nrm), int), np.ones(len(sel), int)]
-                    by_type[n][f"{c}/{t}"] = {"auroc": float(auroc_rows(s[ix], y)[0]), "n": int(len(sel))}
+                    auc = np.mean([auroc_rows(m[ix, j], y)[0] for j in range(m.shape[1])])
+                    by_type[n][f"{c}/{t}"] = {"auroc": float(auc), "n": int(len(sel))}
     out["per_defect_type_auroc"] = by_type
     return out

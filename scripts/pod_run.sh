@@ -23,6 +23,9 @@ if [ ! -f "$VISA_ROOT/split_csv/1cls.csv" ]; then
   cd /workspace/jev-omni-inspection
 fi
 
+echo "== $(date -u) VLM smoke, the cheap gate (2+2 cashew images; the rows are reused by the full run)"
+uv run jev-inspection vlm --model jev --category cashew --limit 2 --out results || { echo '!! jev smoke failed'; exit 1; }
+
 echo "== $(date -u) sanity anchor: PatchCore WRN-101, k=all, seed 0 (EfficientAD reports 94.3 mean image AUROC)"
 uv run jev-inspection patchcore --backbone wide_resnet101_2 --k all --seed 0 --out results
 uv run python - <<'EOF'
@@ -39,8 +42,6 @@ sys.exit(0 if macro >= 90 else 1)
 EOF
 [ $? -eq 0 ] || { echo '!! anchor far below 94.3: stop and investigate before the sweep'; exit 1; }
 
-echo "== $(date -u) VLM smoke (2+2 cashew images; the rows are reused by the full run)"
-uv run jev-inspection vlm --model jev --category cashew --limit 2 --out results || { echo '!! jev smoke failed'; exit 1; }
 for m in jev base; do
   echo "== $(date -u) VLM $m"
   uv run jev-inspection vlm --model $m --out results || echo "!! $m failed"

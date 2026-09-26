@@ -73,6 +73,24 @@ def score(model, root: Path, tests: list[visa.Item], device: str, bs: int = 16, 
     return out
 
 
+@torch.inference_mode()
+def latency(model, root: Path, tests: list[visa.Item], device: str, n=200):
+    """Batch 1 with decode and preprocessing inside the timer, as the VLM run is timed.
+    The first 10 are warmup and discarded."""
+    ms = []
+    for it in tests[:n + 10]:
+        if device.startswith("cuda"):
+            torch.cuda.synchronize()
+        t0 = time.perf_counter()
+        x = TRANSFORM(Image.open(root / it.image).convert("RGB"))[None].to(device)
+        model(x)
+        if device.startswith("cuda"):
+            torch.cuda.synchronize()
+        ms.append((time.perf_counter() - t0) * 1e3)
+    ms = ms[10:]
+    return {"n": len(ms), "median_ms": float(np.median(ms)), "p90_ms": float(np.percentile(ms, 90))}
+
+
 def sweep(root: Path, out_dir: Path, categories, ks, seeds, backbone="wide_resnet50_2", device="cuda",
           maps_for: tuple | None = None):
     """One JSON line per (category, k, seed, test image); resumable per (category, k, seed)."""
@@ -99,6 +117,11 @@ def sweep(root: Path, out_dir: Path, categories, ks, seeds, backbone="wide_resne
                     fit_s = time.perf_counter() - t0
                     maps = out_dir / "maps" / f"{obj}_k{k}_s{seed}" if maps_for == (str(k), seed) else None
                     rows = score(model, root, tests, device, maps_dir=maps)
+                    if maps is not None:
+                        lat = {"obj": obj, "k": k, "seed": seed, "backbone": backbone, "device": device,
+                               **latency(model, root, tests, device)}
+                        with (out_dir / "patchcore_latency.jsonl").open("a") as lf:
+                            lf.write(json.dumps(lat) + "\n")
                     bank = int(model.memory_bank.shape[0])
                     by_img = {i.image: i for i in tests}
                     for r in rows:
