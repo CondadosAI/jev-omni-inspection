@@ -1,0 +1,406 @@
+{
+ "candle": {
+  "split_1cls": {
+   "train_normal": 900,
+   "test_normal": 100,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 13,
+  "type_counts": {
+   "damaged corner of packaging": 25,
+   "different colour spot": 22,
+   "foreign particals on candle": 17,
+   "chunk of wax missing": 15,
+   "wax melded out of the candle": 14,
+   "weird candle wick": 11,
+   "extra wax in candle": 10,
+   "other": 1
+  },
+  "id2class": [
+   "Chunk Of Wax Missing",
+   "Damaged Corner of Packaging",
+   "weird candle wick",
+   "Different Colour Spot",
+   "Extra Wax in Candle",
+   "Foreign Particals on Candle",
+   "Wax Melded out of the candle",
+   "Other"
+  ],
+  "sampled_sizes": {
+   "1284x1168": 20
+  }
+ },
+ "capsules": {
+  "split_1cls": {
+   "train_normal": 542,
+   "test_normal": 60,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 70,
+  "type_counts": {
+   "bubble": 100,
+   "discolor": 70,
+   "scratch": 55,
+   "leak": 40,
+   "misshape": 28
+  },
+  "id2class": [
+   "Bubble",
+   "Discolor",
+   "Scratch",
+   "Leak",
+   "Misshape"
+  ],
+  "sampled_sizes": {
+   "1500x1000": 21
+  }
+ },
+ "cashew": {
+  "split_1cls": {
+   "train_normal": 450,
+   "test_normal": 50,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 10,
+  "type_counts": {
+   "small holes": 22,
+   "corner or edge breakage": 17,
+   "small scratches": 16,
+   "burnt": 14,
+   "same colour spot": 14,
+   "different colour spot": 13,
+   "middle breakage": 8,
+   "stuck together": 6
+  },
+  "id2class": [
+   "Burnt",
+   "Corner or Edge Breakage",
+   "Different Colour Spot",
+   "Middle Breakage",
+   "Small Holes",
+   "Small Scratches",
+   "Stuck Together",
+   "Same Colour Spot",
+   "Other"
+  ],
+  "sampled_sizes": {
+   "1274x1176": 20
+  }
+ },
+ "chewinggum": {
+  "split_1cls": {
+   "train_normal": 453,
+   "test_normal": 50,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 43,
+  "type_counts": {
+   "chunk of gum missing": 47,
+   "corner missing": 36,
+   "small cracks": 29,
+   "similar colour spot": 25,
+   "scratches": 16
+  },
+  "id2class": [
+   "Chunk of gum missing",
+   "Corner Missing",
+   "Scratches",
+   "Similar Colour Spot",
+   "Small Cracks",
+   "Other"
+  ],
+  "sampled_sizes": {
+   "1342x1118": 21
+  }
+ },
+ "fryum": {
+  "split_1cls": {
+   "train_normal": 450,
+   "test_normal": 50,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 13,
+  "type_counts": {
+   "similar colour spot": 22,
+   "middle breakage": 21,
+   "fryum stuck together": 20,
+   "different colour spot": 18,
+   "small scratches": 13,
+   "burnt": 9,
+   "corner or edge breakage": 9,
+   "other": 1
+  },
+  "id2class": [
+   "Burnt",
+   "Corner or Edge Breakage",
+   "Different Colour Spot",
+   "Fryum Stuck Together",
+   "Middle Breakage",
+   "Similar Colour Spot",
+   "Small Scratches",
+   "Other"
+  ],
+  "sampled_sizes": {
+   "1500x1000": 20
+  }
+ },
+ "macaroni1": {
+  "split_1cls": {
+   "train_normal": 900,
+   "test_normal": 100,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 20,
+  "type_counts": {
+   "small scratches": 33,
+   "chip around edge and corner": 25,
+   "similar colour spot": 22,
+   "different colour spot": 16,
+   "small cracks": 14,
+   "middle breakage": 10
+  },
+  "id2class": [
+   "Chip Around Edge And Corner",
+   "Different Colour Spot",
+   "Middle Breakage",
+   "Similar Colour Spot",
+   "Small Cracks",
+   "Small Scratches",
+   "Other"
+  ],
+  "sampled_sizes": {
+   "1500x1000": 20
+  }
+ },
+ "macaroni2": {
+  "split_1cls": {
+   "train_normal": 900,
+   "test_normal": 100,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 22,
+  "type_counts": {
+   "small scratches": 36,
+   "small chip around edge": 30,
+   "color spot similar to the object": 28,
+   "different color spot": 17,
+   "breakage down the middle": 15,
+   "small cracks": 13,
+   "other": 1
+  },
+  "id2class": [
+   "Breakage down the middle",
+   "Color spot similar to the Object",
+   "Different Color spot",
+   "Small chip around edge",
+   "Small Cracks",
+   "Small Scratches",
+   "Other"
+  ],
+  "sampled_sizes": {
+   "1500x1000": 20
+  }
+ },
+ "pcb1": {
+  "split_1cls": {
+   "train_normal": 904,
+   "test_normal": 100,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 9,
+  "type_counts": {
+   "melt": 54,
+   "scratch": 21,
+   "missing": 20,
+   "bent": 15
+  },
+  "id2class": [
+   "Bent",
+   "Melt",
+   "Scratch",
+   "Missing"
+  ],
+  "sampled_sizes": {
+   "1404x1070": 21
+  }
+ },
+ "pcb2": {
+  "split_1cls": {
+   "train_normal": 901,
+   "test_normal": 100,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 9,
+  "type_counts": {
+   "melt": 55,
+   "scratch": 20,
+   "missing": 19,
+   "bent": 15
+  },
+  "id2class": [
+   "Bent",
+   "Melt",
+   "Scratch",
+   "Missing"
+  ],
+  "sampled_sizes": {
+   "1404x1070": 21
+  }
+ },
+ "pcb3": {
+  "split_1cls": {
+   "train_normal": 905,
+   "test_normal": 101,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 7,
+  "type_counts": {
+   "melt": 43,
+   "scratch": 25,
+   "bent": 20,
+   "missing": 20
+  },
+  "id2class": [
+   "Bent",
+   "Melt",
+   "Scratch",
+   "Missing"
+  ],
+  "sampled_sizes": {
+   "1562x960": 21
+  }
+ },
+ "pcb4": {
+  "split_1cls": {
+   "train_normal": 904,
+   "test_normal": 101,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 56,
+  "type_counts": {
+   "dirt": 42,
+   "missing": 33,
+   "extra": 30,
+   "damage": 21,
+   "scratch": 17,
+   "wrong place": 13,
+   "burnt": 8
+  },
+  "id2class": [
+   "Burnt",
+   "Scratch",
+   "Missing",
+   "Damage",
+   "Extra",
+   "Wrong Place",
+   "Dirt"
+  ],
+  "sampled_sizes": {
+   "1358x1104": 21
+  }
+ },
+ "pipe_fryum": {
+  "split_1cls": {
+   "train_normal": 450,
+   "test_normal": 50,
+   "test_anomaly": 100
+  },
+  "anno_columns": [
+   "image",
+   "label",
+   "mask"
+  ],
+  "anomalous_in_anno": 100,
+  "multi_type_images": 12,
+  "type_counts": {
+   "small scratches": 24,
+   "similar colour spot": 21,
+   "burnt": 16,
+   "corner and edge breakage": 15,
+   "different colour spot": 10,
+   "middle breakage": 10,
+   "small cracks": 10,
+   "stuck together": 10
+  },
+  "id2class": [
+   "Burnt",
+   "Corner And Edge Breakage",
+   "Different Colour Spot",
+   "Middle Breakage",
+   "Similar Colour Spot",
+   "Small Scratches",
+   "Stuck Together",
+   "Small Cracks",
+   "Other"
+  ],
+  "sampled_sizes": {
+   "1300x1154": 20
+  }
+ }
+}

@@ -1,0 +1,34 @@
+[project]
+name = "jev-inspection"
+version = "0.1.0"
+description = "How many good parts does PatchCore need to beat a VLM that has seen none? Measured on VisA."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+dependencies = [
+    "click>=8.1",
+    "loguru>=0.7",
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "pillow>=11.0",
+    "scikit-learn>=1.6",
+    "scipy>=1.14",
+]
+
+[project.optional-dependencies]
+# The VLM run happens on a rented GPU; its exact stack is pinned in scripts/pod_run.sh.
+vlm = ["torch==2.14.*", "torchvision==0.29.*", "transformers==5.17.0", "accelerate", "huggingface_hub", "safetensors"]
+patchcore = ["anomalib==2.6.2"]
+
+[project.scripts]
+jev-inspection = "jev_inspection.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jev_inspection"]
+
+[dependency-groups]
+dev = ["pytest>=8.3"]
