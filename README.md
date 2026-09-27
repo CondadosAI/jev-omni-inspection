@@ -36,6 +36,9 @@ scripts/
   pod_ablation.sh  PatchCore at 512 x 512
   post_data.py     numbers and lab data used by the post
   post_figures.py  the post's SVG figures
+  render_visa_video.py     VisA parts on a belt, verdicts from the saved scores
+  demo_detect.py / demo_classify.py / render_conveyor_video.py
+                   day-0 demo: detect, track, isolate, ask Gemma 4 (unlabelled clip)
 data/              step-0 counts and the frozen reference / subset draws
 results/           per-image scores and summaries cited by the post
 ```
@@ -66,6 +69,8 @@ redistributed here, and each keeps its own terms:
 | [timm/wide_resnet50_2.racm_in1k](https://huggingface.co/timm/wide_resnet50_2.racm_in1k) | `30f73ace` | Apache-2.0 on the model card; trained on ImageNet-1k, whose images have their own terms |
 | [timm/wide_resnet101_2.tv_in1k](https://huggingface.co/timm/wide_resnet101_2.tv_in1k) (sanity anchor only) | `bc795a74` | BSD-3-Clause on the model card; torchvision's ImageNet-1k weights |
 | [anomalib](https://github.com/open-edge-platform/anomalib) | 2.6.2 (PyPI) | Apache-2.0 |
+| [RF-DETR](https://github.com/roboflow/rf-detr) base, COCO weights (day-0 demo only) | rfdetr 1.11.0 | Apache-2.0 |
+| [Tangerines on a roller conveyor machine](https://www.pexels.com/video/tangerines-on-a-roller-conveyor-machine-10576684/), Thiago Zanutim Lucas (day-0 demo only) | Pexels 10576684, 1080p, sha256 `736fa8a3…6e40` | [Pexels licence](https://www.pexels.com/license/); downloaded at run time, not redistributed |
 
 `output/cover-bg.png` (the post's cover background) contains VisA images, under CC BY 4.0 with
 attribution to Zou et al. (2022).
