@@ -18,10 +18,12 @@ ap = argparse.ArgumentParser()
 ap.add_argument("out", type=Path)
 ap.add_argument("--phrase", default="a tangerine")
 ap.add_argument("--model", default="base", choices=["base", "jev"])
+ap.add_argument("--spec", default="", help="a product spec appended to the state, e.g. what counts as a defect")
+ap.add_argument("--name", default="verdicts", help="output file stem")
 a = ap.parse_args()
 
 clf, prompt_fn = vlm.load(a.model, "cuda")
-state = f"Production-line inspection photo of {a.phrase}."
+state = f"Production-line inspection photo of {a.phrase}." + (f" {a.spec}" if a.spec else "")
 res = {}
 for crop in sorted((a.out / "crops").glob("*.png"), key=lambda p: int(p.stem)):
     img = Image.open(crop).convert("RGB")
@@ -36,4 +38,4 @@ for crop in sorted((a.out / "crops").glob("*.png"), key=lambda p: int(p.stem)):
     res[crop.stem] = {"logodds": m, "p_defective": 1 / (1 + math.exp(-m)), "order0": lo[0], "order1": lo[1]}
     print(crop.stem, round(m, 3), round(res[crop.stem]["p_defective"], 3))
 json.dump({"model": a.model, "state": state, "question": visa.QUESTION, "verdicts": res},
-          open(a.out / "verdicts.json", "w"), indent=1)
+          open(a.out / f"{a.name}.json", "w"), indent=1)
