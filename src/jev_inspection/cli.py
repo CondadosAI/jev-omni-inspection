@@ -46,11 +46,13 @@ def probe(root, out, n, device):
 @click.option("--k", "ks", multiple=True, help="default: 1 2 4 8 16 64 all")
 @click.option("--seed", "seeds", multiple=True, type=int, default=(0, 1, 2))
 @click.option("--backbone", default="wide_resnet50_2")
+@click.option("--image-size", default=256, help="square input side; 256 = anomalib default (pre-registered)")
 @click.option("--maps-for", nargs=2, help="save anomaly maps for this k and seed, e.g. --maps-for 16 0")
 @click.option("--device", default="cuda")
-def patchcore(root, out, categories, ks, seeds, backbone, maps_for, device):
+def patchcore(root, out, categories, ks, seeds, backbone, image_size, maps_for, device):
     """PatchCore fitted on k good parts per category."""
-    from .patchcore import KS, sweep
+    from .patchcore import KS, set_image_size, sweep
+    set_image_size(image_size)
     ks = [k if k == "all" else int(k) for k in ks] or list(KS)
     maps = (maps_for[0], int(maps_for[1])) if maps_for else None
     sweep(root, out, categories or visa.CATEGORIES, ks, seeds, backbone, device, maps)

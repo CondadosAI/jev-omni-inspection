@@ -24,8 +24,21 @@ from . import visa
 
 KS = (1, 2, 4, 8, 16, 64, "all")
 IMAGE_SIZE = (256, 256)
-TRANSFORM = T.Compose([T.ToImage(), T.ToDtype(torch.float32, scale=True), T.Resize(IMAGE_SIZE, antialias=True),
-                       T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
+
+
+def _transform(size):
+    return T.Compose([T.ToImage(), T.ToDtype(torch.float32, scale=True), T.Resize(size, antialias=True),
+                      T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
+
+
+TRANSFORM = _transform(IMAGE_SIZE)
+
+
+def set_image_size(side: int):
+    """Resolution ablation. 256 is anomalib's default and the pre-registered setting."""
+    global IMAGE_SIZE, TRANSFORM
+    IMAGE_SIZE = (side, side)
+    TRANSFORM = _transform(IMAGE_SIZE)
 
 
 def coreset_ratio(k) -> float:
@@ -99,7 +112,8 @@ def sweep(root: Path, out_dir: Path, categories, ks, seeds, backbone="wide_resne
           maps_for: tuple | None = None):
     """One JSON line per (category, k, seed, test image); resumable per (category, k, seed)."""
     out_dir.mkdir(parents=True, exist_ok=True)
-    out = out_dir / f"patchcore_{backbone}.jsonl"
+    suffix = "" if IMAGE_SIZE == (256, 256) else f"_r{IMAGE_SIZE[0]}"
+    out = out_dir / f"patchcore_{backbone}{suffix}.jsonl"
     done = set()
     if out.exists():
         done = {(r["obj"], str(r["k"]), r["seed"]) for r in map(json.loads, out.open())}
