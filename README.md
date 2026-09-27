@@ -41,7 +41,7 @@ scripts/
   post_images.py           the heat-map figure and the cover background
   render_visa_video.py     VisA parts on a belt, verdicts from the saved scores
   demo_maps.py             PatchCore 512 px maps for the parts in that video
-  demo_detect.py / demo_classify.py / render_counting_video.py
+  pod_demo.sh / demo_detect.py / demo_classify.py / demo_hue.py / render_counting_video.py
                    day-0 demo on a lime line: detect, track, count, ask Gemma 4 (unlabelled clip)
 data/              step-0 counts and the frozen reference / subset draws
 results/           per-image scores and summaries cited by the post
