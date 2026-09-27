@@ -14,11 +14,8 @@ results/*
 !results/pip-freeze.txt
 !results/post_numbers.json
 !results/triage-cashew.json
-!results/demo/
-results/demo/*
-!results/demo/tracks.json
-!results/demo/verdicts.json
-!results/demo/visa-belt-verdicts.json
+!results/visa-belt-verdicts.json
+!results/demo-limes/
 !results/maps-k16-s0-256/
 !results/maps-k16-s0-256/**
 output/*

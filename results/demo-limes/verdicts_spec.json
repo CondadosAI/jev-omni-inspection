@@ -1,0 +1,775 @@
+{
+ "model": "base",
+ "state": "Production-line inspection photo of a Tahiti lime graded for export. Export grade requires a green skin; yellowing, spots or damage count as defects.",
+ "question": "Is everything in the photo good, or is at least one part defective?",
+ "verdicts": {
+  "2": {
+   "logodds": 9.6875,
+   "p_defective": 0.9999379495039771,
+   "order0": 9.75,
+   "order1": 9.625
+  },
+  "3": {
+   "logodds": 4.5,
+   "p_defective": 0.9890130573694068,
+   "order0": 4.375,
+   "order1": 4.625
+  },
+  "4": {
+   "logodds": 2.5625,
+   "p_defective": 0.9284088005554476,
+   "order0": 2.25,
+   "order1": 2.875
+  },
+  "5": {
+   "logodds": 5.625,
+   "p_defective": 0.9964063974185798,
+   "order0": 5.125,
+   "order1": 6.125
+  },
+  "6": {
+   "logodds": 9.0625,
+   "p_defective": 0.9998840806568136,
+   "order0": 9.5,
+   "order1": 8.625
+  },
+  "7": {
+   "logodds": 9.125,
+   "p_defective": 0.9998911030899734,
+   "order0": 9.25,
+   "order1": 9.0
+  },
+  "8": {
+   "logodds": 15.0,
+   "p_defective": 0.999999694097773,
+   "order0": 14.6875,
+   "order1": 15.3125
+  },
+  "9": {
+   "logodds": 7.5625,
+   "p_defective": 0.999480695135505,
+   "order0": 7.75,
+   "order1": 7.375
+  },
+  "10": {
+   "logodds": 8.0625,
+   "p_defective": 0.9996849613059188,
+   "order0": 8.5,
+   "order1": 7.625
+  },
+  "13": {
+   "logodds": 10.375,
+   "p_defective": 0.9999687980886061,
+   "order0": 10.75,
+   "order1": 10.0
+  },
+  "16": {
+   "logodds": 6.6875,
+   "p_defective": 0.9987551566979116,
+   "order0": 6.5,
+   "order1": 6.875
+  },
+  "17": {
+   "logodds": 8.375,
+   "p_defective": 0.9997694932780068,
+   "order0": 8.75,
+   "order1": 7.999999999999999
+  },
+  "18": {
+   "logodds": 4.625,
+   "p_defective": 0.9902915235185259,
+   "order0": 4.375,
+   "order1": 4.875
+  },
+  "19": {
+   "logodds": 3.9375,
+   "p_defective": 0.9808759632491112,
+   "order0": 3.875,
+   "order1": 4.0
+  },
+  "30": {
+   "logodds": 7.8125,
+   "p_defective": 0.9995955185021579,
+   "order0": 8.125,
+   "order1": 7.5
+  },
+  "36": {
+   "logodds": 5.625,
+   "p_defective": 0.9964063974185798,
+   "order0": 5.625,
+   "order1": 5.625
+  },
+  "37": {
+   "logodds": 5.75,
+   "p_defective": 0.9968273171575148,
+   "order0": 6.0,
+   "order1": 5.5
+  },
+  "38": {
+   "logodds": 3.375,
+   "p_defective": 0.9669140216112958,
+   "order0": 3.375,
+   "order1": 3.375
+  },
+  "39": {
+   "logodds": 7.6875,
+   "p_defective": 0.999541687099365,
+   "order0": 7.875,
+   "order1": 7.5
+  },
+  "40": {
+   "logodds": 3.5625,
+   "p_defective": 0.9724147177732099,
+   "order0": 3.5,
+   "order1": 3.625
+  },
+  "43": {
+   "logodds": 6.875,
+   "p_defective": 0.9989677689632452,
+   "order0": 6.875,
+   "order1": 6.875
+  },
+  "46": {
+   "logodds": 2.6875,
+   "p_defective": 0.9362850057480346,
+   "order0": 2.375,
+   "order1": 3.0
+  },
+  "47": {
+   "logodds": 2.5625,
+   "p_defective": 0.9284088005554476,
+   "order0": 2.25,
+   "order1": 2.875
+  },
+  "49": {
+   "logodds": 5.625,
+   "p_defective": 0.9964063974185798,
+   "order0": 5.25,
+   "order1": 6.0
+  },
+  "50": {
+   "logodds": 3.8125,
+   "p_defective": 0.9783846672373524,
+   "order0": 3.625,
+   "order1": 4.0
+  },
+  "53": {
+   "logodds": 11.84375,
+   "p_defective": 0.9999928167396002,
+   "order0": 11.8125,
+   "order1": 11.875
+  },
+  "54": {
+   "logodds": 5.875,
+   "p_defective": 0.9971990730328789,
+   "order0": 5.75,
+   "order1": 6.0
+  },
+  "55": {
+   "logodds": 1.625,
+   "p_defective": 0.8354835371034369,
+   "order0": 1.25,
+   "order1": 2.0
+  },
+  "56": {
+   "logodds": 3.8125,
+   "p_defective": 0.9783846672373524,
+   "order0": 3.625,
+   "order1": 4.0
+  },
+  "63": {
+   "logodds": 12.5,
+   "p_defective": 0.9999962733607158,
+   "order0": 12.4375,
+   "order1": 12.5625
+  },
+  "66": {
+   "logodds": 5.0625,
+   "p_defective": 0.9937100978631075,
+   "order0": 4.625,
+   "order1": 5.5
+  },
+  "71": {
+   "logodds": 2.9375,
+   "p_defective": 0.9496693674025232,
+   "order0": 2.875,
+   "order1": 3.0
+  },
+  "72": {
+   "logodds": 7.125,
+   "p_defective": 0.9991959140643708,
+   "order0": 8.125,
+   "order1": 6.125
+  },
+  "76": {
+   "logodds": 0.4375,
+   "p_defective": 0.6076631698328917,
+   "order0": 0.375,
+   "order1": 0.5
+  },
+  "78": {
+   "logodds": 3.75,
+   "p_defective": 0.9770226300899744,
+   "order0": 3.5,
+   "order1": 4.0
+  },
+  "79": {
+   "logodds": 10.9375,
+   "p_defective": 0.9999822214481369,
+   "order0": 10.625,
+   "order1": 11.25
+  },
+  "81": {
+   "logodds": 7.0,
+   "p_defective": 0.9990889488055994,
+   "order0": 7.0,
+   "order1": 7.0
+  },
+  "82": {
+   "logodds": 7.375,
+   "p_defective": 0.9993736658418905,
+   "order0": 7.25,
+   "order1": 7.5
+  },
+  "83": {
+   "logodds": 12.1875,
+   "p_defective": 0.9999949062949967,
+   "order0": 11.8125,
+   "order1": 12.5625
+  },
+  "86": {
+   "logodds": 9.3125,
+   "p_defective": 0.9999097196098496,
+   "order0": 9.25,
+   "order1": 9.375
+  },
+  "87": {
+   "logodds": 12.8125,
+   "p_defective": 0.9999972735297293,
+   "order0": 12.5,
+   "order1": 13.125
+  },
+  "88": {
+   "logodds": 6.0,
+   "p_defective": 0.9975273768433653,
+   "order0": 7.625,
+   "order1": 4.375
+  },
+  "93": {
+   "logodds": 4.0,
+   "p_defective": 0.9820137900379085,
+   "order0": 3.9999999999999996,
+   "order1": 4.0
+  },
+  "94": {
+   "logodds": 10.84375,
+   "p_defective": 0.9999804741147913,
+   "order0": 10.3125,
+   "order1": 11.375
+  },
+  "96": {
+   "logodds": 13.53125,
+   "p_defective": 0.9999986712226561,
+   "order0": 12.9375,
+   "order1": 14.125
+  },
+  "97": {
+   "logodds": 3.375,
+   "p_defective": 0.9669140216112958,
+   "order0": 3.125,
+   "order1": 3.625
+  },
+  "102": {
+   "logodds": 1.1875,
+   "p_defective": 0.7662936430859597,
+   "order0": 0.875,
+   "order1": 1.5
+  },
+  "109": {
+   "logodds": 9.25,
+   "p_defective": 0.9999038975845005,
+   "order0": 8.5,
+   "order1": 10.0
+  },
+  "110": {
+   "logodds": 3.125,
+   "p_defective": 0.9579122720843811,
+   "order0": 2.5,
+   "order1": 3.75
+  },
+  "117": {
+   "logodds": 8.8125,
+   "p_defective": 0.999851161517427,
+   "order0": 10.625,
+   "order1": 7.0
+  },
+  "119": {
+   "logodds": 16.3125,
+   "p_defective": 0.9999999176675142,
+   "order0": 15.125,
+   "order1": 17.5
+  },
+  "120": {
+   "logodds": 5.0625,
+   "p_defective": 0.9937100978631075,
+   "order0": 4.875,
+   "order1": 5.25
+  },
+  "121": {
+   "logodds": 2.25,
+   "p_defective": 0.9046505351008906,
+   "order0": 1.875,
+   "order1": 2.625
+  },
+  "122": {
+   "logodds": 6.8125,
+   "p_defective": 0.9989012689270753,
+   "order0": 6.875,
+   "order1": 6.75
+  },
+  "127": {
+   "logodds": 7.1875,
+   "p_defective": 0.9992445943672705,
+   "order0": 6.625,
+   "order1": 7.75
+  },
+  "128": {
+   "logodds": 1.6875,
+   "p_defective": 0.8438951025545426,
+   "order0": 1.5,
+   "order1": 1.8749999999999998
+  },
+  "130": {
+   "logodds": 1.0625,
+   "p_defective": 0.7431680086124811,
+   "order0": 0.6249999999999999,
+   "order1": 1.5
+  },
+  "131": {
+   "logodds": 2.0,
+   "p_defective": 0.8807970779778823,
+   "order0": 1.5,
+   "order1": 2.5
+  },
+  "132": {
+   "logodds": 2.6875,
+   "p_defective": 0.9362850057480346,
+   "order0": 2.375,
+   "order1": 3.0
+  },
+  "137": {
+   "logodds": 3.25,
+   "p_defective": 0.9626731126558706,
+   "order0": 2.75,
+   "order1": 3.75
+  },
+  "138": {
+   "logodds": 3.4375,
+   "p_defective": 0.9688561694652216,
+   "order0": 2.875,
+   "order1": 3.9999999999999996
+  },
+  "139": {
+   "logodds": 7.0,
+   "p_defective": 0.9990889488055994,
+   "order0": 6.875,
+   "order1": 7.125
+  },
+  "140": {
+   "logodds": 3.125,
+   "p_defective": 0.9579122720843811,
+   "order0": 3.0,
+   "order1": 3.25
+  },
+  "141": {
+   "logodds": -0.875,
+   "p_defective": 0.29421497216298875,
+   "order0": -1.25,
+   "order1": -0.5
+  },
+  "153": {
+   "logodds": 14.15625,
+   "p_defective": 0.9999992887563014,
+   "order0": 13.5625,
+   "order1": 14.75
+  },
+  "163": {
+   "logodds": 3.8125,
+   "p_defective": 0.9783846672373524,
+   "order0": 3.625,
+   "order1": 4.0
+  },
+  "164": {
+   "logodds": 10.28125,
+   "p_defective": 0.9999657315094574,
+   "order0": 10.1875,
+   "order1": 10.375
+  },
+  "170": {
+   "logodds": 4.0625,
+   "p_defective": 0.9830850867332734,
+   "order0": 3.875,
+   "order1": 4.25
+  },
+  "176": {
+   "logodds": 12.65625,
+   "p_defective": 0.9999968124347834,
+   "order0": 12.3125,
+   "order1": 13.0
+  },
+  "181": {
+   "logodds": 3.5625,
+   "p_defective": 0.9724147177732099,
+   "order0": 3.375,
+   "order1": 3.75
+  },
+  "185": {
+   "logodds": 5.25,
+   "p_defective": 0.9947798743064417,
+   "order0": 5.0,
+   "order1": 5.5
+  },
+  "194": {
+   "logodds": 13.625,
+   "p_defective": 0.9999987901343165,
+   "order0": 13.875,
+   "order1": 13.375
+  },
+  "202": {
+   "logodds": 14.15625,
+   "p_defective": 0.9999992887563014,
+   "order0": 14.25,
+   "order1": 14.0625
+  },
+  "203": {
+   "logodds": 7.125,
+   "p_defective": 0.9991959140643708,
+   "order0": 6.875,
+   "order1": 7.375
+  },
+  "208": {
+   "logodds": 9.65625,
+   "p_defective": 0.9999359799358962,
+   "order0": 10.3125,
+   "order1": 9.0
+  },
+  "209": {
+   "logodds": 5.75,
+   "p_defective": 0.9968273171575148,
+   "order0": 5.375,
+   "order1": 6.125
+  },
+  "214": {
+   "logodds": 3.5,
+   "p_defective": 0.9706877692486436,
+   "order0": 3.0,
+   "order1": 4.0
+  },
+  "215": {
+   "logodds": 8.0,
+   "p_defective": 0.9996646498695336,
+   "order0": 8.75,
+   "order1": 7.25
+  },
+  "221": {
+   "logodds": 12.84375,
+   "p_defective": 0.9999973574141792,
+   "order0": 12.5,
+   "order1": 13.1875
+  },
+  "224": {
+   "logodds": 12.28125,
+   "p_defective": 0.9999953621267027,
+   "order0": 11.5,
+   "order1": 13.0625
+  },
+  "225": {
+   "logodds": 8.375,
+   "p_defective": 0.9997694932780068,
+   "order0": 8.25,
+   "order1": 8.5
+  },
+  "226": {
+   "logodds": 10.8125,
+   "p_defective": 0.999979854309147,
+   "order0": 11.75,
+   "order1": 9.875
+  },
+  "228": {
+   "logodds": 12.0625,
+   "p_defective": 0.9999942280799697,
+   "order0": 12.1875,
+   "order1": 11.9375
+  },
+  "229": {
+   "logodds": 6.375,
+   "p_defective": 0.9982992775885648,
+   "order0": 5.75,
+   "order1": 7.0
+  },
+  "230": {
+   "logodds": 13.5,
+   "p_defective": 0.999998629042793,
+   "order0": 13.0625,
+   "order1": 13.9375
+  },
+  "231": {
+   "logodds": 14.5,
+   "p_defective": 0.9999994956525918,
+   "order0": 15.0,
+   "order1": 14.0
+  },
+  "233": {
+   "logodds": 3.375,
+   "p_defective": 0.9669140216112958,
+   "order0": 3.0,
+   "order1": 3.75
+  },
+  "235": {
+   "logodds": 8.3125,
+   "p_defective": 0.9997546305194572,
+   "order0": 7.875,
+   "order1": 8.75
+  },
+  "236": {
+   "logodds": 7.8125,
+   "p_defective": 0.9995955185021579,
+   "order0": 7.625,
+   "order1": 7.999999999999999
+  },
+  "237": {
+   "logodds": 6.0,
+   "p_defective": 0.9975273768433653,
+   "order0": 5.75,
+   "order1": 6.25
+  },
+  "238": {
+   "logodds": 8.375,
+   "p_defective": 0.9997694932780068,
+   "order0": 8.25,
+   "order1": 8.5
+  },
+  "243": {
+   "logodds": 0.5625,
+   "p_defective": 0.6370307944803831,
+   "order0": 0.25,
+   "order1": 0.875
+  },
+  "244": {
+   "logodds": 4.6875,
+   "p_defective": 0.9908743626108194,
+   "order0": 4.625,
+   "order1": 4.75
+  },
+  "245": {
+   "logodds": 14.6875,
+   "p_defective": 0.9999995818812769,
+   "order0": 14.625,
+   "order1": 14.75
+  },
+  "246": {
+   "logodds": 0.5625,
+   "p_defective": 0.6370307944803831,
+   "order0": 0.0,
+   "order1": 1.125
+  },
+  "247": {
+   "logodds": 8.125,
+   "p_defective": 0.999704042886487,
+   "order0": 8.125,
+   "order1": 8.125
+  },
+  "248": {
+   "logodds": 4.25,
+   "p_defective": 0.9859363729567544,
+   "order0": 4.375,
+   "order1": 4.125
+  },
+  "250": {
+   "logodds": 11.59375,
+   "p_defective": 0.9999907765298898,
+   "order0": 11.1875,
+   "order1": 12.0
+  },
+  "252": {
+   "logodds": 2.3125,
+   "p_defective": 0.9099070060380482,
+   "order0": 1.875,
+   "order1": 2.75
+  },
+  "255": {
+   "logodds": 15.03125,
+   "p_defective": 0.9999997035093924,
+   "order0": 14.375,
+   "order1": 15.6875
+  },
+  "256": {
+   "logodds": 15.4375,
+   "p_defective": 0.9999998024946565,
+   "order0": 14.5625,
+   "order1": 16.3125
+  },
+  "259": {
+   "logodds": 3.3125,
+   "p_defective": 0.9648551535992067,
+   "order0": 3.0,
+   "order1": 3.625
+  },
+  "260": {
+   "logodds": 6.5,
+   "p_defective": 0.998498817743263,
+   "order0": 6.25,
+   "order1": 6.75
+  },
+  "261": {
+   "logodds": 16.15625,
+   "p_defective": 0.9999999037435733,
+   "order0": 14.9375,
+   "order1": 17.375
+  },
+  "265": {
+   "logodds": 3.8125,
+   "p_defective": 0.9783846672373524,
+   "order0": 3.625,
+   "order1": 3.9999999999999996
+  },
+  "266": {
+   "logodds": 9.5,
+   "p_defective": 0.9999251537724895,
+   "order0": 9.0,
+   "order1": 10.0
+  },
+  "268": {
+   "logodds": 9.875,
+   "p_defective": 0.9999485577862579,
+   "order0": 9.875,
+   "order1": 9.875
+  },
+  "271": {
+   "logodds": 1.25,
+   "p_defective": 0.7772998611746911,
+   "order0": 0.75,
+   "order1": 1.75
+  },
+  "272": {
+   "logodds": 10.0,
+   "p_defective": 0.9999546021312976,
+   "order0": 9.625,
+   "order1": 10.375
+  },
+  "278": {
+   "logodds": 3.625,
+   "p_defective": 0.9740426428022031,
+   "order0": 3.375,
+   "order1": 3.875
+  },
+  "280": {
+   "logodds": 13.125,
+   "p_defective": 0.9999980052702785,
+   "order0": 12.4375,
+   "order1": 13.8125
+  },
+  "282": {
+   "logodds": 12.875,
+   "p_defective": 0.9999974387177893,
+   "order0": 12.5625,
+   "order1": 13.1875
+  },
+  "283": {
+   "logodds": 8.6875,
+   "p_defective": 0.9998313472460109,
+   "order0": 8.125,
+   "order1": 9.25
+  },
+  "292": {
+   "logodds": 9.9375,
+   "p_defective": 0.9999516743618128,
+   "order0": 9.5,
+   "order1": 10.375
+  },
+  "294": {
+   "logodds": 10.71875,
+   "p_defective": 0.9999778743309043,
+   "order0": 10.25,
+   "order1": 11.1875
+  },
+  "299": {
+   "logodds": 6.8125,
+   "p_defective": 0.9989012689270753,
+   "order0": 6.5,
+   "order1": 7.125
+  },
+  "302": {
+   "logodds": 11.625,
+   "p_defective": 0.9999910603036951,
+   "order0": 11.1875,
+   "order1": 12.0625
+  },
+  "303": {
+   "logodds": 3.625,
+   "p_defective": 0.9740426428022031,
+   "order0": 3.5,
+   "order1": 3.75
+  },
+  "310": {
+   "logodds": 14.71875,
+   "p_defective": 0.9999995947454324,
+   "order0": 13.75,
+   "order1": 15.6875
+  },
+  "311": {
+   "logodds": 5.5,
+   "p_defective": 0.995929862284104,
+   "order0": 5.25,
+   "order1": 5.75
+  },
+  "314": {
+   "logodds": 1.9375,
+   "p_defective": 0.8740772351648677,
+   "order0": 1.5,
+   "order1": 2.375
+  },
+  "315": {
+   "logodds": 1.0,
+   "p_defective": 0.7310585786300049,
+   "order0": 0.49999999999999994,
+   "order1": 1.5
+  },
+  "317": {
+   "logodds": 1.625,
+   "p_defective": 0.8354835371034369,
+   "order0": 1.375,
+   "order1": 1.875
+  },
+  "323": {
+   "logodds": 11.28125,
+   "p_defective": 0.9999873930537599,
+   "order0": 10.875,
+   "order1": 11.6875
+  },
+  "326": {
+   "logodds": 7.625,
+   "p_defective": 0.9995121428772178,
+   "order0": 7.5,
+   "order1": 7.75
+  },
+  "327": {
+   "logodds": -0.5625,
+   "p_defective": 0.3629692055196168,
+   "order0": -1.0,
+   "order1": -0.125
+  },
+  "333": {
+   "logodds": 8.0625,
+   "p_defective": 0.9996849613059188,
+   "order0": 8.125,
+   "order1": 8.0
+  },
+  "339": {
+   "logodds": 4.5,
+   "p_defective": 0.9890130573694068,
+   "order0": 4.0,
+   "order1": 5.0
+  }
+ }
+}
