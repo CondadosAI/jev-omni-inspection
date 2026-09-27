@@ -53,8 +53,8 @@ for name, s in systems.items():
 # The TriageLab data: cashew scores for three systems (PatchCore at seed 0).
 lab = {"category": "cashew", "systems": []}
 for key, label, note in (("A0", "Jev-Omni, no good parts", "log-odds of 'defective'"),
-                         ("C1", "PatchCore, 1 good part", "nearest-patch distance"),
-                         ("C16", "PatchCore, 16 good parts", "nearest-patch distance")):
+                         ("C1", "PatchCore, 1 good part (256 px)", "nearest-patch distance"),
+                         ("C16", "PatchCore, 16 good parts (256 px)", "nearest-patch distance")):
     s = systems[key]
     lab["systems"].append({"key": key, "label": label, "score": note,
                            "good": [round(float(x), 4) for x in s[n_idx]],

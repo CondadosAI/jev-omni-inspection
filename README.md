@@ -14,13 +14,14 @@ The pre-registration, including the frozen prompt and every departure from it, i
 |:--|--:|:--|
 | Jev-Omni, test photo only | 0 | 81.1 (79.4–82.7) |
 | Gemma 4 12B zero-shot, test photo only | 0 | 82.9 (81.3–84.5) |
-| PatchCore, k = 1 | 1 | 80.8 (78.0–83.1) |
-| PatchCore, k = 8 | 8 | 84.2 (81.8–86.1) |
-| PatchCore, k = 16 | 16 | 85.7 (84.2–87.2) |
-| PatchCore, all | 449–904 | 90.2 (89.0–91.4) |
+| PatchCore 256 px, k = 1 / 8 / 16 | 1–16 | 80.8 / 84.2 / 85.7 |
+| PatchCore 256 px, all | 449–904 | 90.2 (89.0–91.4) |
+| PatchCore 512 px, k = 1 / 4 / 16 | 1–16 | 84.5 / 89.7 / 92.4 |
 
 k\* (the first k whose paired-bootstrap interval on the difference is above zero) is 8 against
-Jev-Omni and 16 against Gemma 4. Everything is in `results/summary.json`.
+Jev-Omni and 16 against Gemma 4 at anomalib's default 256 px (pre-registered), and 1 and 4 at
+512 px (an ablation added after the run). `results/summary.json` holds the 256 px run,
+`results/summary_r512.json` the ablation.
 
 ## Layout
 
@@ -36,9 +37,12 @@ scripts/
   pod_ablation.sh  PatchCore at 512 x 512
   post_data.py     numbers and lab data used by the post
   post_figures.py  the post's SVG figures
+  ablation_summary.py      the 512 px ablation -> results/summary_r512.json
+  post_images.py           the heat-map figure and the cover background
   render_visa_video.py     VisA parts on a belt, verdicts from the saved scores
-  demo_detect.py / demo_classify.py / render_conveyor_video.py
-                   day-0 demo: detect, track, isolate, ask Gemma 4 (unlabelled clip)
+  demo_maps.py             PatchCore 512 px maps for the parts in that video
+  demo_detect.py / demo_classify.py / render_counting_video.py
+                   day-0 demo on a lime line: detect, track, count, ask Gemma 4 (unlabelled clip)
 data/              step-0 counts and the frozen reference / subset draws
 results/           per-image scores and summaries cited by the post
 ```
@@ -47,9 +51,11 @@ results/           per-image scores and summaries cited by the post
 
 ```bash
 uv sync --extra vlm --extra patchcore
-bash scripts/pod_run.sh        # on a CUDA GPU with >= 48 GB (an L40S took 4 h 52 min)
+export VISA_ROOT=/path/to/visa     # default: ~/.condados-jev/visa
+bash scripts/pod_run.sh            # on a CUDA GPU with >= 48 GB (an L40S took 4 h 52 min);
+                                   # the script expects the repo at /workspace/jev-omni-inspection
 uv run jev-inspection score --results results
-uv run pytest
+uv run pytest                      # the end-to-end test needs VisA under VISA_ROOT
 ```
 
 The VisA archive is downloaded from the official URL and checked against
@@ -70,7 +76,7 @@ redistributed here, and each keeps its own terms:
 | [timm/wide_resnet101_2.tv_in1k](https://huggingface.co/timm/wide_resnet101_2.tv_in1k) (sanity anchor only) | `bc795a74` | BSD-3-Clause on the model card; torchvision's ImageNet-1k weights |
 | [anomalib](https://github.com/open-edge-platform/anomalib) | 2.6.2 (PyPI) | Apache-2.0 |
 | [RF-DETR](https://github.com/roboflow/rf-detr) base, COCO weights (day-0 demo only) | rfdetr 1.11.0 | Apache-2.0 |
-| [Tangerines on a roller conveyor machine](https://www.pexels.com/video/tangerines-on-a-roller-conveyor-machine-10576684/), Thiago Zanutim Lucas (day-0 demo only) | Pexels 10576684, 1080p, sha256 `736fa8a3…6e40` | [Pexels licence](https://www.pexels.com/license/); downloaded at run time, not redistributed |
+| [Lime sorting on conveyor belt in factory](https://www.pexels.com/video/lime-sorting-on-conveyor-belt-in-factory-32953325/), Comercial GB (day-0 demo only) | Pexels 32953325, 1080 × 1920, sha256 `2bec11f3…1d72` | [Pexels licence](https://www.pexels.com/license/); downloaded, not redistributed |
 
 `output/cover-bg.png` (the post's cover background) contains VisA images, under CC BY 4.0 with
 attribution to Zou et al. (2022).

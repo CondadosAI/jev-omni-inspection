@@ -1,7 +1,7 @@
 # How many good parts does PatchCore need to beat a VLM that has seen none?
 
 Status: PLAN v2, 25 Sep 2026; step 0 done, prompt frozen. Post 3 of the Jev-Omni series (1: benchmark vs Gemma 4 zero-shot; 2: Jev-Omni on OpenVINO). Rewritten after an adversarial review of v1 (findings
-folded in below). Nothing scaffolded yet.
+folded in below). Kept as written at each step; later sections record what changed and why.
 
 ## The question
 
@@ -106,11 +106,11 @@ and on the laptop CPU (where it would actually run). Both rows labelled with har
   twice the image tokens. Plus Q2 appendix if kept. Estimate 1–2 h of L40S, **< $2**.
 - PatchCore sweep: 12 categories × 7 k × 3 seeds = 252 fits, each a feature pass over
   ≤ 905 images plus inference over the test set. Minutes to an hour; on the pod
-  ([[train-on-runpod]]) alongside the VLM run.
+  alongside the VLM run.
 
 ## Code: what the existing bench does not do
 
-`~/.condados-jev/bench/eval_img.py` is the starting point, not a drop-in:
+The image-benchmark harness from the first Jev-Omni post (`eval_img.py` in CondadosAI/jev-omni-eval) is the starting point, not a drop-in:
 - Resume keys on `id` and writes `{model}_{bench}.jsonl`: put config + option order in
   the id, or later configs are silently skipped.
 - Replace `check_jev_equivalence` (hard-wired to BLINK Counting) with a VisA image;
@@ -185,8 +185,7 @@ weights. Repo `CondadosAI/jev-omni-inspection`, Apache-2.0.
 3. Score: k\*, AUROC table, triage, contamination. Headline decided from the numbers.
 4. TriageLab, figures, demo render, draft, voice sweep, audit, PR.
 
-Series order: post 1 (DecisionBench + BLINK measurements) and post 2 (OpenVINO port) ship first
-(`~/.condados-jev/results-*`); this post links both.
+Series order as planned: post 1 (DecisionBench + BLINK measurements) and post 2 (OpenVINO port) ship first; this post links both.
 
 ## Step 0 results (25 Sep 2026)
 
@@ -201,7 +200,7 @@ Series order: post 1 (DecisionBench + BLINK measurements) and post 2 (OpenVINO p
   appears on 3 images in total. Vocabulary per category in `visa_summary.json`.
 - Frozen draws in `frozen_draws.json` (reference image per category from
   `Random("ref-<obj>")`; nested PatchCore subsets, reference excluded, seeds 0–2).
-- Artifacts: `~/.condados-jev/visa-step0/`, script `~/.condados-jev/bench/visa_step0.py`
+- Artifacts: `data/visa_summary.json`, `data/frozen_draws.json`, script `src/jev_inspection/step0.py`
   (move both into the companion repo at scaffold).
 
 ## Prompt (FROZEN 25 Sep 2026, approved by Luis)
@@ -246,7 +245,7 @@ reproducible: a second run of `visa_step0.py` produced a byte-identical
 
 ## Step 1: code, and where it departs from the text above (25 Sep 2026)
 
-Local repo `/media/lcondados/workspace/personal/jev-omni-inspection` (commit 0585117; becomes
+This repository (commit 0585117; published as
 `CondadosAI/jev-omni-inspection`). `jev-inspection {vlm,patchcore,probe,score,step0}`,
 `scripts/pod_run.sh` for the single pod session. 5 unit tests pass (frozen prompt text, nested
 draws, AUROC == sklearn with ties, Holm, full summary on synthetic scores with a known k*).
@@ -288,7 +287,7 @@ L40S latency is now logged at k = 16, seed 0). At publish, un-ignore the cited f
 
 ## Step 2 results (pod run 26 Sep 2026, 10:36–15:28 UTC, L40S, ~$5.35)
 
-Artifacts: `~/.condados-jev/results-visa-2026-09-26/` (summary.json, all JSONL, anchor,
+Artifacts: `results/` (summary.json, all JSONL, anchor,
 latency, probe, pip-freeze, run.log, anomaly maps k=16 seed 0). Scorer: B = 2,000.
 
 Macro image AUROC (95% bootstrap CI):
