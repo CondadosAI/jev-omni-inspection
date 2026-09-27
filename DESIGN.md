@@ -326,3 +326,16 @@ Macro image AUROC (95% bootstrap CI):
   "disable the cropping of the center 76.6% of input images"; resolution and coreset
   settings for the 94.3 are not stated in the text read. The reason for our 90.5 is
   therefore unverified. Not computed yet: ECE appendix, laptop-CPU PatchCore latency.
+
+## Resolution ablation (27 Sep 2026, RunPod L40, ~$0.30)
+
+PatchCore WRN-50 at 512×512 (everything else unchanged), k = 1, 4, 16 × 3 seeds;
+`results/summary_r512.json`. Macro AUROC 84.5 / 89.7 / 92.4 (256 px: 80.8 / 83.6 / 85.7).
+**k\* drops to 1 against Jev-Omni** (+3.4, [1.0, 5.8]) **and to 4 against Gemma 4**
+(k=1: +1.7, [−0.8, 3.9]; k=4: +6.8, [4.7, 9.0]). The multi-instance advantage of the VLMs
+at 256 px disappears: capsules PatchCore k=16 90.1 vs Jev-Omni 82.3; macaroni1 90.8 vs 86.4.
+So the pre-registered k\* = 8 is a property of anomalib's 256 px default, and the
+"VLM wins on randomly posed products" reading was a resolution artifact.
+EFFICIENTAD (Appendix B.5): their 94.3 used WRN-101, 224×224, coreset 1 %, no crop,
+official patchcore-inspection code; our WRN-101 anchor at 256 / 10 % gave 90.5, so the
+anchor gap is not resolution and remains unexplained (implementation is the candidate).
