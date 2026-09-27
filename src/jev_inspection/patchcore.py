@@ -27,8 +27,14 @@ IMAGE_SIZE = (256, 256)
 
 
 def _transform(size):
-    return T.Compose([T.ToImage(), T.ToDtype(torch.float32, scale=True), T.Resize(size, antialias=True),
+    """Everything after decoding; runs on whatever device the uint8 tensor is on. On the GPU this
+    is the same bilinear antialiased resize, and it keeps a 1.5 MP JPEG from costing ~1 s of CPU."""
+    return T.Compose([T.ToDtype(torch.float32, scale=True), T.Resize(size, antialias=True),
                       T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
+
+
+def _load(root: Path, path: str, device) -> torch.Tensor:
+    return TRANSFORM(T.functional.pil_to_tensor(Image.open(root / path).convert("RGB")).to(device))
 
 
 TRANSFORM = _transform(IMAGE_SIZE)
@@ -48,7 +54,7 @@ def coreset_ratio(k) -> float:
 def _batches(root: Path, paths: list[str], bs: int, device):
     for i in range(0, len(paths), bs):
         chunk = paths[i:i + bs]
-        yield chunk, torch.stack([TRANSFORM(Image.open(root / p).convert("RGB")) for p in chunk]).to(device)
+        yield chunk, torch.stack([_load(root, p, device) for p in chunk])
 
 
 def fit(root: Path, train: list[str], k, seed: int, backbone: str, device: str, bs: int = 16):
@@ -99,7 +105,7 @@ def latency(model, root: Path, tests: list[visa.Item], device: str, n=200):
         if device.startswith("cuda"):
             torch.cuda.synchronize()
         t0 = time.perf_counter()
-        x = TRANSFORM(Image.open(root / it.image).convert("RGB"))[None].to(device)
+        x = _load(root, it.image, device)[None]
         model(x)
         if device.startswith("cuda"):
             torch.cuda.synchronize()
