@@ -1,7 +1,7 @@
 """Day-0 conveyor demo, step 1: detect and track every fruit, keep one crop per track.
 
 Runs in its own environment so RF-DETR's pins never touch the measured stack:
-  uv run --no-project --with rfdetr==1.11.0 --with supervision python scripts/demo_detect.py \
+  uv run --no-project --with rfdetr==1.11.0 --with supervision --with opencv-python-headless python scripts/demo_detect.py \
       clip.mp4 out/ --t0 4.5 --t1 10.75
 Writes out/tracks.json (per-frame boxes with track ids) and out/crops/<track>.png.
 """

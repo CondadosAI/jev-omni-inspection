@@ -1,0 +1,13 @@
+cashew/Data/Images/Normal/337.JPG
+cashew/Data/Images/Anomaly/000.JPG
+cashew/Data/Images/Anomaly/088.JPG
+capsules/Data/Images/Normal/062.JPG
+capsules/Data/Images/Anomaly/009.JPG
+capsules/Data/Images/Anomaly/094.JPG
+pcb4/Data/Images/Normal/0107.JPG
+pcb4/Data/Images/Anomaly/000.JPG
+pcb4/Data/Images/Anomaly/024.JPG
+macaroni1/Data/Images/Normal/0484.JPG
+macaroni1/Data/Images/Anomaly/009.JPG
+macaroni1/Data/Images/Anomaly/092.JPG
+pcb1/Data/Images/Anomaly/045.JPG
