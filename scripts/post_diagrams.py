@@ -1,5 +1,5 @@
-"""The two pipeline diagrams in the post (static, no data): the VisA belt video and the
-day-0 lime line.
+"""Static diagrams (no data): the two pipelines in the post (the VisA belt video and the day-0
+lime line) and the two architectures used in the LinkedIn montage (the VLM readout and PatchCore).
   python scripts/post_diagrams.py <out dir>
 """
 import sys
@@ -92,4 +92,49 @@ b += [arrow(216, 85, 256, 85), arrow(460, 85, 500, 85), arrow(604, 130, 604, 182
 (out / "fig-pipeline-line.svg").write_text(svg(W, H, "".join(b), (
     "Pipeline of the lime-line video: detect each lime, track it, crop and isolate it before the counting line, ask "
     "Gemma 4 with a one-sentence spec, turn the score into OK, person or reject, and count it when it crosses the line.")))
-print("wrote", out / "fig-pipeline-belt.svg", out / "fig-pipeline-line.svg")
+# Architecture: a vision-language model read zero-shot (day 0).
+W, H = 720, 360
+b = [f'<text x="16" y="30" font-size="13" fill="{GEM}" font-weight="700">Day 0 · a vision-language model, zero-shot</text>',
+     box(16, 56, 170, 70, [title("test photo"), sub("one part, never seen")], col=MUTED, num=1),
+     box(16, 150, 170, 118, [title("question"), sub("Is everything good,"), sub("or is at least one part"),
+                             sub("defective? 1. all good"), sub("2. defective")], col=MUTED, num=2),
+     box(214, 56, 150, 70, [title("vision encoder"), sub("280 patches of 48 px")], col=GEM, num=3),
+     box(392, 56, 150, 212, [title("Gemma 4 12B"), sub("language model"), sub(""), sub("reads the image"),
+                             sub("tokens and the"), sub("question together,"), sub("one forward pass,"),
+                             sub("no text generated")], col=GEM, num=4),
+     box(570, 56, 138, 98, [title("Gemma 4"), sub("probability that"), sub("the next token is"), sub("\"1\" or \"2\"")],
+         col=GEM, num=5),
+     box(570, 170, 138, 98, [title("Jev-Omni"), sub("fine-tuned weights"), sub("+ a trained head,"), sub("one probability each")],
+         col="#f59e0b", num=5),
+     arrow(186, 91, 210, 91), arrow(364, 91, 388, 91), arrow(186, 209, 388, 209),
+     arrow(542, 105, 566, 105), arrow(542, 219, 566, 219),
+     box(214, 290, 494, 50, [title("score: log-odds of \"defective\"; 0 is undecided")], col=OK)]
+b.append(arrow(639, 268, 639, 286))
+(out / "fig-arch-vlm.svg").write_text(svg(W, H, "".join(b), (
+    "Architecture of the zero-shot readout: a test photo and a question go through Gemma 4's vision encoder and "
+    "language model in one forward pass; Gemma 4 is read from the next-token probability of 1 or 2, Jev-Omni from "
+    "its trained head; both give a log-odds score.")))
+
+# Architecture: PatchCore (day 1).
+W, H = 720, 340
+b = [f'<text x="16" y="30" font-size="13" fill="{PC}" font-weight="700">Day 1 · PatchCore, a memory of good patches</text>',
+     f'<text x="16" y="56" font-size="11" fill="{MUTED}">once, from k good photos</text>',
+     box(16, 64, 150, 70, [title("good photos"), sub("16 of this product")], col=OK, num=1),
+     box(190, 64, 170, 70, [title("Wide ResNet-50"), sub("trained on ImageNet")], col=PC, num=2),
+     box(384, 64, 150, 70, [title("patch features"), sub("layers 2 + 3")], col=PC, num=3),
+     box(558, 64, 150, 70, [title("memory bank"), sub("every good patch")], col=PC, num=4),
+     arrow(166, 99, 186, 99), arrow(360, 99, 380, 99), arrow(534, 99, 554, 99),
+     f'<text x="16" y="176" font-size="11" fill="{MUTED}">for every part on the line</text>',
+     box(16, 184, 150, 70, [title("test photo"), sub("one part")], col=MUTED, num=5),
+     box(190, 184, 170, 70, [title("same backbone"), sub("same patch features")], col=PC, num=6),
+     box(384, 184, 324, 70, [title("nearest good patch, for each patch"), sub("distance = how unusual this patch is")],
+         col=PC, num=7),
+     arrow(166, 219, 186, 219), arrow(360, 219, 380, 219), arrow(633, 134, 633, 180),
+     box(16, 274, 692, 50, [title("score = the most unusual patch;  heat map = every patch's distance")], col=OK)]
+b.append(arrow(546, 254, 546, 270))
+(out / "fig-arch-patchcore.svg").write_text(svg(W, H, "".join(b), (
+    "Architecture of PatchCore: good photos go through a Wide ResNet-50 once to fill a memory bank of patch "
+    "features; each test photo goes through the same backbone, every patch is matched to its nearest good patch, "
+    "and the most unusual patch gives the score while all distances give the heat map.")))
+print("wrote", out / "fig-pipeline-belt.svg", out / "fig-pipeline-line.svg", out / "fig-arch-vlm.svg",
+      out / "fig-arch-patchcore.svg")
