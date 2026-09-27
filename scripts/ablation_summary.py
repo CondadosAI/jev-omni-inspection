@@ -13,6 +13,7 @@ res = Path(sys.argv[1])
 s = score.summarise(visa.DEFAULT_ROOT, [res / "jev_visa.jsonl", res / "base_visa.jsonl"],
                     res / "patchcore_wide_resnet50_2_r512.jsonl")
 keep = {k: s[k] for k in ("macro_auroc", "k_star", "per_group_auroc")}
+keep["triage"] = {k: v for k, v in s["triage"].items() if k.startswith("C")}
 keep["per_category_auroc"] = {k: v for k, v in s["per_category_auroc"].items() if k.startswith("C")}
 (res / "summary_r512.json").write_text(json.dumps(keep, indent=1))
 for k in ("C1", "C4", "C16"):

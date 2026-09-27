@@ -11,9 +11,10 @@ from pathlib import Path
 res, out = Path(sys.argv[1]), Path(sys.argv[2])
 out.mkdir(parents=True, exist_ok=True)
 S = json.loads((res / "summary.json").read_text())
+S5 = json.loads((res / "summary_r512.json").read_text())  # PatchCore at 512 x 512, k = 1, 4, 16
 
 BG, PANEL, GRID, TXT, MUTED = "#131722", "#1a2030", "#2c313f", "#e8ecf3", "#97a0b5"
-PC, JEV, GEM = "#2dd4bf", "#f59e0b", "#a78bfa"
+PC, JEV, GEM, PC5 = "#2dd4bf", "#f59e0b", "#a78bfa", "#38bdf8"
 FONT = "ui-sans-serif,system-ui,sans-serif"
 
 
@@ -34,7 +35,7 @@ def k_curve():
     ks = ["1", "2", "4", "8", "16", "64", "all"]
     x0 = L + 26  # room left of k = 1 for the reference-pair markers
     xs = {k: x0 + i * (W - x0 - R - 20) / (len(ks) - 1) for i, k in enumerate(ks)}
-    lo, hi = 76, 92
+    lo, hi = 76, 94
     y = lambda v: T + (hi - v) / (hi - lo) * (H - T - B)
     m = S["macro_auroc"]
     b = []
@@ -62,7 +63,16 @@ def k_curve():
     for x, v, (c0, c1) in pts:
         b.append(f'<line x1="{x:.1f}" x2="{x:.1f}" y1="{y(c0):.1f}" y2="{y(c1):.1f}" stroke="{PC}" stroke-width="1.4"/>')
         b.append(f'<circle cx="{x:.1f}" cy="{y(v):.1f}" r="4" fill="{PC}"/>')
-    b.append(text(xs["all"] + 10, y(pts[-1][1]) + 4, f"PatchCore {pts[-1][1]:.1f}", 11, PC))
+    b.append(text(xs["all"] + 10, y(pts[-1][1]) + 4, "256 px", 11, PC))
+    m5 = S5["macro_auroc"]
+    p5 = [(xs[k], 100 * m5[f"C{k}"]["point"], [100 * v for v in m5[f"C{k}"]["ci95"]]) for k in ("1", "4", "16")]
+    b.append('<polyline fill="none" stroke="%s" stroke-width="2.2" stroke-dasharray="7 4" points="%s"/>'
+             % (PC5, " ".join(f"{x:.1f},{y(v):.1f}" for x, v, _ in p5)))
+    for x, v, (c0, c1) in p5:
+        b.append(f'<line x1="{x + 5:.1f}" x2="{x + 5:.1f}" y1="{y(c0):.1f}" y2="{y(c1):.1f}" stroke="{PC5}" stroke-width="1.4"/>')
+        b.append(f'<rect x="{x + 1:.1f}" y="{y(v) - 4:.1f}" width="8" height="8" fill="{PC5}"/>')
+    b.append(text(p5[-1][0] + 14, y(p5[-1][1]) + 4, "512 px", 11, PC5))
+    b.append(text(L + 4, T + 12, "PatchCore input:  ● 256 px (anomalib default)   ■ 512 px", 11, MUTED))
     # VLMs shown one good part sit at k = 1.
     for key, col, dx in (("A1", JEV, -9), ("B1", GEM, 9)):
         p, (c0, c1) = 100 * m[key]["point"], [100 * v for v in m[key]["ci95"]]
@@ -72,12 +82,14 @@ def k_curve():
     ks_a0 = S["k_star"]["A0"]["k_star"]
     b.append(f'<line x1="{xs[ks_a0]:.1f}" x2="{xs[ks_a0]:.1f}" y1="{T}" y2="{H - B}" stroke="{TXT}" '
              f'stroke-dasharray="2 3" opacity="0.6"/>')
-    b.append(text(xs[ks_a0] + 6, T + 12, f"k* = {ks_a0} vs Jev-Omni", 11, TXT))
+    b.append(text(xs[ks_a0] + 6, y(78.4), f"k* = {ks_a0} at 256 px", 11, TXT))
+    b.append(text(xs["1"] + 16, y(p5[0][1]) - 14, "k* = 1 at 512 px", 11, PC5))
     b.append(text(xs["2"] - 30, H - B - 8, "◆ VLM shown one known-good reference, placed at k = 1", 10.5, MUTED))
     b.append(text(W - R + 8, y(pts[0][1]) + 30, "bands: VLM with", 10, MUTED))
     b.append(text(W - R + 8, y(pts[0][1]) + 43, "0 good parts, 95% CI", 10, MUTED))
-    return svg(W, H, "".join(b), "Macro image AUROC of PatchCore against the number of good parts, with the two "
-               "VLMs as flat bands. PatchCore passes Jev-Omni at eight good parts.")
+    return svg(W, H, "".join(b), "Macro image AUROC of PatchCore against the number of good parts at two input "
+               "sizes, with the two VLMs as flat bands. PatchCore passes Jev-Omni at eight good parts at 256 px "
+               "and at one good part at 512 px.")
 
 
 # --- Figure: per-category AUROC, VLM against PatchCore ------------------------------------
@@ -94,8 +106,8 @@ def per_category():
     for v in range(lo, hi + 1, 10):
         b.append(f'<line x1="{x(v):.1f}" x2="{x(v):.1f}" y1="{T - 6}" y2="{H - 34}" stroke="{GRID}"/>')
         b.append(text(x(v), H - 18, v, 11, MUTED, "middle"))
-    legend = [("Jev-Omni, 0 good parts", JEV, "A0"), ("PatchCore, 1 good part", "hollow", "C1"),
-              ("PatchCore, all", PC, "Call")]
+    legend = [("Jev-Omni, 0 good parts", JEV, "A0"), ("PatchCore 16, 256 px", "hollow", "C16"),
+              ("PatchCore 16, 512 px", PC5, "C16r")]
     for i, (lab, col, _) in enumerate(legend):
         mk = (f'fill="{BG}" stroke="{PC}" stroke-width="2"' if col == "hollow" else f'fill="{col}"')
         b.append(f'<circle cx="{L + i * 200 + 6}" cy="18" r="5" {mk}/>' + text(L + i * 200 + 16, 22, lab, 11, MUTED))
@@ -104,7 +116,7 @@ def per_category():
         if c in groups:
             yy += 22
             b.append(text(12, yy - 6, groups[c], 10.5, MUTED, "start", 600))
-        vals = {k: 100 * pc[k][c] for _, _, k in legend}
+        vals = {"A0": 100 * pc["A0"][c], "C16": 100 * pc["C16"][c], "C16r": 100 * S5["per_category_auroc"]["C16"][c]}
         b.append(text(L - 10, yy + 12, c, 12, TXT, "end"))
         b.append(f'<line x1="{x(min(vals.values())):.1f}" x2="{x(max(vals.values())):.1f}" y1="{yy + 8}" y2="{yy + 8}" '
                  f'stroke="{GRID}" stroke-width="3"/>')
@@ -112,8 +124,8 @@ def per_category():
             mk = (f'fill="{BG}" stroke="{PC}" stroke-width="2"' if col == "hollow" else f'fill="{col}"')
             b.append(f'<circle cx="{x(vals[k]):.1f}" cy="{yy + 8}" r="5" {mk}/>')
         yy += row
-    return svg(W, H, "".join(b), "Image AUROC per VisA category for Jev-Omni with no good parts and PatchCore "
-               "with one and with all good parts.")
+    return svg(W, H, "".join(b), "Image AUROC per VisA product for Jev-Omni with no good parts and PatchCore "
+               "with 16 good parts at 256 and at 512 pixels.")
 
 
 # --- Figure: missing parts, one image against a reference pair ----------------------------
@@ -150,14 +162,15 @@ def missing_parts():
 def coverage():
     t = S["triage"]
     rows = [("Jev-Omni, 0 good parts", "A0", JEV), ("Gemma 4 zero-shot, 0", "B0", GEM),
-            ("PatchCore, 1 good part", "C1", PC), ("PatchCore, 16", "C16", PC), ("PatchCore, all", "Call", PC)]
+            ("PatchCore, 1 good part", "C1", PC), ("PatchCore, 16", "C16", PC), ("PatchCore, all", "Call", PC),
+            ("PatchCore, 16 at 512 px", "C16r", PC5)]
     W, L, T, row = 720, 200, 34, 34
     H = T + row * len(rows) + 30
     x = lambda v: L + v * (W - L - 70)
     b = [text(L, 20, "share of a 1%-defective line decided without a human, escapes ≤ 5%", 11.5, MUTED)]
     for i, (lab, k, col) in enumerate(rows):
         yy = T + i * row
-        v = t[k]["per_category"]["coverage_at_prevalence_0.01"]
+        v = (S5["triage"]["C16"] if k == "C16r" else t[k])["per_category"]["coverage_at_prevalence_0.01"]
         b.append(text(L - 10, yy + 16, lab, 12, TXT, "end"))
         b.append(f'<rect x="{L}" y="{yy + 4}" width="{x(v) - L:.1f}" height="18" rx="3" fill="{col}" opacity="0.85"/>')
         b.append(text(x(v) + 8, yy + 17, f"{100 * v:.0f}%", 12, TXT))

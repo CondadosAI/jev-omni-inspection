@@ -2,6 +2,7 @@
 __pycache__/
 results/*
 !results/summary.json
+!results/summary_r512.json
 !results/anchor.json
 !results/jev_equivalence.json
 !results/contamination_probe.jsonl
