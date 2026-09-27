@@ -64,12 +64,12 @@ for p in sel:
     m = np.load(a.maps / (p.replace("/", "__") + ".npy")).astype(np.float32)
     # Colour on the product's own threshold scale, so a good part stays mostly uncoloured.
     lo_m, hi_m = cuts(it.obj, pc)
-    hv = np.clip((m - 0.9 * hi_m) / (0.25 * hi_m), 0, 1)
+    hv = np.clip((m - 0.95 * hi_m) / (0.2 * hi_m), 0, 1)
     hv = np.asarray(Image.fromarray((hv * 255).astype(np.uint8)).resize(img.size, Image.BILINEAR)) / 255.0
     base = np.asarray(img).astype(np.float32)
-    amber = np.array([245, 158, 11], np.float32)
+    heat_rgb = np.array([255, 43, 214], np.float32)  # magenta: amber vanishes on yellow products
     al = (np.clip(hv / 0.5, 0, 1) * 0.85)[..., None]
-    heat = Image.fromarray((base * (1 - al) + amber * al).astype(np.uint8))
+    heat = Image.fromarray((base * (1 - al) + heat_rgb * al).astype(np.uint8))
     htile = tile.copy()
     htile.paste(heat, (ox, oy))
     g = vlm["B0"][p]
@@ -100,7 +100,7 @@ def footer(d):
            "cuts at 5% escapes / 5% rejects per product.", font=f_tiny, fill=MUTED, anchor="ls")
     d.text((W - 24, H - 22), "condados.ai", font=f_tiny, fill=MUTED, anchor="rs")
     d.text((24, H - 42), "Cuts per product: accept below the first, reject above the second, a person in between. "
-           "Heat: PatchCore patches near or above the reject cut.", font=f_tiny, fill=MUTED, anchor="ls")
+           "Magenta: PatchCore patches near or above the reject cut.", font=f_tiny, fill=MUTED, anchor="ls")
 
 
 def belt_frame(t):

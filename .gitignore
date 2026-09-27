@@ -19,6 +19,8 @@ results/demo/*
 !results/demo/tracks.json
 !results/demo/verdicts.json
 !results/demo/visa-belt-verdicts.json
+!results/maps-k16-s0-256/
+!results/maps-k16-s0-256/**
 output/*
 !output/cover-bg.png
 *.pyc
