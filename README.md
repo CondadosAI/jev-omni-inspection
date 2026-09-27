@@ -43,6 +43,9 @@ scripts/
   demo_maps.py             PatchCore 512 px maps for the parts in that video
   pod_demo.sh / demo_detect.py / demo_classify.py / demo_hue.py / render_counting_video.py
                    day-0 demo on a lime line: detect, track, count, ask Gemma 4 (unlabelled clip)
+examples/
+  system_one_readout.py    the same photo and question through Jev-Omni's predict() and through
+                           Gemma 4 read in one pass (the two snippets in the post)
 data/              step-0 counts and the frozen reference / subset draws
 results/           per-image scores and summaries cited by the post
 ```
