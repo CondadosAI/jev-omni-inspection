@@ -1,0 +1,50 @@
+{"image": "pcb2/Data/Images/Anomaly/067.JPG", "answer": "Roboflow Universe"}
+{"image": "pcb3/Data/Images/Anomaly/011.JPG", "answer": "Roboflow Universe"}
+{"image": "candle/Data/Images/Anomaly/065.JPG", "answer": "DeepFashion"}
+{"image": "macaroni2/Data/Images/Normal/0208.JPG", "answer": "Food-101"}
+{"image": "pipe_fryum/Data/Images/Anomaly/032.JPG", "answer": "Materials in Context"}
+{"image": "pcb4/Data/Images/Anomaly/078.JPG", "answer": "OK-Robot"}
+{"image": "pcb3/Data/Images/Normal/0046.JPG", "answer": "OpenImages"}
+{"image": "pcb1/Data/Images/Normal/0306.JPG", "answer": "Roboflow Universe"}
+{"image": "pcb4/Data/Images/Anomaly/040.JPG", "answer": "OK-Robot"}
+{"image": "pcb2/Data/Images/Normal/0027.JPG", "answer": "PCB-Parts"}
+{"image": "macaroni1/Data/Images/Normal/0920.JPG", "answer": "Food-101"}
+{"image": "pipe_fryum/Data/Images/Anomaly/005.JPG", "answer": "Materials in Context"}
+{"image": "chewinggum/Data/Images/Anomaly/010.JPG", "answer": "MVTec AD"}
+{"image": "macaroni2/Data/Images/Anomaly/044.JPG", "answer": "Food-101"}
+{"image": "chewinggum/Data/Images/Anomaly/012.JPG", "answer": "Materials Exploration"}
+{"image": "cashew/Data/Images/Normal/309.JPG", "answer": "Food-101"}
+{"image": "macaroni2/Data/Images/Normal/0996.JPG", "answer": "MVTec AD"}
+{"image": "chewinggum/Data/Images/Anomaly/041.JPG", "answer": "Materials Exploration Dataset"}
+{"image": "pcb1/Data/Images/Normal/0755.JPG", "answer": "Roboflow Universe"}
+{"image": "cashew/Data/Images/Normal/244.JPG", "answer": "Food-101"}
+{"image": "capsules/Data/Images/Anomaly/042.JPG", "answer": "Pills360"}
+{"image": "pcb1/Data/Images/Anomaly/042.JPG", "answer": "Roboflow Universe"}
+{"image": "pcb4/Data/Images/Anomaly/021.JPG", "answer": "OK-RobotParts"}
+{"image": "cashew/Data/Images/Anomaly/002.JPG", "answer": "Food-101"}
+{"image": "pcb2/Data/Images/Normal/0940.JPG", "answer": "Roboflow Universe"}
+{"image": "pcb3/Data/Images/Anomaly/067.JPG", "answer": "OK-Robot"}
+{"image": "pcb1/Data/Images/Normal/0479.JPG", "answer": "OpenImages"}
+{"image": "macaroni1/Data/Images/Normal/0423.JPG", "answer": "Food-101"}
+{"image": "pcb4/Data/Images/Anomaly/041.JPG", "answer": "OpenImages"}
+{"image": "pcb4/Data/Images/Normal/0690.JPG", "answer": "OK-Robot"}
+{"image": "pipe_fryum/Data/Images/Anomaly/073.JPG", "answer": "Materials in Context"}
+{"image": "macaroni2/Data/Images/Normal/0027.JPG", "answer": "Food-101"}
+{"image": "capsules/Data/Images/Normal/187.JPG", "answer": "Pills-100"}
+{"image": "candle/Data/Images/Normal/0100.JPG", "answer": "DeepFashion"}
+{"image": "cashew/Data/Images/Normal/130.JPG", "answer": "Food-101"}
+{"image": "pcb3/Data/Images/Normal/0685.JPG", "answer": "OpenImages"}
+{"image": "candle/Data/Images/Normal/0303.JPG", "answer": "Objects365"}
+{"image": "pipe_fryum/Data/Images/Normal/050.JPG", "answer": "Materials in Context"}
+{"image": "pcb1/Data/Images/Anomaly/054.JPG", "answer": "Roboflow Universe"}
+{"image": "macaroni1/Data/Images/Anomaly/089.JPG", "answer": "Food-101"}
+{"image": "pcb1/Data/Images/Anomaly/022.JPG", "answer": "Roboflow Universe"}
+{"image": "capsules/Data/Images/Normal/545.JPG", "answer": "Pills360"}
+{"image": "fryum/Data/Images/Anomaly/072.JPG", "answer": "Materials in Context"}
+{"image": "macaroni1/Data/Images/Normal/0490.JPG", "answer": "Food-101"}
+{"image": "macaroni1/Data/Images/Anomaly/067.JPG", "answer": "Food-101"}
+{"image": "chewinggum/Data/Images/Anomaly/023.JPG", "answer": "Materials Exploration Dataset"}
+{"image": "pcb4/Data/Images/Normal/0685.JPG", "answer": "OK-Robot"}
+{"image": "cashew/Data/Images/Normal/006.JPG", "answer": "Food-101"}
+{"image": "capsules/Data/Images/Anomaly/069.JPG", "answer": "MVTec AD"}
+{"image": "pcb1/Data/Images/Anomaly/000.JPG", "answer": "Roboflow Universe"}

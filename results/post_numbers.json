@@ -1,0 +1,105 @@
+{
+ "vlm_score_example": {
+  "cashew/Data/Images/Anomaly/000.JPG": {
+   "order0_scores": [
+    0.016321510076522827,
+    0.46411383152008057
+   ],
+   "order1_scores": [
+    0.6404711008071899,
+    0.38444289565086365
+   ],
+   "order0_logodds": 0.44779232144355774,
+   "order1_logodds": 0.2560282051563263,
+   "mean_logodds": 0.351910263299942
+  },
+  "cashew/Data/Images/Normal/023.JPG": {
+   "order0_scores": [
+    1.0552527904510498,
+    0.1741793006658554
+   ],
+   "order1_scores": [
+    -0.07643690705299377,
+    0.7920516133308411
+   ],
+   "order0_logodds": -0.8810734897851944,
+   "order1_logodds": -0.8684885203838348,
+   "mean_logodds": -0.8747810050845146
+  }
+ },
+ "cashew": {
+  "n_good": 50,
+  "n_defective": 100,
+  "systems": {
+   "A0": {
+    "pairs": 5000,
+    "pairs_won": 3602.0,
+    "auroc": 0.7204,
+    "triage": {
+     "escape": 0.06,
+     "escape_ci95": [
+      0.022334886071316368,
+      0.12602993458082296
+     ],
+     "escapes": 6,
+     "overkill": 0.06,
+     "auto_given_defective": 0.49,
+     "auto_given_good": 0.12,
+     "coverage_at_prevalence_0.01": 0.12369999999999999
+    },
+    "per_10000_at_1pct": {
+     "defective_parts": 100,
+     "escaped": 6.0,
+     "to_human": 8763.0,
+     "good_rejected": 594.0
+    }
+   },
+   "C1": {
+    "pairs": 5000,
+    "pairs_won": 4243.0,
+    "auroc": 0.8486,
+    "triage": {
+     "escape": 0.04,
+     "escape_ci95": [
+      0.011004493986188198,
+      0.09925715671265992
+     ],
+     "escapes": 4,
+     "overkill": 0.04,
+     "auto_given_defective": 0.61,
+     "auto_given_good": 0.32,
+     "coverage_at_prevalence_0.01": 0.3229
+    },
+    "per_10000_at_1pct": {
+     "defective_parts": 100,
+     "escaped": 4.0,
+     "to_human": 6771.0,
+     "good_rejected": 396.0
+    }
+   },
+   "C16": {
+    "pairs": 5000,
+    "pairs_won": 4700.0,
+    "auroc": 0.94,
+    "triage": {
+     "escape": 0.04,
+     "escape_ci95": [
+      0.011004493986188198,
+      0.09925715671265992
+     ],
+     "escapes": 4,
+     "overkill": 0.04,
+     "auto_given_defective": 0.78,
+     "auto_given_good": 0.68,
+     "coverage_at_prevalence_0.01": 0.681
+    },
+    "per_10000_at_1pct": {
+     "defective_parts": 100,
+     "escaped": 4.0,
+     "to_human": 3190.0,
+     "good_rejected": 396.0
+    }
+   }
+  }
+ }
+}

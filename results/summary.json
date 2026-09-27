@@ -1,0 +1,2483 @@
+{
+ "n_test": 2162,
+ "bootstrap": 2000,
+ "positional_bias_logodds": {
+  "A0": 0.4082314906682414,
+  "A1": 0.9192024362069908,
+  "B0": 0.11833660962072155,
+  "B1": 0.16636794634597596
+ },
+ "macro_auroc": {
+  "A0": {
+   "point": 0.8109938943894388,
+   "ci95": [
+    0.7937769870737075,
+    0.8270622648514853
+   ]
+  },
+  "A1": {
+   "point": 0.8168182343234324,
+   "ci95": [
+    0.799153173129813,
+    0.8330728293454344
+   ]
+  },
+  "B0": {
+   "point": 0.8288807893289328,
+   "ci95": [
+    0.812725993880638,
+    0.8448206342821781
+   ]
+  },
+  "B1": {
+   "point": 0.8348894526952694,
+   "ci95": [
+    0.8175453004675466,
+    0.8511296318069306
+   ]
+  },
+  "C1": {
+   "point": 0.808140639897323,
+   "ci95": [
+    0.7799632845159518,
+    0.8312347132838284
+   ]
+  },
+  "C2": {
+   "point": 0.8281966813348002,
+   "ci95": [
+    0.7964928107810781,
+    0.8566596369636963
+   ]
+  },
+  "C4": {
+   "point": 0.8358208104143747,
+   "ci95": [
+    0.801824377750275,
+    0.8645385423542353
+   ]
+  },
+  "C8": {
+   "point": 0.8418987990465715,
+   "ci95": [
+    0.8179143172442244,
+    0.8612203657865788
+   ]
+  },
+  "C16": {
+   "point": 0.8569272277227723,
+   "ci95": [
+    0.8415396816556655,
+    0.871706580720572
+   ]
+  },
+  "C64": {
+   "point": 0.8747290337367071,
+   "ci95": [
+    0.8588226265126514,
+    0.8909730610561056
+   ]
+  },
+  "Call": {
+   "point": 0.9021865236523653,
+   "ci95": [
+    0.8896150137513751,
+    0.913884214108911
+   ]
+  }
+ },
+ "k_star": {
+  "A0": {
+   "k_star": "8",
+   "curve": [
+    {
+     "k": "1",
+     "diff": -0.00285325449211582,
+     "ci95": [
+      -0.034241718921892136,
+      0.025510499862486328
+     ]
+    },
+    {
+     "k": "2",
+     "diff": 0.01720278694536137,
+     "ci95": [
+      -0.01924171067106706,
+      0.05083629262926271
+     ]
+    },
+    {
+     "k": "4",
+     "diff": 0.02482691602493592,
+     "ci95": [
+      -0.014260409103410511,
+      0.059126410203520344
+     ]
+    },
+    {
+     "k": "8",
+     "diff": 0.030904904657132692,
+     "ci95": [
+      0.0027321534653465263,
+      0.0554155603685369
+     ]
+    },
+    {
+     "k": "16",
+     "diff": 0.04593333333333349,
+     "ci95": [
+      0.02414606298129808,
+      0.06814743674367438
+     ]
+    },
+    {
+     "k": "64",
+     "diff": 0.06373513934726827,
+     "ci95": [
+      0.04224732948294832,
+      0.08571480679317937
+     ]
+    },
+    {
+     "k": "all",
+     "diff": 0.09119262926292648,
+     "ci95": [
+      0.07265891432893293,
+      0.1107413173817383
+     ]
+    }
+   ]
+  },
+  "A1": {
+   "k_star": "16",
+   "curve": [
+    {
+     "k": "1",
+     "diff": -0.00867759442610938,
+     "ci95": [
+      -0.039678255638063806,
+      0.018303868261826086
+     ]
+    },
+    {
+     "k": "2",
+     "diff": 0.01137844701136781,
+     "ci95": [
+      -0.024053370462046284,
+      0.04443295517051701
+     ]
+    },
+    {
+     "k": "4",
+     "diff": 0.019002576090942358,
+     "ci95": [
+      -0.01746049642464242,
+      0.05171600797579735
+     ]
+    },
+    {
+     "k": "8",
+     "diff": 0.02508056472313913,
+     "ci95": [
+      -0.0018943241199121162,
+      0.04917702282728302
+     ]
+    },
+    {
+     "k": "16",
+     "diff": 0.04010899339933993,
+     "ci95": [
+      0.019468785066006557,
+      0.060570200770076896
+     ]
+    },
+    {
+     "k": "64",
+     "diff": 0.057910799413274705,
+     "ci95": [
+      0.0372882659515951,
+      0.08010356573157311
+     ]
+    },
+    {
+     "k": "all",
+     "diff": 0.08536828932893292,
+     "ci95": [
+      0.06726356091859188,
+      0.10421157315731573
+     ]
+    }
+   ]
+  },
+  "B0": {
+   "k_star": "16",
+   "curve": [
+    {
+     "k": "1",
+     "diff": -0.020740149431609844,
+     "ci95": [
+      -0.05133054867986783,
+      0.007744301430142742
+     ]
+    },
+    {
+     "k": "2",
+     "diff": -0.0006841079941326544,
+     "ci95": [
+      -0.03645323638613855,
+      0.03229327660891093
+     ]
+    },
+    {
+     "k": "4",
+     "diff": 0.006940021085441894,
+     "ci95": [
+      -0.031227391364136478,
+      0.04093778602860292
+     ]
+    },
+    {
+     "k": "8",
+     "diff": 0.013018009717638668,
+     "ci95": [
+      -0.015767486592409317,
+      0.036572930418041785
+     ]
+    },
+    {
+     "k": "16",
+     "diff": 0.028046438393839468,
+     "ci95": [
+      0.006368109185918652,
+      0.04892054283553347
+     ]
+    },
+    {
+     "k": "64",
+     "diff": 0.04584824440777424,
+     "ci95": [
+      0.023580905528052788,
+      0.06776992333608373
+     ]
+    },
+    {
+     "k": "all",
+     "diff": 0.07330573432343246,
+     "ci95": [
+      0.05492994568206826,
+      0.09161882150715069
+     ]
+    }
+   ]
+  },
+  "B1": {
+   "k_star": "16",
+   "curve": [
+    {
+     "k": "1",
+     "diff": -0.026748812797946386,
+     "ci95": [
+      -0.05692698432343248,
+      0.0007781586908690279
+     ]
+    },
+    {
+     "k": "2",
+     "diff": -0.006692771360469196,
+     "ci95": [
+      -0.042441435643564444,
+      0.025429870393289162
+     ]
+    },
+    {
+     "k": "4",
+     "diff": 0.0009313577191053524,
+     "ci95": [
+      -0.03577199841859195,
+      0.03427917388613864
+     ]
+    },
+    {
+     "k": "8",
+     "diff": 0.007009346351302126,
+     "ci95": [
+      -0.02025723219196921,
+      0.030872979235423516
+     ]
+    },
+    {
+     "k": "16",
+     "diff": 0.022037775027502926,
+     "ci95": [
+      0.0016089463008799405,
+      0.04220629331683154
+     ]
+    },
+    {
+     "k": "64",
+     "diff": 0.0398395810414377,
+     "ci95": [
+      0.019038801567656555,
+      0.06181127715896599
+     ]
+    },
+    {
+     "k": "all",
+     "diff": 0.06729707095709592,
+     "ci95": [
+      0.04903917938668847,
+      0.08629371287128723
+     ]
+    }
+   ]
+  }
+ },
+ "per_category_auroc": {
+  "A0": {
+   "candle": 0.9094,
+   "capsules": 0.823,
+   "cashew": 0.7204,
+   "chewinggum": 0.9626,
+   "fryum": 0.9074,
+   "macaroni1": 0.864,
+   "macaroni2": 0.6206,
+   "pcb1": 0.6393,
+   "pcb2": 0.7343,
+   "pcb3": 0.6716831683168317,
+   "pcb4": 0.8956435643564357,
+   "pipe_fryum": 0.9836
+  },
+  "A1": {
+   "candle": 0.7376,
+   "capsules": 0.7975,
+   "cashew": 0.8574,
+   "chewinggum": 0.9828,
+   "fryum": 0.8998,
+   "macaroni1": 0.8087,
+   "macaroni2": 0.6102,
+   "pcb1": 0.5645,
+   "pcb2": 0.7882,
+   "pcb3": 0.8105940594059406,
+   "pcb4": 0.9775247524752475,
+   "pipe_fryum": 0.967
+  },
+  "B0": {
+   "candle": 0.95335,
+   "capsules": 0.8085833333333333,
+   "cashew": 0.8253,
+   "chewinggum": 0.971,
+   "fryum": 0.9154,
+   "macaroni1": 0.86945,
+   "macaroni2": 0.6911,
+   "pcb1": 0.58255,
+   "pcb2": 0.75165,
+   "pcb3": 0.665,
+   "pcb4": 0.9213861386138614,
+   "pipe_fryum": 0.9918
+  },
+  "B1": {
+   "candle": 0.71515,
+   "capsules": 0.8863333333333333,
+   "cashew": 0.863,
+   "chewinggum": 0.985,
+   "fryum": 0.9269,
+   "macaroni1": 0.86055,
+   "macaroni2": 0.7066,
+   "pcb1": 0.54285,
+   "pcb2": 0.7871,
+   "pcb3": 0.8034158415841585,
+   "pcb4": 0.9775742574257426,
+   "pipe_fryum": 0.9642
+  },
+  "C1": {
+   "candle": 0.9068333333333333,
+   "capsules": 0.6299444444444444,
+   "cashew": 0.8925333333333333,
+   "chewinggum": 0.9776666666666666,
+   "fryum": 0.8237333333333333,
+   "macaroni1": 0.6586333333333333,
+   "macaroni2": 0.5653,
+   "pcb1": 0.8941666666666667,
+   "pcb2": 0.6755333333333334,
+   "pcb3": 0.8096039603960397,
+   "pcb4": 0.9527392739273927,
+   "pipe_fryum": 0.9109999999999999
+  },
+  "C2": {
+   "candle": 0.9066666666666666,
+   "capsules": 0.6542222222222221,
+   "cashew": 0.9308000000000001,
+   "chewinggum": 0.9819333333333332,
+   "fryum": 0.8641333333333333,
+   "macaroni1": 0.6772333333333332,
+   "macaroni2": 0.5839666666666666,
+   "pcb1": 0.8416333333333332,
+   "pcb2": 0.7572333333333333,
+   "pcb3": 0.829042904290429,
+   "pcb4": 0.9704950495049505,
+   "pipe_fryum": 0.941
+  },
+  "C4": {
+   "candle": 0.9147333333333334,
+   "capsules": 0.6577777777777777,
+   "cashew": 0.9323333333333333,
+   "chewinggum": 0.9802,
+   "fryum": 0.8943333333333333,
+   "macaroni1": 0.6995,
+   "macaroni2": 0.5992666666666667,
+   "pcb1": 0.8169000000000001,
+   "pcb2": 0.789,
+   "pcb3": 0.8166666666666668,
+   "pcb4": 0.9694719471947195,
+   "pipe_fryum": 0.9596666666666667
+  },
+  "C8": {
+   "candle": 0.9225666666666666,
+   "capsules": 0.6410555555555556,
+   "cashew": 0.9436,
+   "chewinggum": 0.9796,
+   "fryum": 0.9104,
+   "macaroni1": 0.7295333333333334,
+   "macaroni2": 0.5815333333333332,
+   "pcb1": 0.8219333333333333,
+   "pcb2": 0.8080999999999999,
+   "pcb3": 0.8303630363036304,
+   "pcb4": 0.9733003300330033,
+   "pipe_fryum": 0.9608
+  },
+  "C16": {
+   "candle": 0.9256666666666667,
+   "capsules": 0.6623333333333333,
+   "cashew": 0.9436,
+   "chewinggum": 0.9788666666666667,
+   "fryum": 0.9231333333333334,
+   "macaroni1": 0.7684666666666667,
+   "macaroni2": 0.6136666666666666,
+   "pcb1": 0.8591333333333333,
+   "pcb2": 0.8214666666666667,
+   "pcb3": 0.8422772277227722,
+   "pcb4": 0.975049504950495,
+   "pipe_fryum": 0.9694666666666666
+  },
+  "C64": {
+   "candle": 0.9372666666666666,
+   "capsules": 0.6694444444444444,
+   "cashew": 0.9453999999999999,
+   "chewinggum": 0.9832000000000001,
+   "fryum": 0.9348000000000001,
+   "macaroni1": 0.7879666666666667,
+   "macaroni2": 0.6486,
+   "pcb1": 0.8939,
+   "pcb2": 0.8530333333333333,
+   "pcb3": 0.8766996699669968,
+   "pcb4": 0.9795709570957095,
+   "pipe_fryum": 0.9868666666666667
+  },
+  "Call": {
+   "candle": 0.9729,
+   "capsules": 0.7268333333333333,
+   "cashew": 0.962,
+   "chewinggum": 0.9924,
+   "fryum": 0.9588,
+   "macaroni1": 0.7961,
+   "macaroni2": 0.6578,
+   "pcb1": 0.9288,
+   "pcb2": 0.9281,
+   "pcb3": 0.9243564356435644,
+   "pcb4": 0.9851485148514851,
+   "pipe_fryum": 0.993
+  }
+ },
+ "per_group_auroc": {
+  "A0": {
+   "pcb": 0.7352316831683168,
+   "multiple_instances": 0.80425,
+   "single_instance": 0.8935
+  },
+  "A1": {
+   "pcb": 0.7852047029702971,
+   "multiple_instances": 0.7384999999999999,
+   "single_instance": 0.9267500000000001
+  },
+  "B0": {
+   "pcb": 0.7301465346534654,
+   "multiple_instances": 0.8306208333333334,
+   "single_instance": 0.925875
+  },
+  "B1": {
+   "pcb": 0.7777350247524754,
+   "multiple_instances": 0.7921583333333333,
+   "single_instance": 0.9347749999999999
+  },
+  "C1": {
+   "pcb": 0.8330108085808581,
+   "multiple_instances": 0.6901777777777778,
+   "single_instance": 0.9012333333333333
+  },
+  "C2": {
+   "pcb": 0.8496011551155115,
+   "multiple_instances": 0.7055222222222222,
+   "single_instance": 0.9294666666666666
+  },
+  "C4": {
+   "pcb": 0.8480096534653466,
+   "multiple_instances": 0.7178194444444445,
+   "single_instance": 0.9416333333333333
+  },
+  "C8": {
+   "pcb": 0.8584241749174917,
+   "multiple_instances": 0.7186722222222223,
+   "single_instance": 0.9486
+  },
+  "C16": {
+   "pcb": 0.8744816831683169,
+   "multiple_instances": 0.7425333333333334,
+   "single_instance": 0.9537666666666667
+  },
+  "C64": {
+   "pcb": 0.9008009900990099,
+   "multiple_instances": 0.7608194444444445,
+   "single_instance": 0.9625666666666667
+  },
+  "Call": {
+   "pcb": 0.9416012376237624,
+   "multiple_instances": 0.7884083333333334,
+   "single_instance": 0.9765499999999999
+  }
+ },
+ "A0_vs_B0": {
+  "macro_diff_ci95": [
+   -0.02822962183718365,
+   -0.007736567656765619
+  ],
+  "per_category_diff": {
+   "candle": -0.04403635,
+   "capsules": 0.014063875,
+   "cashew": -0.10490215,
+   "chewinggum": -0.008485000000000001,
+   "fryum": -0.008077500000000001,
+   "macaroni1": -0.005818225,
+   "macaroni2": -0.070369175,
+   "pcb1": 0.057349075,
+   "pcb2": -0.017392375,
+   "pcb3": 0.007140371287128712,
+   "pcb4": -0.026397599009900994,
+   "pipe_fryum": -0.008325449999999998
+  },
+  "per_category_p_holm": {
+   "candle": 0.006,
+   "cashew": 0.006,
+   "macaroni2": 0.006,
+   "pcb1": 0.08099999999999999,
+   "pcb4": 0.408,
+   "pipe_fryum": 0.408,
+   "chewinggum": 0.43199999999999994,
+   "pcb2": 1.0,
+   "fryum": 1.0,
+   "capsules": 1.0,
+   "macaroni1": 1.0,
+   "pcb3": 1.0
+  }
+ },
+ "triage": {
+  "A0": {
+   "per_category": {
+    "escape": 0.0475,
+    "escape_ci95": [
+     0.036171461207449435,
+     0.06110669526122856
+    ],
+    "escapes": 57,
+    "overkill": 0.05093555093555094,
+    "auto_given_defective": 0.555,
+    "auto_given_good": 0.3607068607068607,
+    "coverage_at_prevalence_0.01": 0.3626497920997921
+   },
+   "global": {
+    "escape": 0.049166666666666664,
+    "escape_ci95": [
+     0.03763544794919008,
+     0.06296610567541992
+    ],
+    "escapes": 59,
+    "overkill": 0.05301455301455302,
+    "auto_given_defective": 0.465,
+    "auto_given_good": 0.1735966735966736,
+    "coverage_at_prevalence_0.01": 0.17651070686070686
+   }
+  },
+  "A1": {
+   "per_category": {
+    "escape": 0.04833333333333333,
+    "escape_ci95": [
+     0.036902955522941205,
+     0.06203688806179606
+    ],
+    "escapes": 58,
+    "overkill": 0.0550935550935551,
+    "auto_given_defective": 0.6441666666666667,
+    "auto_given_good": 0.3596673596673597,
+    "coverage_at_prevalence_0.01": 0.36251235273735277
+   },
+   "global": {
+    "escape": 0.0525,
+    "escape_ci95": [
+     0.04057493232641829,
+     0.06667367273894885
+    ],
+    "escapes": 63,
+    "overkill": 0.04885654885654886,
+    "auto_given_defective": 0.47833333333333333,
+    "auto_given_good": 0.23076923076923078,
+    "coverage_at_prevalence_0.01": 0.2332448717948718
+   }
+  },
+  "B0": {
+   "per_category": {
+    "escape": 0.045,
+    "escape_ci95": [
+     0.033983223615477696,
+     0.058310019297277714
+    ],
+    "escapes": 54,
+    "overkill": 0.04885654885654886,
+    "auto_given_defective": 0.6033333333333334,
+    "auto_given_good": 0.3659043659043659,
+    "coverage_at_prevalence_0.01": 0.3682786555786556
+   },
+   "global": {
+    "escape": 0.05,
+    "escape_ci95": [
+     0.038368914437111074,
+     0.06389437121473936
+    ],
+    "escapes": 60,
+    "overkill": 0.0498960498960499,
+    "auto_given_defective": 0.5041666666666667,
+    "auto_given_good": 0.18711018711018712,
+    "coverage_at_prevalence_0.01": 0.19028075190575192
+   }
+  },
+  "B1": {
+   "per_category": {
+    "escape": 0.043333333333333335,
+    "escape_ci95": [
+     0.032529880584017117,
+     0.056440221205962635
+    ],
+    "escapes": 52,
+    "overkill": 0.04781704781704782,
+    "auto_given_defective": 0.6416666666666667,
+    "auto_given_good": 0.3898128898128898,
+    "coverage_at_prevalence_0.01": 0.3923314275814276
+   },
+   "global": {
+    "escape": 0.04583333333333333,
+    "escape_ci95": [
+     0.03471156843698036,
+     0.0592432866070482
+    ],
+    "escapes": 55,
+    "overkill": 0.04885654885654886,
+    "auto_given_defective": 0.41583333333333333,
+    "auto_given_good": 0.2182952182952183,
+    "coverage_at_prevalence_0.01": 0.22027059944559946
+   }
+  },
+  "C1": {
+   "per_category": {
+    "escape": 0.04777777777777777,
+    "escape_ci95": null,
+    "escapes": 57.333333333333336,
+    "overkill": 0.05093555093555094,
+    "auto_given_defective": 0.5158333333333334,
+    "auto_given_good": 0.4421344421344422,
+    "coverage_at_prevalence_0.01": 0.442871431046431
+   }
+  },
+  "C2": {
+   "per_category": {
+    "escape": 0.04750000000000001,
+    "escape_ci95": null,
+    "escapes": 57.0,
+    "overkill": 0.05024255024255025,
+    "auto_given_defective": 0.5388888888888889,
+    "auto_given_good": 0.45980595980595984,
+    "coverage_at_prevalence_0.01": 0.4605967890967891
+   }
+  },
+  "C4": {
+   "per_category": {
+    "escape": 0.04916666666666667,
+    "escape_ci95": null,
+    "escapes": 59.0,
+    "overkill": 0.05232155232155233,
+    "auto_given_defective": 0.5688888888888889,
+    "auto_given_good": 0.4944559944559945,
+    "coverage_at_prevalence_0.01": 0.49520032340032333
+   }
+  },
+  "C8": {
+   "per_category": {
+    "escape": 0.04750000000000001,
+    "escape_ci95": null,
+    "escapes": 57.0,
+    "overkill": 0.05024255024255025,
+    "auto_given_defective": 0.563888888888889,
+    "auto_given_good": 0.5072765072765073,
+    "coverage_at_prevalence_0.01": 0.5078426310926311
+   }
+  },
+  "C16": {
+   "per_category": {
+    "escape": 0.04750000000000001,
+    "escape_ci95": null,
+    "escapes": 57.0,
+    "overkill": 0.0550935550935551,
+    "auto_given_defective": 0.5844444444444444,
+    "auto_given_good": 0.5426195426195426,
+    "coverage_at_prevalence_0.01": 0.5430377916377916
+   }
+  },
+  "C64": {
+   "per_category": {
+    "escape": 0.049166666666666664,
+    "escape_ci95": null,
+    "escapes": 59.0,
+    "overkill": 0.053361053361053366,
+    "auto_given_defective": 0.6347222222222223,
+    "auto_given_good": 0.5776160776160776,
+    "coverage_at_prevalence_0.01": 0.578187139062139
+   }
+  },
+  "Call": {
+   "per_category": {
+    "escape": 0.04666666666666667,
+    "escape_ci95": null,
+    "escapes": 56.0,
+    "overkill": 0.05197505197505198,
+    "auto_given_defective": 0.7441666666666666,
+    "auto_given_good": 0.6611226611226612,
+    "coverage_at_prevalence_0.01": 0.6619531011781012
+   }
+  }
+ },
+ "per_defect_type_auroc": {
+  "A0": {
+   "candle/chunk of wax missing": {
+    "auroc": 0.926,
+    "n": 15
+   },
+   "candle/damaged corner of packaging": {
+    "auroc": 0.9076,
+    "n": 25
+   },
+   "candle/different colour spot": {
+    "auroc": 0.7972727272727272,
+    "n": 22
+   },
+   "candle/extra wax in candle": {
+    "auroc": 0.966,
+    "n": 10
+   },
+   "candle/foreign particals on candle": {
+    "auroc": 0.9835294117647059,
+    "n": 17
+   },
+   "candle/wax melded out of the candle": {
+    "auroc": 0.9778571428571429,
+    "n": 14
+   },
+   "candle/weird candle wick": {
+    "auroc": 0.8218181818181818,
+    "n": 11
+   },
+   "capsules/bubble": {
+    "auroc": 0.823,
+    "n": 100
+   },
+   "capsules/discolor": {
+    "auroc": 0.8573809523809524,
+    "n": 70
+   },
+   "capsules/leak": {
+    "auroc": 0.9395833333333333,
+    "n": 40
+   },
+   "capsules/misshape": {
+    "auroc": 0.9136904761904762,
+    "n": 28
+   },
+   "capsules/scratch": {
+    "auroc": 0.8893939393939394,
+    "n": 55
+   },
+   "cashew/burnt": {
+    "auroc": 0.5257142857142857,
+    "n": 14
+   },
+   "cashew/corner or edge breakage": {
+    "auroc": 0.9023529411764706,
+    "n": 17
+   },
+   "cashew/different colour spot": {
+    "auroc": 0.8353846153846154,
+    "n": 13
+   },
+   "cashew/middle breakage": {
+    "auroc": 0.995,
+    "n": 8
+   },
+   "cashew/same colour spot": {
+    "auroc": 0.5485714285714286,
+    "n": 14
+   },
+   "cashew/small holes": {
+    "auroc": 0.8436363636363636,
+    "n": 22
+   },
+   "cashew/small scratches": {
+    "auroc": 0.30625,
+    "n": 16
+   },
+   "cashew/stuck together": {
+    "auroc": 1.0,
+    "n": 6
+   },
+   "chewinggum/chunk of gum missing": {
+    "auroc": 0.9991489361702127,
+    "n": 47
+   },
+   "chewinggum/corner missing": {
+    "auroc": 0.9155555555555556,
+    "n": 36
+   },
+   "chewinggum/scratches": {
+    "auroc": 0.945,
+    "n": 16
+   },
+   "chewinggum/similar colour spot": {
+    "auroc": 0.9968,
+    "n": 25
+   },
+   "chewinggum/small cracks": {
+    "auroc": 1.0,
+    "n": 29
+   },
+   "fryum/burnt": {
+    "auroc": 1.0,
+    "n": 9
+   },
+   "fryum/corner or edge breakage": {
+    "auroc": 0.9955555555555555,
+    "n": 9
+   },
+   "fryum/different colour spot": {
+    "auroc": 0.8855555555555555,
+    "n": 18
+   },
+   "fryum/fryum stuck together": {
+    "auroc": 0.99,
+    "n": 20
+   },
+   "fryum/middle breakage": {
+    "auroc": 0.9685714285714285,
+    "n": 21
+   },
+   "fryum/similar colour spot": {
+    "auroc": 0.7781818181818182,
+    "n": 22
+   },
+   "fryum/small scratches": {
+    "auroc": 0.6292307692307693,
+    "n": 13
+   },
+   "macaroni1/chip around edge and corner": {
+    "auroc": 0.8016,
+    "n": 25
+   },
+   "macaroni1/different colour spot": {
+    "auroc": 0.98375,
+    "n": 16
+   },
+   "macaroni1/middle breakage": {
+    "auroc": 0.991,
+    "n": 10
+   },
+   "macaroni1/similar colour spot": {
+    "auroc": 0.9431818181818182,
+    "n": 22
+   },
+   "macaroni1/small cracks": {
+    "auroc": 0.7607142857142857,
+    "n": 14
+   },
+   "macaroni1/small scratches": {
+    "auroc": 0.8409090909090909,
+    "n": 33
+   },
+   "macaroni2/breakage down the middle": {
+    "auroc": 0.6933333333333334,
+    "n": 15
+   },
+   "macaroni2/color spot similar to the object": {
+    "auroc": 0.5935714285714285,
+    "n": 28
+   },
+   "macaroni2/different color spot": {
+    "auroc": 0.7329411764705882,
+    "n": 17
+   },
+   "macaroni2/small chip around edge": {
+    "auroc": 0.6233333333333333,
+    "n": 30
+   },
+   "macaroni2/small cracks": {
+    "auroc": 0.5684615384615385,
+    "n": 13
+   },
+   "macaroni2/small scratches": {
+    "auroc": 0.5941666666666666,
+    "n": 36
+   },
+   "pcb1/bent": {
+    "auroc": 0.8926666666666667,
+    "n": 15
+   },
+   "pcb1/melt": {
+    "auroc": 0.6875925925925926,
+    "n": 54
+   },
+   "pcb1/missing": {
+    "auroc": 0.4485,
+    "n": 20
+   },
+   "pcb1/scratch": {
+    "auroc": 0.5547619047619048,
+    "n": 21
+   },
+   "pcb2/bent": {
+    "auroc": 0.8713333333333333,
+    "n": 15
+   },
+   "pcb2/melt": {
+    "auroc": 0.7805454545454545,
+    "n": 55
+   },
+   "pcb2/missing": {
+    "auroc": 0.5405263157894736,
+    "n": 19
+   },
+   "pcb2/scratch": {
+    "auroc": 0.7135,
+    "n": 20
+   },
+   "pcb3/bent": {
+    "auroc": 0.7103960396039604,
+    "n": 20
+   },
+   "pcb3/melt": {
+    "auroc": 0.7137923094635045,
+    "n": 43
+   },
+   "pcb3/missing": {
+    "auroc": 0.5282178217821782,
+    "n": 20
+   },
+   "pcb3/scratch": {
+    "auroc": 0.6510891089108911,
+    "n": 25
+   },
+   "pcb4/burnt": {
+    "auroc": 0.9702970297029703,
+    "n": 8
+   },
+   "pcb4/damage": {
+    "auroc": 0.9094766619519095,
+    "n": 21
+   },
+   "pcb4/dirt": {
+    "auroc": 0.9323432343234324,
+    "n": 42
+   },
+   "pcb4/extra": {
+    "auroc": 0.8653465346534653,
+    "n": 30
+   },
+   "pcb4/missing": {
+    "auroc": 0.8721872187218722,
+    "n": 33
+   },
+   "pcb4/scratch": {
+    "auroc": 0.9120559114735003,
+    "n": 17
+   },
+   "pcb4/wrong place": {
+    "auroc": 0.853008377760853,
+    "n": 13
+   },
+   "pipe_fryum/burnt": {
+    "auroc": 0.99875,
+    "n": 16
+   },
+   "pipe_fryum/corner and edge breakage": {
+    "auroc": 1.0,
+    "n": 15
+   },
+   "pipe_fryum/different colour spot": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/middle breakage": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/similar colour spot": {
+    "auroc": 1.0,
+    "n": 21
+   },
+   "pipe_fryum/small cracks": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/small scratches": {
+    "auroc": 0.9475,
+    "n": 24
+   },
+   "pipe_fryum/stuck together": {
+    "auroc": 0.962,
+    "n": 10
+   }
+  },
+  "A1": {
+   "candle/chunk of wax missing": {
+    "auroc": 0.8606666666666667,
+    "n": 15
+   },
+   "candle/damaged corner of packaging": {
+    "auroc": 0.5756,
+    "n": 25
+   },
+   "candle/different colour spot": {
+    "auroc": 0.5627272727272727,
+    "n": 22
+   },
+   "candle/extra wax in candle": {
+    "auroc": 0.822,
+    "n": 10
+   },
+   "candle/foreign particals on candle": {
+    "auroc": 0.9552941176470588,
+    "n": 17
+   },
+   "candle/wax melded out of the candle": {
+    "auroc": 0.83,
+    "n": 14
+   },
+   "candle/weird candle wick": {
+    "auroc": 0.63,
+    "n": 11
+   },
+   "capsules/bubble": {
+    "auroc": 0.7975,
+    "n": 100
+   },
+   "capsules/discolor": {
+    "auroc": 0.8180952380952381,
+    "n": 70
+   },
+   "capsules/leak": {
+    "auroc": 0.9691666666666666,
+    "n": 40
+   },
+   "capsules/misshape": {
+    "auroc": 0.955952380952381,
+    "n": 28
+   },
+   "capsules/scratch": {
+    "auroc": 0.8951515151515151,
+    "n": 55
+   },
+   "cashew/burnt": {
+    "auroc": 0.9642857142857143,
+    "n": 14
+   },
+   "cashew/corner or edge breakage": {
+    "auroc": 0.9705882352941176,
+    "n": 17
+   },
+   "cashew/different colour spot": {
+    "auroc": 0.943076923076923,
+    "n": 13
+   },
+   "cashew/middle breakage": {
+    "auroc": 1.0,
+    "n": 8
+   },
+   "cashew/same colour spot": {
+    "auroc": 0.7028571428571428,
+    "n": 14
+   },
+   "cashew/small holes": {
+    "auroc": 0.8936363636363637,
+    "n": 22
+   },
+   "cashew/small scratches": {
+    "auroc": 0.53125,
+    "n": 16
+   },
+   "cashew/stuck together": {
+    "auroc": 1.0,
+    "n": 6
+   },
+   "chewinggum/chunk of gum missing": {
+    "auroc": 1.0,
+    "n": 47
+   },
+   "chewinggum/corner missing": {
+    "auroc": 0.9555555555555556,
+    "n": 36
+   },
+   "chewinggum/scratches": {
+    "auroc": 0.965,
+    "n": 16
+   },
+   "chewinggum/similar colour spot": {
+    "auroc": 1.0,
+    "n": 25
+   },
+   "chewinggum/small cracks": {
+    "auroc": 1.0,
+    "n": 29
+   },
+   "fryum/burnt": {
+    "auroc": 1.0,
+    "n": 9
+   },
+   "fryum/corner or edge breakage": {
+    "auroc": 1.0,
+    "n": 9
+   },
+   "fryum/different colour spot": {
+    "auroc": 0.8855555555555555,
+    "n": 18
+   },
+   "fryum/fryum stuck together": {
+    "auroc": 1.0,
+    "n": 20
+   },
+   "fryum/middle breakage": {
+    "auroc": 0.9914285714285714,
+    "n": 21
+   },
+   "fryum/similar colour spot": {
+    "auroc": 0.7836363636363637,
+    "n": 22
+   },
+   "fryum/small scratches": {
+    "auroc": 0.6446153846153846,
+    "n": 13
+   },
+   "macaroni1/chip around edge and corner": {
+    "auroc": 0.6772,
+    "n": 25
+   },
+   "macaroni1/different colour spot": {
+    "auroc": 0.961875,
+    "n": 16
+   },
+   "macaroni1/middle breakage": {
+    "auroc": 0.981,
+    "n": 10
+   },
+   "macaroni1/similar colour spot": {
+    "auroc": 0.915,
+    "n": 22
+   },
+   "macaroni1/small cracks": {
+    "auroc": 0.7071428571428572,
+    "n": 14
+   },
+   "macaroni1/small scratches": {
+    "auroc": 0.803030303030303,
+    "n": 33
+   },
+   "macaroni2/breakage down the middle": {
+    "auroc": 0.674,
+    "n": 15
+   },
+   "macaroni2/color spot similar to the object": {
+    "auroc": 0.6071428571428571,
+    "n": 28
+   },
+   "macaroni2/different color spot": {
+    "auroc": 0.6217647058823529,
+    "n": 17
+   },
+   "macaroni2/small chip around edge": {
+    "auroc": 0.5666666666666667,
+    "n": 30
+   },
+   "macaroni2/small cracks": {
+    "auroc": 0.5061538461538462,
+    "n": 13
+   },
+   "macaroni2/small scratches": {
+    "auroc": 0.7063888888888888,
+    "n": 36
+   },
+   "pcb1/bent": {
+    "auroc": 0.9493333333333334,
+    "n": 15
+   },
+   "pcb1/melt": {
+    "auroc": 0.5061111111111111,
+    "n": 54
+   },
+   "pcb1/missing": {
+    "auroc": 0.6255,
+    "n": 20
+   },
+   "pcb1/scratch": {
+    "auroc": 0.43238095238095237,
+    "n": 21
+   },
+   "pcb2/bent": {
+    "auroc": 0.9366666666666666,
+    "n": 15
+   },
+   "pcb2/melt": {
+    "auroc": 0.7887272727272727,
+    "n": 55
+   },
+   "pcb2/missing": {
+    "auroc": 0.7147368421052631,
+    "n": 19
+   },
+   "pcb2/scratch": {
+    "auroc": 0.6785,
+    "n": 20
+   },
+   "pcb3/bent": {
+    "auroc": 0.9202970297029703,
+    "n": 20
+   },
+   "pcb3/melt": {
+    "auroc": 0.784941284826157,
+    "n": 43
+   },
+   "pcb3/missing": {
+    "auroc": 0.8212871287128712,
+    "n": 20
+   },
+   "pcb3/scratch": {
+    "auroc": 0.761980198019802,
+    "n": 25
+   },
+   "pcb4/burnt": {
+    "auroc": 0.9876237623762376,
+    "n": 8
+   },
+   "pcb4/damage": {
+    "auroc": 0.9825553983969826,
+    "n": 21
+   },
+   "pcb4/dirt": {
+    "auroc": 0.9827911362564828,
+    "n": 42
+   },
+   "pcb4/extra": {
+    "auroc": 0.9848184818481848,
+    "n": 30
+   },
+   "pcb4/missing": {
+    "auroc": 0.9717971797179717,
+    "n": 33
+   },
+   "pcb4/scratch": {
+    "auroc": 0.9743739079790332,
+    "n": 17
+   },
+   "pcb4/wrong place": {
+    "auroc": 0.9634424980959635,
+    "n": 13
+   },
+   "pipe_fryum/burnt": {
+    "auroc": 0.98,
+    "n": 16
+   },
+   "pipe_fryum/corner and edge breakage": {
+    "auroc": 0.996,
+    "n": 15
+   },
+   "pipe_fryum/different colour spot": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/middle breakage": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/similar colour spot": {
+    "auroc": 0.9942857142857143,
+    "n": 21
+   },
+   "pipe_fryum/small cracks": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/small scratches": {
+    "auroc": 0.87,
+    "n": 24
+   },
+   "pipe_fryum/stuck together": {
+    "auroc": 0.994,
+    "n": 10
+   }
+  },
+  "B0": {
+   "candle/chunk of wax missing": {
+    "auroc": 0.9476666666666667,
+    "n": 15
+   },
+   "candle/damaged corner of packaging": {
+    "auroc": 0.9372,
+    "n": 25
+   },
+   "candle/different colour spot": {
+    "auroc": 0.9168181818181819,
+    "n": 22
+   },
+   "candle/extra wax in candle": {
+    "auroc": 0.9785,
+    "n": 10
+   },
+   "candle/foreign particals on candle": {
+    "auroc": 0.9852941176470589,
+    "n": 17
+   },
+   "candle/wax melded out of the candle": {
+    "auroc": 0.99,
+    "n": 14
+   },
+   "candle/weird candle wick": {
+    "auroc": 0.9118181818181819,
+    "n": 11
+   },
+   "capsules/bubble": {
+    "auroc": 0.8085833333333333,
+    "n": 100
+   },
+   "capsules/discolor": {
+    "auroc": 0.8341666666666666,
+    "n": 70
+   },
+   "capsules/leak": {
+    "auroc": 0.9095833333333333,
+    "n": 40
+   },
+   "capsules/misshape": {
+    "auroc": 0.8708333333333333,
+    "n": 28
+   },
+   "capsules/scratch": {
+    "auroc": 0.8663636363636363,
+    "n": 55
+   },
+   "cashew/burnt": {
+    "auroc": 0.84,
+    "n": 14
+   },
+   "cashew/corner or edge breakage": {
+    "auroc": 0.9541176470588235,
+    "n": 17
+   },
+   "cashew/different colour spot": {
+    "auroc": 0.9523076923076923,
+    "n": 13
+   },
+   "cashew/middle breakage": {
+    "auroc": 0.9975,
+    "n": 8
+   },
+   "cashew/same colour spot": {
+    "auroc": 0.6907142857142857,
+    "n": 14
+   },
+   "cashew/small holes": {
+    "auroc": 0.9486363636363636,
+    "n": 22
+   },
+   "cashew/small scratches": {
+    "auroc": 0.37125,
+    "n": 16
+   },
+   "cashew/stuck together": {
+    "auroc": 0.9966666666666667,
+    "n": 6
+   },
+   "chewinggum/chunk of gum missing": {
+    "auroc": 0.9987234042553191,
+    "n": 47
+   },
+   "chewinggum/corner missing": {
+    "auroc": 0.9313888888888889,
+    "n": 36
+   },
+   "chewinggum/scratches": {
+    "auroc": 0.960625,
+    "n": 16
+   },
+   "chewinggum/similar colour spot": {
+    "auroc": 0.9996,
+    "n": 25
+   },
+   "chewinggum/small cracks": {
+    "auroc": 1.0,
+    "n": 29
+   },
+   "fryum/burnt": {
+    "auroc": 1.0,
+    "n": 9
+   },
+   "fryum/corner or edge breakage": {
+    "auroc": 1.0,
+    "n": 9
+   },
+   "fryum/different colour spot": {
+    "auroc": 0.8966666666666666,
+    "n": 18
+   },
+   "fryum/fryum stuck together": {
+    "auroc": 0.987,
+    "n": 20
+   },
+   "fryum/middle breakage": {
+    "auroc": 0.9871428571428571,
+    "n": 21
+   },
+   "fryum/similar colour spot": {
+    "auroc": 0.8159090909090909,
+    "n": 22
+   },
+   "fryum/small scratches": {
+    "auroc": 0.6576923076923077,
+    "n": 13
+   },
+   "macaroni1/chip around edge and corner": {
+    "auroc": 0.8212,
+    "n": 25
+   },
+   "macaroni1/different colour spot": {
+    "auroc": 0.99875,
+    "n": 16
+   },
+   "macaroni1/middle breakage": {
+    "auroc": 0.998,
+    "n": 10
+   },
+   "macaroni1/similar colour spot": {
+    "auroc": 0.9818181818181818,
+    "n": 22
+   },
+   "macaroni1/small cracks": {
+    "auroc": 0.7789285714285714,
+    "n": 14
+   },
+   "macaroni1/small scratches": {
+    "auroc": 0.8183333333333334,
+    "n": 33
+   },
+   "macaroni2/breakage down the middle": {
+    "auroc": 0.7253333333333334,
+    "n": 15
+   },
+   "macaroni2/color spot similar to the object": {
+    "auroc": 0.6107142857142858,
+    "n": 28
+   },
+   "macaroni2/different color spot": {
+    "auroc": 0.7761764705882352,
+    "n": 17
+   },
+   "macaroni2/small chip around edge": {
+    "auroc": 0.6766666666666666,
+    "n": 30
+   },
+   "macaroni2/small cracks": {
+    "auroc": 0.6307692307692307,
+    "n": 13
+   },
+   "macaroni2/small scratches": {
+    "auroc": 0.6951388888888889,
+    "n": 36
+   },
+   "pcb1/bent": {
+    "auroc": 0.835,
+    "n": 15
+   },
+   "pcb1/melt": {
+    "auroc": 0.6265740740740741,
+    "n": 54
+   },
+   "pcb1/missing": {
+    "auroc": 0.40025,
+    "n": 20
+   },
+   "pcb1/scratch": {
+    "auroc": 0.5223809523809524,
+    "n": 21
+   },
+   "pcb2/bent": {
+    "auroc": 0.9,
+    "n": 15
+   },
+   "pcb2/melt": {
+    "auroc": 0.8139090909090909,
+    "n": 55
+   },
+   "pcb2/missing": {
+    "auroc": 0.5021052631578947,
+    "n": 19
+   },
+   "pcb2/scratch": {
+    "auroc": 0.72225,
+    "n": 20
+   },
+   "pcb3/bent": {
+    "auroc": 0.7071782178217821,
+    "n": 20
+   },
+   "pcb3/melt": {
+    "auroc": 0.6998618466497812,
+    "n": 43
+   },
+   "pcb3/missing": {
+    "auroc": 0.5215346534653466,
+    "n": 20
+   },
+   "pcb3/scratch": {
+    "auroc": 0.6522772277227723,
+    "n": 25
+   },
+   "pcb4/burnt": {
+    "auroc": 0.9925742574257426,
+    "n": 8
+   },
+   "pcb4/damage": {
+    "auroc": 0.9262140499764262,
+    "n": 21
+   },
+   "pcb4/dirt": {
+    "auroc": 0.9503771805752004,
+    "n": 42
+   },
+   "pcb4/extra": {
+    "auroc": 0.9018151815181518,
+    "n": 30
+   },
+   "pcb4/missing": {
+    "auroc": 0.8877887788778878,
+    "n": 33
+   },
+   "pcb4/scratch": {
+    "auroc": 0.9036109493302271,
+    "n": 17
+   },
+   "pcb4/wrong place": {
+    "auroc": 0.8853769992383854,
+    "n": 13
+   },
+   "pipe_fryum/burnt": {
+    "auroc": 1.0,
+    "n": 16
+   },
+   "pipe_fryum/corner and edge breakage": {
+    "auroc": 1.0,
+    "n": 15
+   },
+   "pipe_fryum/different colour spot": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/middle breakage": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/similar colour spot": {
+    "auroc": 1.0,
+    "n": 21
+   },
+   "pipe_fryum/small cracks": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/small scratches": {
+    "auroc": 0.97375,
+    "n": 24
+   },
+   "pipe_fryum/stuck together": {
+    "auroc": 0.981,
+    "n": 10
+   }
+  },
+  "B1": {
+   "candle/chunk of wax missing": {
+    "auroc": 0.884,
+    "n": 15
+   },
+   "candle/damaged corner of packaging": {
+    "auroc": 0.5622,
+    "n": 25
+   },
+   "candle/different colour spot": {
+    "auroc": 0.5731818181818182,
+    "n": 22
+   },
+   "candle/extra wax in candle": {
+    "auroc": 0.7275,
+    "n": 10
+   },
+   "candle/foreign particals on candle": {
+    "auroc": 0.9411764705882353,
+    "n": 17
+   },
+   "candle/wax melded out of the candle": {
+    "auroc": 0.7914285714285715,
+    "n": 14
+   },
+   "candle/weird candle wick": {
+    "auroc": 0.5731818181818182,
+    "n": 11
+   },
+   "capsules/bubble": {
+    "auroc": 0.8863333333333333,
+    "n": 100
+   },
+   "capsules/discolor": {
+    "auroc": 0.8980952380952381,
+    "n": 70
+   },
+   "capsules/leak": {
+    "auroc": 0.9595833333333333,
+    "n": 40
+   },
+   "capsules/misshape": {
+    "auroc": 0.9422619047619047,
+    "n": 28
+   },
+   "capsules/scratch": {
+    "auroc": 0.9346969696969697,
+    "n": 55
+   },
+   "cashew/burnt": {
+    "auroc": 0.9742857142857143,
+    "n": 14
+   },
+   "cashew/corner or edge breakage": {
+    "auroc": 0.9470588235294117,
+    "n": 17
+   },
+   "cashew/different colour spot": {
+    "auroc": 0.9484615384615385,
+    "n": 13
+   },
+   "cashew/middle breakage": {
+    "auroc": 1.0,
+    "n": 8
+   },
+   "cashew/same colour spot": {
+    "auroc": 0.7907142857142857,
+    "n": 14
+   },
+   "cashew/small holes": {
+    "auroc": 0.9136363636363637,
+    "n": 22
+   },
+   "cashew/small scratches": {
+    "auroc": 0.465625,
+    "n": 16
+   },
+   "cashew/stuck together": {
+    "auroc": 1.0,
+    "n": 6
+   },
+   "chewinggum/chunk of gum missing": {
+    "auroc": 1.0,
+    "n": 47
+   },
+   "chewinggum/corner missing": {
+    "auroc": 0.9588888888888889,
+    "n": 36
+   },
+   "chewinggum/scratches": {
+    "auroc": 0.97375,
+    "n": 16
+   },
+   "chewinggum/similar colour spot": {
+    "auroc": 1.0,
+    "n": 25
+   },
+   "chewinggum/small cracks": {
+    "auroc": 1.0,
+    "n": 29
+   },
+   "fryum/burnt": {
+    "auroc": 1.0,
+    "n": 9
+   },
+   "fryum/corner or edge breakage": {
+    "auroc": 1.0,
+    "n": 9
+   },
+   "fryum/different colour spot": {
+    "auroc": 0.9077777777777778,
+    "n": 18
+   },
+   "fryum/fryum stuck together": {
+    "auroc": 1.0,
+    "n": 20
+   },
+   "fryum/middle breakage": {
+    "auroc": 0.9895238095238095,
+    "n": 21
+   },
+   "fryum/similar colour spot": {
+    "auroc": 0.8236363636363636,
+    "n": 22
+   },
+   "fryum/small scratches": {
+    "auroc": 0.7415384615384616,
+    "n": 13
+   },
+   "macaroni1/chip around edge and corner": {
+    "auroc": 0.7826,
+    "n": 25
+   },
+   "macaroni1/different colour spot": {
+    "auroc": 0.99375,
+    "n": 16
+   },
+   "macaroni1/middle breakage": {
+    "auroc": 0.9955,
+    "n": 10
+   },
+   "macaroni1/similar colour spot": {
+    "auroc": 0.9375,
+    "n": 22
+   },
+   "macaroni1/small cracks": {
+    "auroc": 0.8110714285714286,
+    "n": 14
+   },
+   "macaroni1/small scratches": {
+    "auroc": 0.8296969696969697,
+    "n": 33
+   },
+   "macaroni2/breakage down the middle": {
+    "auroc": 0.738,
+    "n": 15
+   },
+   "macaroni2/color spot similar to the object": {
+    "auroc": 0.7426785714285714,
+    "n": 28
+   },
+   "macaroni2/different color spot": {
+    "auroc": 0.8102941176470588,
+    "n": 17
+   },
+   "macaroni2/small chip around edge": {
+    "auroc": 0.6616666666666666,
+    "n": 30
+   },
+   "macaroni2/small cracks": {
+    "auroc": 0.6842307692307692,
+    "n": 13
+   },
+   "macaroni2/small scratches": {
+    "auroc": 0.705,
+    "n": 36
+   },
+   "pcb1/bent": {
+    "auroc": 0.908,
+    "n": 15
+   },
+   "pcb1/melt": {
+    "auroc": 0.4772222222222222,
+    "n": 54
+   },
+   "pcb1/missing": {
+    "auroc": 0.674,
+    "n": 20
+   },
+   "pcb1/scratch": {
+    "auroc": 0.3811904761904762,
+    "n": 21
+   },
+   "pcb2/bent": {
+    "auroc": 0.9586666666666667,
+    "n": 15
+   },
+   "pcb2/melt": {
+    "auroc": 0.7788181818181819,
+    "n": 55
+   },
+   "pcb2/missing": {
+    "auroc": 0.7513157894736842,
+    "n": 19
+   },
+   "pcb2/scratch": {
+    "auroc": 0.65225,
+    "n": 20
+   },
+   "pcb3/bent": {
+    "auroc": 0.947029702970297,
+    "n": 20
+   },
+   "pcb3/melt": {
+    "auroc": 0.7624913654156114,
+    "n": 43
+   },
+   "pcb3/missing": {
+    "auroc": 0.8272277227722772,
+    "n": 20
+   },
+   "pcb3/scratch": {
+    "auroc": 0.7451485148514851,
+    "n": 25
+   },
+   "pcb4/burnt": {
+    "auroc": 0.9900990099009901,
+    "n": 8
+   },
+   "pcb4/damage": {
+    "auroc": 0.9839698255539839,
+    "n": 21
+   },
+   "pcb4/dirt": {
+    "auroc": 0.9837340876944838,
+    "n": 42
+   },
+   "pcb4/extra": {
+    "auroc": 0.9831683168316832,
+    "n": 30
+   },
+   "pcb4/missing": {
+    "auroc": 0.9731473147314732,
+    "n": 33
+   },
+   "pcb4/scratch": {
+    "auroc": 0.9796156086196856,
+    "n": 17
+   },
+   "pcb4/wrong place": {
+    "auroc": 0.9588728103579589,
+    "n": 13
+   },
+   "pipe_fryum/burnt": {
+    "auroc": 0.979375,
+    "n": 16
+   },
+   "pipe_fryum/corner and edge breakage": {
+    "auroc": 0.9946666666666667,
+    "n": 15
+   },
+   "pipe_fryum/different colour spot": {
+    "auroc": 0.992,
+    "n": 10
+   },
+   "pipe_fryum/middle breakage": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/similar colour spot": {
+    "auroc": 0.9876190476190476,
+    "n": 21
+   },
+   "pipe_fryum/small cracks": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/small scratches": {
+    "auroc": 0.8758333333333334,
+    "n": 24
+   },
+   "pipe_fryum/stuck together": {
+    "auroc": 0.978,
+    "n": 10
+   }
+  },
+  "C16": {
+   "candle/chunk of wax missing": {
+    "auroc": 0.9437777777777777,
+    "n": 15
+   },
+   "candle/damaged corner of packaging": {
+    "auroc": 0.8926666666666666,
+    "n": 25
+   },
+   "candle/different colour spot": {
+    "auroc": 0.8621212121212122,
+    "n": 22
+   },
+   "candle/extra wax in candle": {
+    "auroc": 0.9723333333333333,
+    "n": 10
+   },
+   "candle/foreign particals on candle": {
+    "auroc": 0.9698039215686275,
+    "n": 17
+   },
+   "candle/wax melded out of the candle": {
+    "auroc": 0.9783333333333332,
+    "n": 14
+   },
+   "candle/weird candle wick": {
+    "auroc": 0.8924242424242425,
+    "n": 11
+   },
+   "capsules/bubble": {
+    "auroc": 0.6623333333333333,
+    "n": 100
+   },
+   "capsules/discolor": {
+    "auroc": 0.7597619047619046,
+    "n": 70
+   },
+   "capsules/leak": {
+    "auroc": 0.9411111111111111,
+    "n": 40
+   },
+   "capsules/misshape": {
+    "auroc": 0.9418650793650793,
+    "n": 28
+   },
+   "capsules/scratch": {
+    "auroc": 0.8014141414141415,
+    "n": 55
+   },
+   "cashew/burnt": {
+    "auroc": 0.9038095238095237,
+    "n": 14
+   },
+   "cashew/corner or edge breakage": {
+    "auroc": 0.9909803921568626,
+    "n": 17
+   },
+   "cashew/different colour spot": {
+    "auroc": 0.9697435897435898,
+    "n": 13
+   },
+   "cashew/middle breakage": {
+    "auroc": 1.0,
+    "n": 8
+   },
+   "cashew/same colour spot": {
+    "auroc": 0.7885714285714286,
+    "n": 14
+   },
+   "cashew/small holes": {
+    "auroc": 0.9927272727272727,
+    "n": 22
+   },
+   "cashew/small scratches": {
+    "auroc": 0.9225,
+    "n": 16
+   },
+   "cashew/stuck together": {
+    "auroc": 1.0,
+    "n": 6
+   },
+   "chewinggum/chunk of gum missing": {
+    "auroc": 1.0,
+    "n": 47
+   },
+   "chewinggum/corner missing": {
+    "auroc": 0.9416666666666668,
+    "n": 36
+   },
+   "chewinggum/scratches": {
+    "auroc": 0.9683333333333334,
+    "n": 16
+   },
+   "chewinggum/similar colour spot": {
+    "auroc": 1.0,
+    "n": 25
+   },
+   "chewinggum/small cracks": {
+    "auroc": 1.0,
+    "n": 29
+   },
+   "fryum/burnt": {
+    "auroc": 0.9992592592592593,
+    "n": 9
+   },
+   "fryum/corner or edge breakage": {
+    "auroc": 0.997037037037037,
+    "n": 9
+   },
+   "fryum/different colour spot": {
+    "auroc": 0.7855555555555557,
+    "n": 18
+   },
+   "fryum/fryum stuck together": {
+    "auroc": 0.9986666666666667,
+    "n": 20
+   },
+   "fryum/middle breakage": {
+    "auroc": 0.9990476190476191,
+    "n": 21
+   },
+   "fryum/similar colour spot": {
+    "auroc": 0.8466666666666667,
+    "n": 22
+   },
+   "fryum/small scratches": {
+    "auroc": 0.8169230769230769,
+    "n": 13
+   },
+   "macaroni1/chip around edge and corner": {
+    "auroc": 0.6186666666666666,
+    "n": 25
+   },
+   "macaroni1/different colour spot": {
+    "auroc": 0.8147916666666667,
+    "n": 16
+   },
+   "macaroni1/middle breakage": {
+    "auroc": 0.9686666666666666,
+    "n": 10
+   },
+   "macaroni1/similar colour spot": {
+    "auroc": 0.7275757575757575,
+    "n": 22
+   },
+   "macaroni1/small cracks": {
+    "auroc": 0.835,
+    "n": 14
+   },
+   "macaroni1/small scratches": {
+    "auroc": 0.8231313131313133,
+    "n": 33
+   },
+   "macaroni2/breakage down the middle": {
+    "auroc": 0.7744444444444444,
+    "n": 15
+   },
+   "macaroni2/color spot similar to the object": {
+    "auroc": 0.5369047619047619,
+    "n": 28
+   },
+   "macaroni2/different color spot": {
+    "auroc": 0.6619607843137255,
+    "n": 17
+   },
+   "macaroni2/small chip around edge": {
+    "auroc": 0.5464444444444444,
+    "n": 30
+   },
+   "macaroni2/small cracks": {
+    "auroc": 0.5433333333333333,
+    "n": 13
+   },
+   "macaroni2/small scratches": {
+    "auroc": 0.7340740740740741,
+    "n": 36
+   },
+   "pcb1/bent": {
+    "auroc": 0.9784444444444444,
+    "n": 15
+   },
+   "pcb1/melt": {
+    "auroc": 0.8180864197530863,
+    "n": 54
+   },
+   "pcb1/missing": {
+    "auroc": 0.956,
+    "n": 20
+   },
+   "pcb1/scratch": {
+    "auroc": 0.8015873015873015,
+    "n": 21
+   },
+   "pcb2/bent": {
+    "auroc": 0.906,
+    "n": 15
+   },
+   "pcb2/melt": {
+    "auroc": 0.778969696969697,
+    "n": 55
+   },
+   "pcb2/missing": {
+    "auroc": 0.8014035087719297,
+    "n": 19
+   },
+   "pcb2/scratch": {
+    "auroc": 0.8491666666666667,
+    "n": 20
+   },
+   "pcb3/bent": {
+    "auroc": 0.9721122112211221,
+    "n": 20
+   },
+   "pcb3/melt": {
+    "auroc": 0.7779568654539872,
+    "n": 43
+   },
+   "pcb3/missing": {
+    "auroc": 0.87986798679868,
+    "n": 20
+   },
+   "pcb3/scratch": {
+    "auroc": 0.8106930693069309,
+    "n": 25
+   },
+   "pcb4/burnt": {
+    "auroc": 0.971122112211221,
+    "n": 8
+   },
+   "pcb4/damage": {
+    "auroc": 0.9721829325789723,
+    "n": 21
+   },
+   "pcb4/dirt": {
+    "auroc": 0.9794908062234796,
+    "n": 42
+   },
+   "pcb4/extra": {
+    "auroc": 0.9889988998899889,
+    "n": 30
+   },
+   "pcb4/missing": {
+    "auroc": 0.9620962096209622,
+    "n": 33
+   },
+   "pcb4/scratch": {
+    "auroc": 0.9836924868957485,
+    "n": 17
+   },
+   "pcb4/wrong place": {
+    "auroc": 0.9766438182279766,
+    "n": 13
+   },
+   "pipe_fryum/burnt": {
+    "auroc": 0.97375,
+    "n": 16
+   },
+   "pipe_fryum/corner and edge breakage": {
+    "auroc": 0.9813333333333333,
+    "n": 15
+   },
+   "pipe_fryum/different colour spot": {
+    "auroc": 0.9973333333333333,
+    "n": 10
+   },
+   "pipe_fryum/middle breakage": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/similar colour spot": {
+    "auroc": 0.9387301587301587,
+    "n": 21
+   },
+   "pipe_fryum/small cracks": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/small scratches": {
+    "auroc": 0.9513888888888888,
+    "n": 24
+   },
+   "pipe_fryum/stuck together": {
+    "auroc": 1.0,
+    "n": 10
+   }
+  },
+  "Call": {
+   "candle/chunk of wax missing": {
+    "auroc": 0.9686666666666667,
+    "n": 15
+   },
+   "candle/damaged corner of packaging": {
+    "auroc": 0.9512,
+    "n": 25
+   },
+   "candle/different colour spot": {
+    "auroc": 0.9359090909090909,
+    "n": 22
+   },
+   "candle/extra wax in candle": {
+    "auroc": 0.996,
+    "n": 10
+   },
+   "candle/foreign particals on candle": {
+    "auroc": 0.9911764705882353,
+    "n": 17
+   },
+   "candle/wax melded out of the candle": {
+    "auroc": 0.9985714285714286,
+    "n": 14
+   },
+   "candle/weird candle wick": {
+    "auroc": 0.9781818181818182,
+    "n": 11
+   },
+   "capsules/bubble": {
+    "auroc": 0.7268333333333333,
+    "n": 100
+   },
+   "capsules/discolor": {
+    "auroc": 0.8,
+    "n": 70
+   },
+   "capsules/leak": {
+    "auroc": 0.9866666666666667,
+    "n": 40
+   },
+   "capsules/misshape": {
+    "auroc": 0.9827380952380952,
+    "n": 28
+   },
+   "capsules/scratch": {
+    "auroc": 0.8754545454545455,
+    "n": 55
+   },
+   "cashew/burnt": {
+    "auroc": 0.9428571428571428,
+    "n": 14
+   },
+   "cashew/corner or edge breakage": {
+    "auroc": 0.9952941176470588,
+    "n": 17
+   },
+   "cashew/different colour spot": {
+    "auroc": 0.9769230769230769,
+    "n": 13
+   },
+   "cashew/middle breakage": {
+    "auroc": 1.0,
+    "n": 8
+   },
+   "cashew/same colour spot": {
+    "auroc": 0.8528571428571429,
+    "n": 14
+   },
+   "cashew/small holes": {
+    "auroc": 0.9854545454545455,
+    "n": 22
+   },
+   "cashew/small scratches": {
+    "auroc": 0.955,
+    "n": 16
+   },
+   "cashew/stuck together": {
+    "auroc": 1.0,
+    "n": 6
+   },
+   "chewinggum/chunk of gum missing": {
+    "auroc": 1.0,
+    "n": 47
+   },
+   "chewinggum/corner missing": {
+    "auroc": 0.9788888888888889,
+    "n": 36
+   },
+   "chewinggum/scratches": {
+    "auroc": 0.97875,
+    "n": 16
+   },
+   "chewinggum/similar colour spot": {
+    "auroc": 1.0,
+    "n": 25
+   },
+   "chewinggum/small cracks": {
+    "auroc": 1.0,
+    "n": 29
+   },
+   "fryum/burnt": {
+    "auroc": 1.0,
+    "n": 9
+   },
+   "fryum/corner or edge breakage": {
+    "auroc": 1.0,
+    "n": 9
+   },
+   "fryum/different colour spot": {
+    "auroc": 0.8777777777777778,
+    "n": 18
+   },
+   "fryum/fryum stuck together": {
+    "auroc": 1.0,
+    "n": 20
+   },
+   "fryum/middle breakage": {
+    "auroc": 1.0,
+    "n": 21
+   },
+   "fryum/similar colour spot": {
+    "auroc": 0.9245454545454546,
+    "n": 22
+   },
+   "fryum/small scratches": {
+    "auroc": 0.8984615384615384,
+    "n": 13
+   },
+   "macaroni1/chip around edge and corner": {
+    "auroc": 0.638,
+    "n": 25
+   },
+   "macaroni1/different colour spot": {
+    "auroc": 0.87,
+    "n": 16
+   },
+   "macaroni1/middle breakage": {
+    "auroc": 0.992,
+    "n": 10
+   },
+   "macaroni1/similar colour spot": {
+    "auroc": 0.7586363636363637,
+    "n": 22
+   },
+   "macaroni1/small cracks": {
+    "auroc": 0.8942857142857142,
+    "n": 14
+   },
+   "macaroni1/small scratches": {
+    "auroc": 0.8345454545454546,
+    "n": 33
+   },
+   "macaroni2/breakage down the middle": {
+    "auroc": 0.8666666666666667,
+    "n": 15
+   },
+   "macaroni2/color spot similar to the object": {
+    "auroc": 0.5889285714285715,
+    "n": 28
+   },
+   "macaroni2/different color spot": {
+    "auroc": 0.8111764705882353,
+    "n": 17
+   },
+   "macaroni2/small chip around edge": {
+    "auroc": 0.5013333333333333,
+    "n": 30
+   },
+   "macaroni2/small cracks": {
+    "auroc": 0.5753846153846154,
+    "n": 13
+   },
+   "macaroni2/small scratches": {
+    "auroc": 0.7616666666666667,
+    "n": 36
+   },
+   "pcb1/bent": {
+    "auroc": 0.9966666666666667,
+    "n": 15
+   },
+   "pcb1/melt": {
+    "auroc": 0.8996296296296297,
+    "n": 54
+   },
+   "pcb1/missing": {
+    "auroc": 0.975,
+    "n": 20
+   },
+   "pcb1/scratch": {
+    "auroc": 0.9271428571428572,
+    "n": 21
+   },
+   "pcb2/bent": {
+    "auroc": 0.9673333333333334,
+    "n": 15
+   },
+   "pcb2/melt": {
+    "auroc": 0.9236363636363636,
+    "n": 55
+   },
+   "pcb2/missing": {
+    "auroc": 0.8657894736842106,
+    "n": 19
+   },
+   "pcb2/scratch": {
+    "auroc": 0.948,
+    "n": 20
+   },
+   "pcb3/bent": {
+    "auroc": 0.9930693069306931,
+    "n": 20
+   },
+   "pcb3/melt": {
+    "auroc": 0.8998388210914114,
+    "n": 43
+   },
+   "pcb3/missing": {
+    "auroc": 0.8841584158415842,
+    "n": 20
+   },
+   "pcb3/scratch": {
+    "auroc": 0.9334653465346535,
+    "n": 25
+   },
+   "pcb4/burnt": {
+    "auroc": 0.9900990099009901,
+    "n": 8
+   },
+   "pcb4/damage": {
+    "auroc": 0.9820839226779821,
+    "n": 21
+   },
+   "pcb4/dirt": {
+    "auroc": 0.9903347477604904,
+    "n": 42
+   },
+   "pcb4/extra": {
+    "auroc": 0.9920792079207921,
+    "n": 30
+   },
+   "pcb4/missing": {
+    "auroc": 0.9744974497449745,
+    "n": 33
+   },
+   "pcb4/scratch": {
+    "auroc": 0.9900990099009901,
+    "n": 17
+   },
+   "pcb4/wrong place": {
+    "auroc": 0.9862909367859863,
+    "n": 13
+   },
+   "pipe_fryum/burnt": {
+    "auroc": 0.99625,
+    "n": 16
+   },
+   "pipe_fryum/corner and edge breakage": {
+    "auroc": 0.9946666666666667,
+    "n": 15
+   },
+   "pipe_fryum/different colour spot": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/middle breakage": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/similar colour spot": {
+    "auroc": 0.9780952380952381,
+    "n": 21
+   },
+   "pipe_fryum/small cracks": {
+    "auroc": 1.0,
+    "n": 10
+   },
+   "pipe_fryum/small scratches": {
+    "auroc": 0.9958333333333333,
+    "n": 24
+   },
+   "pipe_fryum/stuck together": {
+    "auroc": 1.0,
+    "n": 10
+   }
+  }
+ }
+}
