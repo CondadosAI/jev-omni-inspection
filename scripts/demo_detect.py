@@ -22,7 +22,7 @@ ap.add_argument("out", type=Path)
 ap.add_argument("--t0", type=float, default=0.0)
 ap.add_argument("--t1", type=float, default=1e9)
 ap.add_argument("--classes", default="orange")
-ap.add_argument("--threshold", type=float, default=0.4)
+ap.add_argument("--threshold", type=float, default=0.12, help="COCO 'orange' scores tangerines low")
 ap.add_argument("--min-frames", type=int, default=6, help="tracks shorter than this are dropped")
 ap.add_argument("--max-area", type=float, default=0.06, help="drop boxes larger than this share of the frame")
 ap.add_argument("--min-side", type=int, default=90, help="a crop smaller than this (px) is not judged")
@@ -46,7 +46,7 @@ def isolate(rgb, x0, y0, x1, y1, margin=0.06):
 
 wanted = {i for i, n in COCO_CLASSES.items() if n in a.classes.split(",")}
 model = RFDETRBase()
-tracker = sv.ByteTrack()
+tracker = sv.ByteTrack(track_activation_threshold=a.threshold, lost_track_buffer=15, frame_rate=30)
 cap = cv2.VideoCapture(a.video)
 fps = cap.get(cv2.CAP_PROP_FPS)
 cap.set(cv2.CAP_PROP_POS_MSEC, a.t0 * 1000)
