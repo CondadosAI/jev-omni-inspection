@@ -30,6 +30,8 @@ BG, TXT, MUTED = (15, 18, 24), (232, 236, 243), (160, 168, 186)
 GEM, PC, OK = (167, 139, 250), (56, 189, 248), (45, 212, 191)
 F = lambda w, s: ImageFont.truetype(str(a.fonts / f"inter-latin-{w}-normal.woff"), s)
 f_hero, f_label, f_cap, f_small, f_wm = F(700, 64), F(700, 40), F(400, 32), F(400, 26), F(600, 30)
+f_code = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 31)
+JEV = (245, 158, 11)
 TOP, BOTTOM = 250, H - 90  # content area
 
 
@@ -138,6 +140,61 @@ def s_title(t, dur):
     return im
 
 
+def s_two_readouts(t, dur):
+    im, d = base("Two System One readouts", "Same photo, same question, one pass each. What does "
+                 "the System One training add?", GEM)
+    cards = [(JEV, "Jev-Omni", ["Gemma 4 12B", "+ fine-tuned weights", "+ a trained decision head", "",
+                                "trained for System One", "open, not affiliated", "with TypeSafe"]),
+             (GEM, "Gemma 4, one pass", ["the same base model,", "untouched", "", "read the probability",
+                                        "of the answer \u201c1\u201d or \u201c2\u201d", "", "no training"])]
+    for i, (col, title, lines) in enumerate(cards):
+        if t < 0.4 + 0.8 * i:
+            continue
+        x0 = 60 + i * 500
+        d.rounded_rectangle((x0, 300, x0 + 460, 900), 24, fill=(26, 32, 48), outline=col, width=4)
+        d.text((x0 + 36, 380), title, font=f_label, fill=col, anchor="ls")
+        y = 460
+        for line in lines:
+            d.text((x0 + 36, y), line, font=f_cap, fill=TXT, anchor="ls")
+            y += 52
+    if t > 2.6:
+        for j, line in enumerate(wrap(d, "On VisA photos the untouched Gemma 4 scored higher, 82.9 against 81.1. "
+                                         "Jev-Omni's card reports decision, audio and video benchmarks, none on "
+                                         "images or inspection. The lime demo uses Gemma 4.", f_cap, W - 120)):
+            d.text((60, 990 + 44 * j), line, font=f_cap, fill=MUTED, anchor="ls")
+    return im
+
+
+def s_code(t, dur):
+    im, d = base("In Python", "Simplified; the full, tested code is in the post and the repo.", TXT)
+    blocks = [
+        (JEV, "# Jev-Omni: its own predict()", [
+            "result = classifier.predict(",
+            "    state=\"Inspection photo of a cashew nut.\",",
+            "    question=\"Good, or is a part defective?\",",
+            "    options=[\"all good\", \"defective\"],",
+            "    media=\"cashew.jpg\", modality=\"image\")",
+            "# {'all good': 0.39, 'defective': 0.61}"]),
+        (GEM, "# Gemma 4: one pass, read two probabilities", [
+            "inputs = processor.apply_chat_template(",
+            "    [photo, question + \"1. all good 2. defective\"])",
+            "logits = model(**inputs).logits[0, -1]",
+            "p = softmax(logits[[id(\"1\"), id(\"2\")]])",
+            "# {'all good': 0.029, 'defective': 0.971}"]),
+    ]
+    y = 290
+    for i, (col, head, lines) in enumerate(blocks):
+        if t < 0.3 + 2.5 * i:
+            continue
+        d.rounded_rectangle((30, y - 44, W - 30, y + 50 * len(lines) + 30), 16, fill=(10, 12, 18))
+        d.text((50, y), head, font=f_code, fill=col, anchor="ls")
+        for j, line in enumerate(lines):
+            c = OK if line.startswith("#") else TXT
+            d.text((50, y + 50 * (j + 1)), line, font=f_code, fill=c, anchor="ls")
+        y += 50 * len(lines) + 150
+    return im
+
+
 def s_diagram(pic, label, caption, col, height=820):
     def f(t, dur):
         im, d = base(label, caption, col)
@@ -197,9 +254,11 @@ def s_close(t, dur):
 scenes = [
     (3.5, s_title),
     (7.0, s_system_one),
+    (6.0, s_two_readouts),
+    (8.0, s_code),
     (8.0, s_diagram(arch_vlm, "Day 0 · a System One readout",
-                    "Jev-Omni, an open model built on Gemma 4 in the style of TypeSafe's Jev, reads a photo and a "
-                    "question and returns one probability per answer. No examples needed.", GEM)),
+                    "Both readouts run the photo and the question through Gemma 4 once and return one probability "
+                    "per answer. No examples needed.", GEM)),
     (7.0, s_diagram(arch_pc, "Day 1 · PatchCore", "Learns what good parts look like from a few photos, then flags "
                     "any patch that looks like none of them.", PC)),
     (14.0, s_clip(belt, "Same parts, both inspectors", "Real VisA test parts. Verdicts read from the saved scores; "
