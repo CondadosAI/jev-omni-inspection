@@ -1,0 +1,236 @@
+[
+ {
+  "path": "cashew/Data/Images/Normal/337.JPG",
+  "obj": "cashew",
+  "truth": "good",
+  "gemma": "person",
+  "p_def": 0.02442309005410721,
+  "gcut": [
+   0.01243165085318582,
+   0.07585818002124355
+  ],
+  "pc": "accept",
+  "pc_score": 30.47821044921875,
+  "pcut": [
+   32.19748306274414,
+   36.34690856933594
+  ],
+  "is_bad": false
+ },
+ {
+  "path": "cashew/Data/Images/Anomaly/000.JPG",
+  "obj": "cashew",
+  "truth": "defect: burnt, corner or edge breakage",
+  "gemma": "reject",
+  "p_def": 0.9859363729567544,
+  "gcut": [
+   0.01243165085318582,
+   0.07585818002124355
+  ],
+  "pc": "reject",
+  "pc_score": 51.59624481201172,
+  "pcut": [
+   32.19748306274414,
+   36.34690856933594
+  ],
+  "is_bad": true
+ },
+ {
+  "path": "cashew/Data/Images/Anomaly/088.JPG",
+  "obj": "cashew",
+  "truth": "defect: small scratches",
+  "gemma": "accept",
+  "p_def": 0.008061991528271641,
+  "gcut": [
+   0.01243165085318582,
+   0.07585818002124355
+  ],
+  "pc": "reject",
+  "pc_score": 38.36071014404297,
+  "pcut": [
+   32.19748306274414,
+   36.34690856933594
+  ],
+  "is_bad": true
+ },
+ {
+  "path": "capsules/Data/Images/Normal/062.JPG",
+  "obj": "capsules",
+  "truth": "good",
+  "gemma": "accept",
+  "p_def": 0.29421497216298875,
+  "gcut": [
+   0.40733340004593016,
+   0.9241418199787566
+  ],
+  "pc": "accept",
+  "pc_score": 40.841522216796875,
+  "pcut": [
+   41.20015335083008,
+   47.41621017456055
+  ],
+  "is_bad": false
+ },
+ {
+  "path": "capsules/Data/Images/Anomaly/009.JPG",
+  "obj": "capsules",
+  "truth": "defect: bubble",
+  "gemma": "reject",
+  "p_def": 0.9987551566979116,
+  "gcut": [
+   0.40733340004593016,
+   0.9241418199787566
+  ],
+  "pc": "reject",
+  "pc_score": 53.62025833129883,
+  "pcut": [
+   41.20015335083008,
+   47.41621017456055
+  ],
+  "is_bad": true
+ },
+ {
+  "path": "capsules/Data/Images/Anomaly/094.JPG",
+  "obj": "capsules",
+  "truth": "defect: bubble, discolor",
+  "gemma": "accept",
+  "p_def": 0.24508501313237172,
+  "gcut": [
+   0.40733340004593016,
+   0.9241418199787566
+  ],
+  "pc": "reject",
+  "pc_score": 50.51310729980469,
+  "pcut": [
+   41.20015335083008,
+   47.41621017456055
+  ],
+  "is_bad": true
+ },
+ {
+  "path": "pcb4/Data/Images/Normal/0107.JPG",
+  "obj": "pcb4",
+  "truth": "good",
+  "gemma": "accept",
+  "p_def": 0.19193278644723683,
+  "gcut": [
+   0.30735801686526387,
+   0.7549149868676283
+  ],
+  "pc": "accept",
+  "pc_score": 35.79124069213867,
+  "pcut": [
+   50.0615348815918,
+   50.5384521484375
+  ],
+  "is_bad": false
+ },
+ {
+  "path": "pcb4/Data/Images/Anomaly/000.JPG",
+  "obj": "pcb4",
+  "truth": "defect: burnt, scratch",
+  "gemma": "reject",
+  "p_def": 0.9046505351008906,
+  "gcut": [
+   0.30735801686526387,
+   0.7549149868676283
+  ],
+  "pc": "reject",
+  "pc_score": 52.78450393676758,
+  "pcut": [
+   50.0615348815918,
+   50.5384521484375
+  ],
+  "is_bad": true
+ },
+ {
+  "path": "pcb4/Data/Images/Anomaly/024.JPG",
+  "obj": "pcb4",
+  "truth": "defect: damage, extra",
+  "gemma": "reject",
+  "p_def": 0.9241418199787566,
+  "gcut": [
+   0.30735801686526387,
+   0.7549149868676283
+  ],
+  "pc": "accept",
+  "pc_score": 48.770389556884766,
+  "pcut": [
+   50.0615348815918,
+   50.5384521484375
+  ],
+  "is_bad": true
+ },
+ {
+  "path": "macaroni1/Data/Images/Normal/0484.JPG",
+  "obj": "macaroni1",
+  "truth": "good",
+  "gemma": "person",
+  "p_def": 0.09009299396195182,
+  "gcut": [
+   0.09009299396195182,
+   0.9046505351008906
+  ],
+  "pc": "accept",
+  "pc_score": 34.79386520385742,
+  "pcut": [
+   36.58489990234375,
+   45.25056838989258
+  ],
+  "is_bad": false
+ },
+ {
+  "path": "macaroni1/Data/Images/Anomaly/009.JPG",
+  "obj": "macaroni1",
+  "truth": "defect: chip around edge and corner, small scratches",
+  "gemma": "reject",
+  "p_def": 0.9999452402301955,
+  "gcut": [
+   0.09009299396195182,
+   0.9046505351008906
+  ],
+  "pc": "reject",
+  "pc_score": 50.76999282836914,
+  "pcut": [
+   36.58489990234375,
+   45.25056838989258
+  ],
+  "is_bad": true
+ },
+ {
+  "path": "macaroni1/Data/Images/Anomaly/092.JPG",
+  "obj": "macaroni1",
+  "truth": "defect: small scratches",
+  "gemma": "accept",
+  "p_def": 0.07159119944455247,
+  "gcut": [
+   0.09009299396195182,
+   0.9046505351008906
+  ],
+  "pc": "reject",
+  "pc_score": 49.588134765625,
+  "pcut": [
+   36.58489990234375,
+   45.25056838989258
+  ],
+  "is_bad": true
+ },
+ {
+  "path": "pcb1/Data/Images/Anomaly/045.JPG",
+  "obj": "pcb1",
+  "truth": "defect: missing",
+  "gemma": "accept",
+  "p_def": 0.021615332762647654,
+  "gcut": [
+   0.02442309005410721,
+   0.7772998611746911
+  ],
+  "pc": "reject",
+  "pc_score": 63.57555389404297,
+  "pcut": [
+   41.68545913696289,
+   49.56343460083008
+  ],
+  "is_bad": true
+ }
+]

@@ -1,0 +1,193 @@
+{
+ "model": "base",
+ "state": "Production-line inspection photo of a tangerine.",
+ "question": "Is everything in the photo good, or is at least one part defective?",
+ "verdicts": {
+  "1": {
+   "logodds": 5.625,
+   "p_defective": 0.9964063974185798,
+   "order0": 4.5,
+   "order1": 6.75
+  },
+  "2": {
+   "logodds": 5.25,
+   "p_defective": 0.9947798743064417,
+   "order0": 4.625,
+   "order1": 5.875
+  },
+  "3": {
+   "logodds": -2.5,
+   "p_defective": 0.07585818002124355,
+   "order0": -3.0,
+   "order1": -1.9999999999999998
+  },
+  "4": {
+   "logodds": -2.25,
+   "p_defective": 0.09534946489910949,
+   "order0": -2.5,
+   "order1": -2.0
+  },
+  "5": {
+   "logodds": 8.8125,
+   "p_defective": 0.999851161517427,
+   "order0": 8.25,
+   "order1": 9.375
+  },
+  "9": {
+   "logodds": 6.5625,
+   "p_defective": 0.9985896415033819,
+   "order0": 5.625,
+   "order1": 7.5
+  },
+  "10": {
+   "logodds": 3.0,
+   "p_defective": 0.9525741268224334,
+   "order0": 2.875,
+   "order1": 3.125
+  },
+  "11": {
+   "logodds": 7.5,
+   "p_defective": 0.9994472213630764,
+   "order0": 6.75,
+   "order1": 8.25
+  },
+  "12": {
+   "logodds": 7.875,
+   "p_defective": 0.999620015485248,
+   "order0": 7.25,
+   "order1": 8.5
+  },
+  "14": {
+   "logodds": 4.5,
+   "p_defective": 0.9890130573694068,
+   "order0": 4.375,
+   "order1": 4.625
+  },
+  "16": {
+   "logodds": 11.0625,
+   "p_defective": 0.9999843104502723,
+   "order0": 10.1875,
+   "order1": 11.9375
+  },
+  "24": {
+   "logodds": 8.875,
+   "p_defective": 0.9998601779243528,
+   "order0": 8.375,
+   "order1": 9.375
+  },
+  "25": {
+   "logodds": 5.75,
+   "p_defective": 0.9968273171575148,
+   "order0": 5.25,
+   "order1": 6.25
+  },
+  "26": {
+   "logodds": 3.875,
+   "p_defective": 0.9796676466573412,
+   "order0": 4.125,
+   "order1": 3.625
+  },
+  "27": {
+   "logodds": 4.1875,
+   "p_defective": 0.98504291340685,
+   "order0": 3.9999999999999996,
+   "order1": 4.375
+  },
+  "29": {
+   "logodds": -1.0,
+   "p_defective": 0.2689414213699951,
+   "order0": -1.125,
+   "order1": -0.875
+  },
+  "31": {
+   "logodds": -1.75,
+   "p_defective": 0.14804719803168948,
+   "order0": -2.0,
+   "order1": -1.5
+  },
+  "32": {
+   "logodds": 8.625,
+   "p_defective": 0.9998204720306533,
+   "order0": 7.875,
+   "order1": 9.375
+  },
+  "35": {
+   "logodds": 6.125,
+   "p_defective": 0.9978172835546547,
+   "order0": 5.5,
+   "order1": 6.75
+  },
+  "36": {
+   "logodds": 6.5,
+   "p_defective": 0.998498817743263,
+   "order0": 6.125,
+   "order1": 6.875
+  },
+  "37": {
+   "logodds": 13.59375,
+   "p_defective": 0.999998751729105,
+   "order0": 13.0625,
+   "order1": 14.125
+  },
+  "38": {
+   "logodds": 6.0625,
+   "p_defective": 0.9976768374773688,
+   "order0": 5.75,
+   "order1": 6.375
+  },
+  "40": {
+   "logodds": 9.8125,
+   "p_defective": 0.9999452402301955,
+   "order0": 9.0,
+   "order1": 10.625
+  },
+  "41": {
+   "logodds": 7.6875,
+   "p_defective": 0.999541687099365,
+   "order0": 7.25,
+   "order1": 8.125
+  },
+  "42": {
+   "logodds": 8.125,
+   "p_defective": 0.999704042886487,
+   "order0": 7.75,
+   "order1": 8.5
+  },
+  "43": {
+   "logodds": 6.5,
+   "p_defective": 0.998498817743263,
+   "order0": 6.375,
+   "order1": 6.625
+  },
+  "45": {
+   "logodds": 7.75,
+   "p_defective": 0.9995694429186754,
+   "order0": 7.375,
+   "order1": 8.125
+  },
+  "46": {
+   "logodds": 5.0,
+   "p_defective": 0.9933071490757153,
+   "order0": 5.0,
+   "order1": 5.0
+  },
+  "48": {
+   "logodds": 9.3125,
+   "p_defective": 0.9999097196098496,
+   "order0": 8.75,
+   "order1": 9.875
+  },
+  "49": {
+   "logodds": 6.8125,
+   "p_defective": 0.9989012689270753,
+   "order0": 6.0,
+   "order1": 7.625
+  },
+  "51": {
+   "logodds": 3.1875,
+   "p_defective": 0.96036116089903,
+   "order0": 3.0,
+   "order1": 3.375
+  }
+ }
+}
