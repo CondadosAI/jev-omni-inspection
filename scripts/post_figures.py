@@ -31,14 +31,51 @@ def text(x, y, s, size=12, fill=TXT, anchor="start", weight=400):
 
 # --- Figure: macro AUROC against the number of good parts ----------------------------------
 def k_curve():
-    W, H, L, R, T, B = 720, 400, 62, 150, 30, 58
+    W, H, L, R, T, B = 720, 500, 62, 110, 128, 58
     ks = ["1", "2", "4", "8", "16", "64", "all"]
     x0 = L + 26  # room left of k = 1 for the reference-pair markers
     xs = {k: x0 + i * (W - x0 - R - 20) / (len(ks) - 1) for i, k in enumerate(ks)}
     lo, hi = 76, 94
     y = lambda v: T + (hi - v) / (hi - lo) * (H - T - B)
-    m = S["macro_auroc"]
+    m, m5 = S["macro_auroc"], S5["macro_auroc"]
     b = []
+
+    # Legend: one entry per series, in a panel above the plot.
+    def swatch(x, yy, kind, col):
+        if kind == "solid":
+            return (f'<line x1="{x}" x2="{x + 26}" y1="{yy}" y2="{yy}" stroke="{col}" stroke-width="2.4"/>'
+                    f'<circle cx="{x + 13}" cy="{yy}" r="4" fill="{col}"/>')
+        if kind == "dashed":
+            return (f'<line x1="{x}" x2="{x + 26}" y1="{yy}" y2="{yy}" stroke="{col}" stroke-width="2.4" '
+                    f'stroke-dasharray="6 3"/><rect x="{x + 9}" y="{yy - 4}" width="8" height="8" fill="{col}"/>')
+        if kind == "band":
+            return (f'<rect x="{x}" y="{yy - 7}" width="26" height="14" fill="{col}" opacity="0.18"/>'
+                    f'<line x1="{x}" x2="{x + 26}" y1="{yy}" y2="{yy}" stroke="{col}" stroke-width="1.8" '
+                    f'stroke-dasharray="6 4"/>')
+        if kind == "diamond":
+            return (f'<rect x="{x + 9}" y="{yy - 4}" width="8" height="8" fill="{col}" '
+                    f'transform="rotate(45 {x + 13} {yy})"/>')
+        if kind == "kstar":
+            return f'<line x1="{x + 13}" x2="{x + 13}" y1="{yy - 8}" y2="{yy + 8}" stroke="{TXT}" stroke-dasharray="2 3"/>'
+        if kind == "ci":
+            return (f'<line x1="{x + 13}" x2="{x + 13}" y1="{yy - 8}" y2="{yy + 8}" stroke="{MUTED}" stroke-width="1.4"/>'
+                    f'<circle cx="{x + 13}" cy="{yy}" r="3" fill="{MUTED}"/>')
+    entries = [
+        ("solid", PC, "PatchCore, 256 px input (anomalib default)"),
+        ("dashed", PC5, "PatchCore, 512 px input (k = 1, 4, 16)"),
+        ("band", JEV, "Jev-Omni, no good parts"),
+        ("band", GEM, "Gemma 4 zero-shot, no good parts"),
+        ("diamond", JEV, "Jev-Omni + one reference photo"),
+        ("diamond", GEM, "Gemma 4 + one reference photo"),
+        ("kstar", TXT, "k*: first k ahead of Jev-Omni (95% CI > 0)"),
+        ("ci", MUTED, "bars and bands: 95% bootstrap interval"),
+    ]
+    b.append(f'<rect x="{L}" y="12" width="{W - L - 24}" height="{T - 30}" rx="8" fill="{PANEL}"/>')
+    for i, (kind, col, lab) in enumerate(entries):
+        cx = L + 14 + (i % 2) * ((W - L - 24) // 2)
+        cy = 32 + (i // 2) * 22
+        b.append(swatch(cx, cy, kind, col) + text(cx + 34, cy + 4, lab, 11.5, TXT))
+
     for v in range(lo, hi + 1, 2):
         b.append(f'<line x1="{L}" x2="{W - R}" y1="{y(v):.1f}" y2="{y(v):.1f}" stroke="{GRID}"/>')
         b.append(text(L - 8, y(v) + 4, v, 11, MUTED, "end"))
@@ -48,7 +85,7 @@ def k_curve():
     b.append(text((L + W - R) / 2, H - 12, "good parts in PatchCore's memory bank (k)", 12, MUTED, "middle"))
     b.append(text(16, T + (H - T - B) / 2, "macro image AUROC",
                   12, MUTED, "middle").replace("<text", f'<text transform="rotate(-90 16 {T + (H - T - B) / 2:.1f})"'))
-    # VLM bands: zero good parts, drawn across the whole axis.
+    # VLM bands: zero good parts, drawn across the whole axis, value labelled at the right end.
     for key, col, lab in (("A0", JEV, "Jev-Omni"), ("B0", GEM, "Gemma 4")):
         p, (c0, c1) = 100 * m[key]["point"], [100 * v for v in m[key]["ci95"]]
         b.append(f'<rect x="{L}" y="{y(c1):.1f}" width="{W - R - L}" height="{y(c0) - y(c1):.1f}" '
@@ -56,40 +93,38 @@ def k_curve():
         b.append(f'<line x1="{L}" x2="{W - R}" y1="{y(p):.1f}" y2="{y(p):.1f}" stroke="{col}" '
                  f'stroke-width="1.6" stroke-dasharray="6 4"/>')
         b.append(text(W - R + 8, y(p) + (4 if key == "B0" else 10), f"{lab} {p:.1f}", 11, col))
-    # PatchCore curve with interval bars.
+    # PatchCore at 256 px: every k, with interval bars.
     pts = [(xs[k], 100 * m[f"C{k}"]["point"], [100 * v for v in m[f"C{k}"]["ci95"]]) for k in ks]
     b.append('<polyline fill="none" stroke="%s" stroke-width="2.2" points="%s"/>'
              % (PC, " ".join(f"{x:.1f},{y(v):.1f}" for x, v, _ in pts)))
     for x, v, (c0, c1) in pts:
         b.append(f'<line x1="{x:.1f}" x2="{x:.1f}" y1="{y(c0):.1f}" y2="{y(c1):.1f}" stroke="{PC}" stroke-width="1.4"/>')
         b.append(f'<circle cx="{x:.1f}" cy="{y(v):.1f}" r="4" fill="{PC}"/>')
-    b.append(text(xs["all"] + 10, y(pts[-1][1]) + 4, "256 px", 11, PC))
-    m5 = S5["macro_auroc"]
+    b.append(text(xs["all"] + 10, y(pts[-1][1]) + 4, f"{pts[-1][1]:.1f}", 11, PC))
+    # PatchCore at 512 px: k = 1, 4, 16 only.
     p5 = [(xs[k], 100 * m5[f"C{k}"]["point"], [100 * v for v in m5[f"C{k}"]["ci95"]]) for k in ("1", "4", "16")]
     b.append('<polyline fill="none" stroke="%s" stroke-width="2.2" stroke-dasharray="7 4" points="%s"/>'
              % (PC5, " ".join(f"{x:.1f},{y(v):.1f}" for x, v, _ in p5)))
     for x, v, (c0, c1) in p5:
         b.append(f'<line x1="{x + 5:.1f}" x2="{x + 5:.1f}" y1="{y(c0):.1f}" y2="{y(c1):.1f}" stroke="{PC5}" stroke-width="1.4"/>')
         b.append(f'<rect x="{x + 1:.1f}" y="{y(v) - 4:.1f}" width="8" height="8" fill="{PC5}"/>')
-    b.append(text(p5[-1][0] + 14, y(p5[-1][1]) + 4, "512 px", 11, PC5))
-    b.append(text(L + 4, T + 12, "PatchCore input:  ● 256 px (anomalib default)   ■ 512 px", 11, MUTED))
+    b.append(text(p5[-1][0] + 14, y(p5[-1][1]) + 4, f"{p5[-1][1]:.1f}", 11, PC5))
     # VLMs shown one good part sit at k = 1.
-    for key, col, dx in (("A1", JEV, -9), ("B1", GEM, 9)):
+    for key, col, dx in (("A1", JEV, -11), ("B1", GEM, -20)):
         p, (c0, c1) = 100 * m[key]["point"], [100 * v for v in m[key]["ci95"]]
         x = xs["1"] + dx
         b.append(f'<line x1="{x}" x2="{x}" y1="{y(c0):.1f}" y2="{y(c1):.1f}" stroke="{col}"/>')
         b.append(f'<rect x="{x - 4}" y="{y(p) - 4:.1f}" width="8" height="8" fill="{col}" transform="rotate(45 {x} {y(p):.1f})"/>')
+    # k* against Jev-Omni at each resolution.
     ks_a0 = S["k_star"]["A0"]["k_star"]
-    b.append(f'<line x1="{xs[ks_a0]:.1f}" x2="{xs[ks_a0]:.1f}" y1="{T}" y2="{H - B}" stroke="{TXT}" '
-             f'stroke-dasharray="2 3" opacity="0.6"/>')
-    b.append(text(xs[ks_a0] + 6, y(78.4), f"k* = {ks_a0} at 256 px", 11, TXT))
-    b.append(text(xs["1"] + 16, y(p5[0][1]) - 14, "k* = 1 at 512 px", 11, PC5))
-    b.append(text(xs["2"] - 30, H - B - 8, "◆ VLM shown one known-good reference, placed at k = 1", 10.5, MUTED))
-    b.append(text(W - R + 8, y(pts[0][1]) + 30, "bands: VLM with", 10, MUTED))
-    b.append(text(W - R + 8, y(pts[0][1]) + 43, "0 good parts, 95% CI", 10, MUTED))
+    ks_a0_5 = S5["k_star"]["A0"]["k_star"]
+    for kk, lab, col, ty in ((ks_a0, "k* = %s, 256 px" % ks_a0, TXT, 78.2), (ks_a0_5, "k* = %s, 512 px" % ks_a0_5, PC5, 77.0)):
+        b.append(f'<line x1="{xs[kk]:.1f}" x2="{xs[kk]:.1f}" y1="{T}" y2="{H - B}" stroke="{col}" '
+                 f'stroke-dasharray="2 3" opacity="0.7"/>')
+        b.append(text(xs[kk] + 6, y(ty), lab, 11, col))
     return svg(W, H, "".join(b), "Macro image AUROC of PatchCore against the number of good parts at two input "
-               "sizes, with the two VLMs as flat bands. PatchCore passes Jev-Omni at eight good parts at 256 px "
-               "and at one good part at 512 px.")
+               "sizes, with the two VLMs as flat bands and their reference-photo variants at k = 1. PatchCore "
+               "passes Jev-Omni at eight good parts at 256 px and at one good part at 512 px.")
 
 
 # --- Figure: per-category AUROC, VLM against PatchCore ------------------------------------
