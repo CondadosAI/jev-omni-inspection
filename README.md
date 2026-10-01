@@ -17,11 +17,20 @@ The pre-registration, including the frozen prompt and every departure from it, i
 | PatchCore 256 px, k = 1 / 8 / 16 | 1–16 | 80.8 / 84.2 / 85.7 |
 | PatchCore 256 px, all | 449–904 | 90.2 (89.0–91.4) |
 | PatchCore 512 px, k = 1 / 4 / 16 | 1–16 | 84.5 / 89.7 / 92.4 |
+| RSI-Jev v4.0-VL, test photo only (added after the pre-registered design) | 0 | 86.6 (85.1–88.1) |
 
 k\* (the first k whose paired-bootstrap interval on the difference is above zero) is 8 against
 Jev-Omni and 16 against Gemma 4 at anomalib's default 256 px (pre-registered), and 1 and 4 at
 512 px (an ablation added after the run). `results/summary.json` holds the 256 px run,
 `results/summary_r512.json` the ablation.
+
+The RSI-Jev v4.0-VL row was added after the pre-registered design, by the RSI-Jev authors, and is
+not part of the pre-registered comparison. It uses the same frozen prompt, split, option orders
+and statistics; per-image scores are in `results/rsijev_visa.jsonl`, the summary in
+`results/summary_rsijev.json`. Caveats: it reads about 1,000 input tokens per photo, against about
+350 for Jev-Omni and Gemma 4; VisA is not among its fine-tuning sources, but its base model's
+(Qwen3.5-2B) pretraining data cannot be checked; and it is below both VLMs on chewinggum and
+pipe_fryum.
 
 ## Layout
 
@@ -29,6 +38,7 @@ Jev-Omni and 16 against Gemma 4 at anomalib's default 256 px (pre-registered), a
 src/jev_inspection/
   visa.py        official 1cls split, the frozen prompt, the frozen draws
   vlm.py         Jev-Omni head and Gemma 4 digit readout -> float64 log-odds, both option orders
+  rsijev.py      RSI-Jev over its HTTP server (Jev's request plus images), added after the run
   patchcore.py   anomalib's PatchcoreModel on k good parts
   score.py       macro AUROC, paired bootstrap, k*, cross-fitted triage, Holm
   cli.py         jev-inspection {vlm, patchcore, probe, score, step0}
@@ -61,6 +71,19 @@ uv run jev-inspection score --results results
 uv run pytest                      # the end-to-end test needs VisA under VISA_ROOT
 ```
 
+RSI-Jev v4.0-VL (added after the run; it is served over HTTP, so no GPU stack here):
+
+```bash
+pip install "rsi-jev[vision] @ git+https://github.com/Shanghua-Gao/RSI-Jev"
+rsi-jev serve shgao/rsi-jev-v4.0-vl-qwen3.5-2b --port 8000
+uv run jev-inspection vlm --model rsijev --server http://localhost:8000
+uv run jev-inspection score --results results --rsijev    # -> results/summary_rsijev.json
+```
+
+The RSI-Jev repository has the same run as one script, `scripts/vision_benches/visa.py`
+([Shanghua-Gao/RSI-Jev](https://github.com/Shanghua-Gao/RSI-Jev/tree/main/scripts/vision_benches)),
+which imports this repository's prompt and statistics.
+
 The VisA archive is downloaded from the official URL and checked against
 sha256 `2eb8690c803ab37de0324772964100169ec8ba1fa3f7e94291c9ca673f40f362`.
 
@@ -77,6 +100,7 @@ redistributed here, and each keeps its own terms:
 | [google/gemma-4-12B-it](https://huggingface.co/google/gemma-4-12B-it) | `707f0a3b` | Apache-2.0 on the model card, which also links the [Gemma 4 license page](https://ai.google.dev/gemma/docs/gemma_4_license) |
 | [timm/wide_resnet50_2.racm_in1k](https://huggingface.co/timm/wide_resnet50_2.racm_in1k) | `30f73ace` | Apache-2.0 on the model card; trained on ImageNet-1k, whose images have their own terms |
 | [timm/wide_resnet101_2.tv_in1k](https://huggingface.co/timm/wide_resnet101_2.tv_in1k) (sanity anchor only) | `bc795a74` | BSD-3-Clause on the model card; torchvision's ImageNet-1k weights |
+| [shgao/rsi-jev-v4.0-vl-qwen3.5-2b](https://huggingface.co/shgao/rsi-jev-v4.0-vl-qwen3.5-2b) (post-hoc row only) | v4.0-VL | Apache-2.0 on the model card |
 | [anomalib](https://github.com/open-edge-platform/anomalib) | 2.6.2 (PyPI) | Apache-2.0 |
 | [RF-DETR](https://github.com/roboflow/rf-detr) base, COCO weights (day-0 demo only) | rfdetr 1.11.0 | Apache-2.0 |
 | [Lime sorting on conveyor belt in factory](https://www.pexels.com/video/lime-sorting-on-conveyor-belt-in-factory-32953325/), Comercial GB (day-0 demo only) | Pexels 32953325, 1080 × 1920, sha256 `2bec11f3…1d72` | [Pexels licence](https://www.pexels.com/license/); downloaded, not redistributed |

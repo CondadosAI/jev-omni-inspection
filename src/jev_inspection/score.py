@@ -27,7 +27,8 @@ from scipy.stats import beta, rankdata
 
 from . import visa
 
-VLM_SYSTEMS = {"A0": ("jev", "single"), "A1": ("jev", "ref"), "B0": ("base", "single"), "B1": ("base", "ref")}
+VLM_SYSTEMS = {"A0": ("jev", "single"), "A1": ("jev", "ref"), "B0": ("base", "single"), "B1": ("base", "ref"),
+               "R0": ("rsijev", "single")}  # R0: RSI-Jev v4.0-VL, added after the pre-registered run
 ESCAPE, OVERKILL, PREVALENCE = 0.05, 0.05, 0.01
 
 

@@ -8,6 +8,8 @@ results/*
 !results/contamination_probe.jsonl
 !results/jev_visa.jsonl
 !results/base_visa.jsonl
+!results/rsijev_visa.jsonl
+!results/summary_rsijev.json
 !results/patchcore_wide_resnet50_2.jsonl
 !results/patchcore_wide_resnet50_2_r512.jsonl
 !results/patchcore_wide_resnet101_2.jsonl
