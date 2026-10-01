@@ -338,3 +338,15 @@ So the pre-registered k\* = 8 is a property of anomalib's 256 px default, and th
 EFFICIENTAD (Appendix B.5): their 94.3 used WRN-101, 224×224, coreset 1 %, no crop,
 official patchcore-inspection code; our WRN-101 anchor at 256 / 10 % gave 90.5, so the
 anchor gap is not resolution and remains unexplained (implementation is the candidate).
+
+## Post-hoc addition: RSI-Jev v4.0-VL (1 Oct 2026)
+
+Not pre-registered; contributed by the RSI-Jev authors after the run. RSI-Jev v4.0-VL
+(Qwen3.5-2B base, `shgao/rsi-jev-v4.0-vl-qwen3.5-2b`) on config "single" only, both option
+orders, the frozen prompt sent as a two-option choice to its `/v1/systemone` server
+(`src/jev_inspection/rsijev.py`). The score is the log-odds of "defective" from the served,
+calibrated probabilities; photos are scaled to fit 1,536 px. `jev-inspection score --rsijev`
+adds it as R0 and writes `results/summary_rsijev.json`; `results/summary.json` is unchanged.
+Macro AUROC 86.6 (85.1–88.1). It uses about 1,000 input tokens per photo against about 350
+for A0/B0, VisA is not among its fine-tuning sources but its base model's pretraining data
+cannot be checked, and it is below both A0 and B0 on chewinggum and pipe_fryum.
