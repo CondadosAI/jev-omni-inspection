@@ -62,8 +62,18 @@ def test_summary_on_synthetic_scores(tmp_path):
                 for seed in (0, 1, 2):
                     fh.write(json.dumps({"obj": it.obj, "k": k, "seed": seed, "image": it.image,
                                          "score": rng.normal(sep * it.is_anomaly, 1.0)}) + "\n")
-    s = score.summarise(visa.DEFAULT_ROOT, [tmp_path / "jev_visa.jsonl", tmp_path / "base_visa.jsonl"],
+    with open(tmp_path / "clef-flash_visa.jsonl", "w") as fh:  # Clef: one option order only
+        for it in tests:
+            for config in visa.CONFIGS:
+                fh.write(json.dumps({"model": "clef-flash", "image": it.image, "config": config, "order": 0,
+                                     "logodds_defective": rng.normal(1.0 * it.is_anomaly, 1.0)}) + "\n")
+    s = score.summarise(visa.DEFAULT_ROOT, [tmp_path / f for f in ("jev_visa.jsonl", "base_visa.jsonl",
+                                                                   "clef-flash_visa.jsonl")],
                         tmp_path / "pc.jsonl", B=200)
+    assert s["positional_bias_logodds"]["F0"] is None
+    # one order, noise sd 1: AUROC = Phi(1/sqrt(2)) = 0.760
+    assert 0.73 < s["macro_auroc"]["F0"]["point"] < 0.79
+    assert s["vlm_pairs"]["A0-F0"]["diff"] > 0
     assert s["n_test"] == 2162
     assert s["k_star"]["A0"]["k_star"] == "16"  # separation 2.0 clearly beats 1.0; 1.0 vs 1.0 does not
     # two option orders averaged: noise sd 1/sqrt(2), so AUROC = Phi(1) = 0.841

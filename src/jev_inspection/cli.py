@@ -14,7 +14,7 @@ def main():
 
 
 @main.command()
-@click.option("--model", type=click.Choice(["jev", "base"]), required=True)
+@click.option("--model", type=click.Choice(["jev", "base", "clef-flash", "clef"]), required=True)
 @click.option("--config", "configs", multiple=True, default=visa.CONFIGS, type=click.Choice(visa.CONFIGS))
 @click.option("--root", type=Path, default=visa.DEFAULT_ROOT)
 @click.option("--out", type=Path, default=Path("results"))
@@ -22,7 +22,7 @@ def main():
 @click.option("--limit", type=int, help="first N normals and N anomalies per category (smoke test)")
 @click.option("--device", default="cuda")
 def vlm(model, configs, root, out, categories, limit, device):
-    """Score the test set with Jev-Omni or Gemma 4 zero-shot (GPU pod)."""
+    """Score the test set with Jev-Omni, Gemma 4 zero-shot or a Clef release (GPU pod)."""
     from .vlm import run
     run(model, configs, visa.ORDERS, root, out, device, limit, categories)
 
@@ -67,7 +67,8 @@ def patchcore(root, out, categories, ks, seeds, backbone, image_size, maps_for, 
 def score(root, results, patchcore_file, categories, bootstrap):
     """Primary endpoint, k*, triage and breakdowns -> results/summary.json."""
     from .score import summarise
-    s = summarise(root, [results / "jev_visa.jsonl", results / "base_visa.jsonl"], results / patchcore_file,
+    vlm_files = [results / f"{m}_visa.jsonl" for m in ("jev", "base", "clef-flash", "clef")]
+    s = summarise(root, vlm_files, results / patchcore_file,
                   B=bootstrap, categories=categories or visa.CATEGORIES)
     (results / "summary.json").write_text(json.dumps(s, indent=1))
     click.echo(json.dumps({k: s[k] for k in ("macro_auroc", "k_star")}, indent=1))

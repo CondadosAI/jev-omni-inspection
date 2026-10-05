@@ -338,3 +338,67 @@ So the pre-registered k\* = 8 is a property of anomalib's 256 px default, and th
 EFFICIENTAD (Appendix B.5): their 94.3 used WRN-101, 224×224, coreset 1 %, no crop,
 official patchcore-inspection code; our WRN-101 anchor at 256 / 10 % gave 90.5, so the
 anchor gap is not resolution and remains unexplained (implementation is the candidate).
+
+## Clef arm (pre-registered 4 Oct 2026, before any Clef forward pass on VisA)
+
+**Why.** Cloudflare released Clef (27B, post-trained from Qwen3.8-27B) and Clef-Flash (9B, from
+Qwen3.5-9B) on 1 Oct 2026, Apache-2.0, as "System One" decision models whose API is compatible with
+Jev's. The announcement (blog.cloudflare.com/clef-decision-models, read 4 Oct) says "it has a vision
+encoder so it's able to take in images and classify visual content". The model card's results table
+and the Decision Index leaderboard (`/data/leaderboard.json`, generated 2026-10-01T15:33Z: 48
+benchmarks) contain no image or video benchmark; "New Yorker" there is a text description of a
+cartoon. I did not find a published image result for either model. This arm measures one.
+
+**Question.** On the same 2,162 VisA test photos, the same frozen state, question and options, and
+the same scorer: where do Clef-Flash and Clef land against Jev-Omni (A), Gemma 4 zero-shot (B) and
+PatchCore at k good parts (C)? Endpoint: macro image AUROC with the paired bootstrap already in
+`score.py` (B = 2,000); k\* for each Clef system; pairwise VLM differences (`vlm_pairs`) descriptive.
+
+| # | System | Revision |
+|---|---|---|
+| F0 / F1 | Clef-Flash, single / reference + test | Cloudflare/clef-flash @ 17f0b0ad64efb65d273590632833508766b2aae6 |
+| L0 / L1 | Clef, single / reference + test | Cloudflare/clef @ 2f3de3dd85f379784083b0814d997ab627200f0c |
+
+**Inputs, and where they depart from A and B.**
+- Clef has its own input format: a `state`, typed `questions` and allowed options, rendered by the
+  release's `encode_record` (its own system prompt, `STATE:`, `SCHEMA FIELDS:`). It gets the frozen
+  pieces in that format: `state` = the frozen state, one `choice` question with `instructions` = the
+  frozen question and `criteria` = {"all good": None, "defective": None}. No option descriptions:
+  the frozen prompt has bare option texts, though the card's examples always carry descriptions.
+  So the text is the same as A and B, the rendering is Clef's. The VLM docstring's "identical
+  inputs" holds for A and B only.
+- **One option order.** `question_options` sorts a `choice` question's options by id, so the input
+  is the same whatever order the frozen prompt lists and order 1 would be a duplicate forward pass.
+  Forcing a swap would mean renaming the option ids, which feed the head's
+  `option_lexical_projection`, so it would not be a neutral control. F and L have no positional-bias
+  estimate (`None` in the summary) and their score is one forward pass, where A and B average two.
+- Log-odds are read by option id (`z[defective] - z[all good]`), never by the prompt's index.
+- Images at the release processor's defaults (no `max_pixels` override): a full-size VisA photo is
+  about 1,470 tokens, a reference + test pair 3,017 to 3,121 tokens (measured on the 12 reference
+  photos, `tests/test_clef_tiny.py`). Gemma 4 saw 280 patches per image, so Clef sees about five
+  times as many visual tokens. Stated, not equalised: each model runs as shipped.
+- Head in bf16 as `load_release_model` ships it (the Jev-Omni scores used a float32 head). Logits
+  cast to float64 before the subtraction.
+- `ms_forward` for Clef includes `encode_record` (the processor call), which the release does in one
+  step with the forward pass; `ms_total` is comparable across models.
+
+**Checks before the full run.** `check_clef_equivalence`: our path must reproduce the release's own
+`systemone()` on the cashew reference photo (max |dp| ≤ 1e-3; `systemone()` rounds to 4 decimals,
+so a correct path shows up to 5e-5). Smoke gate: 2 normals + 2 anomalies of cashew in both configs,
+option ids as expected and the output not constant. Verified locally on CPU with a tiny random
+backbone and head built from the real config, processor and code (`tests/test_clef_tiny.py`,
+4 Oct): option order fixed by Clef, log-odds by id, equivalence 4.3e-5. The scorer was run on the
+committed A/B/C rows plus synthetic F rows and reproduces the published A0 81.1 and B0 82.9.
+
+**Compute (estimates, nothing run).** `scripts/pod_clef.sh clef-flash` on an L40S (48 GB; 18.8 GB of
+weights): Gemma 4 took 204 / 409 ms per forward at 280 visual tokens; at about five times the
+visual tokens and one order, expect roughly 0.5 / 1.0 s per image, so about 1 h for 2,162 photos in
+both configs, about 1.5 h with setup, about US$2 at the 26 Sep L40S rate (~US$1.10/h).
+`scripts/pod_clef.sh clef` needs an 80 GB card (54.7 GB of weights): roughly 3 h with the download,
+US$5 to 8 depending on the card's current rate (not checked). Run Clef-Flash first: if it is near
+chance, the 27B run is still worth its cost only as "does size buy vision", and that is Luis's call.
+
+**What would change the post.** If F0 or L0 is within the CI of B0, the finding is "the System One
+head neither helps nor hurts vision", as with Jev-Omni on BLINK/MMStar. If clearly below B0, the
+post-training traded vision for text decisions (one run: hedge the mechanism). If above B0, a
+decision head did help inspection, which no earlier arm showed.

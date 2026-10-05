@@ -1,10 +1,15 @@
-"""Jev-Omni (trained head) and Gemma 4 12B IT zero-shot (digit-logit readout) on VisA.
+"""Jev-Omni (trained head), Gemma 4 12B IT zero-shot (digit-logit readout) and Cloudflare's Clef /
+Clef-Flash (joint schema head) on VisA.
 
-Both models receive identical inputs: the image(s) first, then the text built by Jev-Omni's own
+Jev-Omni and Gemma 4 receive identical inputs: the image(s) first, then the text built by Jev-Omni's own
 `_prompt(state, question, options)` inside the chat template, which is how its predict() does it.
 The score saved per image is the log-odds of "defective" against "all good", in float64:
 - jev:  the head's two option logits, with the head evaluated in float32 outside autocast.
 - base: the log-probabilities of the digits "1" and "2" as the next token.
+- clef: the joint schema head's two option logits. Clef has its own input format (a state, typed
+  questions and allowed options, rendered by its `encode_record`), so it gets the same frozen state,
+  question and option texts in that format, not Jev-Omni's prompt string. It sorts a choice's
+  options by id, so the option order is fixed by the model's code and only order 0 is run.
 Probabilities saturate (BLINK had 57/733 wrong answers at >= 0.99), log-odds do not tie.
 
 One JSON line per (image, config, option order); resumable on that key.
@@ -25,6 +30,11 @@ from . import visa
 
 JEV_REPO, JEV_REV = "akhilaaa3/Jev-Omni", "5addda86ddee081a68fb067477ea100c221b8917"
 BASE_REPO, BASE_REV = "google/gemma-4-12B-it", "707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7"
+CLEF = {"clef": ("Cloudflare/clef", "2f3de3dd85f379784083b0814d997ab627200f0c"),
+        "clef-flash": ("Cloudflare/clef-flash", "17f0b0ad64efb65d273590632833508766b2aae6")}
+CLEF_FILES = ["joint_schema_model.py", "config.json", "generation_config.json", "joint_head.safetensors",
+              "joint_head_config.json", "processor_config.json", "tokenizer.json", "tokenizer_config.json",
+              "chat_template.jinja", "model.safetensors.index.json"]
 MODEL_FILES = ["config.json", "generation_config.json", "model.safetensors", "processor_config.json",
                "tokenizer.json", "tokenizer_config.json", "chat_template.jinja"]
 
@@ -49,7 +59,58 @@ class Base:
         self.device = device
 
 
+class Clef:
+    """A Clef release loaded through its own `load_release_model`, head in bf16 as shipped."""
+
+    def __init__(self, which, device):
+        from huggingface_hub import hf_hub_download
+        repo, rev = CLEF[which]
+        path = Path(_fetch(repo, rev, CLEF_FILES))
+        shards = sorted(set(json.loads((path / "model.safetensors.index.json").read_text())["weight_map"].values()))
+        for f in shards:
+            hf_hub_download(repo, f, revision=rev)
+        sys.path.insert(0, str(path))
+        import joint_schema_model as jsm
+        self.jsm = jsm
+        self.model, self.processor = jsm.load_release_model(path, device=device)
+        self.device = device
+
+
+def clef_record(p: visa.Prompt, images) -> dict:
+    """The frozen state, question and options as one Clef `choice` question, no option descriptions."""
+    return {"state": p.state, "images": images,
+            "questions": {"inspection": {"type": "choice", "instructions": p.question,
+                                         "criteria": {o: None for o in p.options}}}}
+
+
+@torch.inference_mode()
+def clef_logits(clf, record):
+    """Option logits in Clef's own option order, and that order."""
+    jsm = clf.jsm
+    enc = jsm.encode_record(clf.processor.tokenizer, record, processor=clf.processor)
+    batch = jsm.collate_records([enc], clf.processor.tokenizer.pad_token_id, torch.device(clf.device))
+    z = clf.model(batch)[0][0]
+    return z.double().cpu(), list(enc.questions[0].option_ids), len(enc.input_ids)
+
+
+def check_clef_equivalence(clf, root):
+    """Our path must reproduce the release's own `systemone()` on one image."""
+    img = Image.open(root / visa.reference("cashew")).convert("RGB")
+    p = visa.prompt("cashew", "single", 0)
+    rec = clef_record(p, [img])
+    ref = clf.jsm.systemone(clf.model, clf.processor, {"model": "clef", **rec})
+    z, ids, _ = clef_logits(clf, rec)
+    ours = dict(zip(ids, z.float().softmax(0).tolist()))
+    d = max(abs(ours[o] - ref["answers"]["inspection"]["probabilities"][o]) for o in p.options)
+    logger.info(f"[clef] equivalence vs systemone(): max |dp| = {d:.2e}; {ref['answers']}")
+    if d > 1e-3:
+        raise SystemExit("our input path does not match Clef's systemone(); aborting")
+    return {"max_dp_vs_systemone": d, "systemone_answer": ref["answers"]["inspection"]}
+
+
 def load(which: str, device: str):
+    if which in CLEF:
+        return Clef(which, device), None
     jev_path = _fetch(JEV_REPO, JEV_REV, ["jev_omni.py", "verification.json"] +
                       (MODEL_FILES + ["decision_config.json", "head.pt"] if which == "jev" else []))
     sys.path.insert(0, jev_path)
@@ -116,6 +177,9 @@ def run(which, configs, orders, root: Path, out_dir: Path, device="cuda", limit=
     if which == "jev":
         (out_dir / "jev_equivalence.json").write_text(
             json.dumps(check_jev_equivalence(clf, prompt_fn, root, device)))
+    if which in CLEF:
+        (out_dir / f"{which}_equivalence.json").write_text(json.dumps(check_clef_equivalence(clf, root)))
+        orders = (0,)  # Clef sorts a choice's options by id: both orders are the same input
     out = out_dir / f"{which}_visa.jsonl"
     done = {json.loads(line)["key"] for line in out.open()} if out.exists() else set()
     tests = [i for i in visa.load(root) if i.split == "test" and (not categories or i.obj in categories)]
@@ -140,25 +204,32 @@ def run(which, configs, orders, root: Path, out_dir: Path, device="cuda", limit=
                     t0 = time.perf_counter()  # image decode and preprocessing are inside the timer
                     paths = ([visa.reference(item.obj)] if config == "ref" else []) + [item.image]
                     images = [Image.open(root / pth).convert("RGB") for pth in paths]
-                    inputs = make_inputs(processor, images, prompt_fn(p.state, p.question, list(p.options)),
-                                         device)
-                    if torch.cuda.is_available():
-                        torch.cuda.synchronize()
-                    t1 = time.perf_counter()
-                    if which == "jev":
-                        z = jev_logits(clf, inputs, 2)
-                        extra = {}
+                    if which in CLEF:  # encoding and the forward pass are one call; ms_forward includes encoding
+                        t1 = time.perf_counter()
+                        z, ids, n_tokens = clef_logits(clf, clef_record(p, images))
+                        d, g = ids.index(visa.DEFECTIVE), ids.index(visa.GOOD)
+                        extra = {"option_ids": ids}
                     else:
-                        z = base_logprobs(clf, inputs, 2)
-                        extra = {"valid_mass": z.exp().sum().item()}
+                        inputs = make_inputs(processor, images, prompt_fn(p.state, p.question, list(p.options)),
+                                             device)
+                        n_tokens = int(inputs["input_ids"].shape[1])
+                        if torch.cuda.is_available():
+                            torch.cuda.synchronize()
+                        t1 = time.perf_counter()
+                        if which == "jev":
+                            z = jev_logits(clf, inputs, 2)
+                            extra = {}
+                        else:
+                            z = base_logprobs(clf, inputs, 2)
+                            extra = {"valid_mass": z.exp().sum().item()}
+                        d, g = p.defective_index, 1 - p.defective_index
                     if torch.cuda.is_available():
                         torch.cuda.synchronize()
                     t2 = time.perf_counter()
-                    d = p.defective_index
                     rec = {"key": key, "model": which, "image": item.image, "obj": item.obj,
                            "label": item.label, "types": item.types, "config": config, "order": order,
-                           "scores": z.tolist(), "logodds_defective": (z[d] - z[1 - d]).item(),
-                           "n_tokens": int(inputs["input_ids"].shape[1]),
+                           "scores": z.tolist(), "logodds_defective": (z[d] - z[g]).item(),
+                           "n_tokens": n_tokens,
                            "ms_total": round((t2 - t0) * 1e3, 2), "ms_forward": round((t2 - t1) * 1e3, 2),
                            **extra}
                     fh.write(json.dumps(rec) + "\n")

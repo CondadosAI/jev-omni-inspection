@@ -28,13 +28,15 @@ Jev-Omni and 16 against Gemma 4 at anomalib's default 256 px (pre-registered), a
 ```
 src/jev_inspection/
   visa.py        official 1cls split, the frozen prompt, the frozen draws
-  vlm.py         Jev-Omni head and Gemma 4 digit readout -> float64 log-odds, both option orders
+  vlm.py         Jev-Omni head and Gemma 4 digit readout -> float64 log-odds, both option orders;
+                 Clef / Clef-Flash joint schema head (one order: Clef sorts its options)
   patchcore.py   anomalib's PatchcoreModel on k good parts
   score.py       macro AUROC, paired bootstrap, k*, cross-fitted triage, Holm
   cli.py         jev-inspection {vlm, patchcore, probe, score, step0}
 scripts/
   pod_run.sh       the full run on one GPU pod
   pod_ablation.sh  PatchCore at 512 x 512
+  pod_clef.sh      the Clef arm (clef-flash on 48 GB, clef on 80 GB), scored into results-clef/
   post_data.py     numbers and lab data used by the post
   post_figures.py  the post's SVG figures
   ablation_summary.py      the 512 px ablation -> results/summary_r512.json
@@ -75,6 +77,8 @@ redistributed here, and each keeps its own terms:
 | [VisA](https://github.com/amazon-science/spot-diff) (Zou et al., ECCV 2022) | archive `VisA_20220922.tar`, repo `2a692ab5` | CC BY 4.0 (`LICENSE-DATASET` in the repo); the repo's code is Apache-2.0 |
 | [akhilaaa3/Jev-Omni](https://huggingface.co/akhilaaa3/Jev-Omni) | `5addda86` | Apache-2.0 on the model card |
 | [google/gemma-4-12B-it](https://huggingface.co/google/gemma-4-12B-it) | `707f0a3b` | Apache-2.0 on the model card, which also links the [Gemma 4 license page](https://ai.google.dev/gemma/docs/gemma_4_license) |
+| [Cloudflare/clef](https://huggingface.co/Cloudflare/clef) | `2f3de3dd` | Apache-2.0 (`LICENSE` in the repo and on the model card) |
+| [Cloudflare/clef-flash](https://huggingface.co/Cloudflare/clef-flash) | `17f0b0ad` | Apache-2.0 (`LICENSE` in the repo and on the model card) |
 | [timm/wide_resnet50_2.racm_in1k](https://huggingface.co/timm/wide_resnet50_2.racm_in1k) | `30f73ace` | Apache-2.0 on the model card; trained on ImageNet-1k, whose images have their own terms |
 | [timm/wide_resnet101_2.tv_in1k](https://huggingface.co/timm/wide_resnet101_2.tv_in1k) (sanity anchor only) | `bc795a74` | BSD-3-Clause on the model card; torchvision's ImageNet-1k weights |
 | [anomalib](https://github.com/open-edge-platform/anomalib) | 2.6.2 (PyPI) | Apache-2.0 |

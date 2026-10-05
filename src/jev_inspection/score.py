@@ -27,13 +27,16 @@ from scipy.stats import beta, rankdata
 
 from . import visa
 
-VLM_SYSTEMS = {"A0": ("jev", "single"), "A1": ("jev", "ref"), "B0": ("base", "single"), "B1": ("base", "ref")}
+VLM_SYSTEMS = {"A0": ("jev", "single"), "A1": ("jev", "ref"), "B0": ("base", "single"), "B1": ("base", "ref"),
+               "F0": ("clef-flash", "single"), "F1": ("clef-flash", "ref"),
+               "L0": ("clef", "single"), "L1": ("clef", "ref")}
+SINGLE_ORDER = {"clef-flash", "clef"}  # Clef sorts its options: one order, no positional-bias estimate
 ESCAPE, OVERKILL, PREVALENCE = 0.05, 0.05, 0.01
 
 
 # --- loading ---------------------------------------------------------------------------------
 def load_vlm(paths: list[Path]) -> tuple[pd.DataFrame, dict]:
-    """One column per VLM system: log-odds averaged over the two option orders."""
+    """One column per VLM system: log-odds averaged over the two option orders (one for Clef)."""
     rows = [json.loads(line) for p in paths if p.exists() for line in p.open()]
     df = pd.DataFrame(rows)
     cols, bias = {}, {}
@@ -42,10 +45,12 @@ def load_vlm(paths: list[Path]) -> tuple[pd.DataFrame, dict]:
         if sub.empty:
             continue
         wide = sub.pivot_table(index="image", columns="order", values="logodds_defective")
-        if wide.isna().any().any() or set(wide.columns) != {0, 1}:
-            raise ValueError(f"{name}: some images lack one of the two option orders")
+        orders = {0} if model in SINGLE_ORDER else {0, 1}
+        if wide.isna().any().any() or set(wide.columns) != orders:
+            raise ValueError(f"{name}: expected option orders {sorted(orders)}, found {sorted(wide.columns)}")
         cols[name] = wide.mean(axis=1)
-        bias[name] = float((wide[0] - wide[1]).mean())  # >0: "defective" favoured when listed second
+        # >0: "defective" favoured when listed second
+        bias[name] = None if model in SINGLE_ORDER else float((wide[0] - wide[1]).mean())
     return pd.DataFrame(cols), bias
 
 
@@ -225,6 +230,12 @@ def summarise(root: Path, vlm_paths: list[Path], patchcore_path: Path | None, B=
             pvals[c] = max(1 / B, 2 * min((d <= 0).mean(), (d >= 0).mean()))
         out["A0_vs_B0"] = {"macro_diff_ci95": ci(boot["A0"] - boot["B0"]),
                            "per_category_diff": diffs, "per_category_p_holm": holm(pvals)}
+
+    out["vlm_pairs"] = {}  # descriptive: every VLM against every other, same bootstrap draws
+    names = sorted(systems)
+    for i, a in enumerate(names):
+        for b in names[i + 1:]:
+            out["vlm_pairs"][f"{a}-{b}"] = {"diff": point[a] - point[b], "ci95": ci(boot[a] - boot[b])}
 
     out["triage"] = {}
     for n, s in systems.items():
