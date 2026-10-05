@@ -32,12 +32,18 @@ echo "== $(date -u) smoke: 2+2 cashew images (the equivalence check against syst
 uv run jev-inspection vlm --model $MODEL --category cashew --limit 2 --out $OUT || { echo '!! smoke failed'; exit 1; }
 uv run python - "$OUT/${MODEL}_visa.jsonl" <<'EOF' || { echo '!! smoke rows look wrong'; exit 1; }
 import json, sys
-rows = [json.loads(line) for line in open(sys.argv[1])]
+# the smoke rows only: on a rerun after a crash the file already holds the full run's rows
+rows = [r for r in map(json.loads, open(sys.argv[1])) if r["obj"] == "cashew"][:8]
 for r in rows:
     print(r["config"], r["label"], round(r["logodds_defective"], 3), r["option_ids"], r["n_tokens"], r["ms_total"])
 assert len(rows) == 8 and all(r["option_ids"] == ["all good", "defective"] for r in rows)
 assert len({round(r["logodds_defective"], 6) for r in rows}) > 1, "constant output"
+# the estimate assumes the linear-attention kernels; transformers falls back to pure torch without them
+slow = max(r["ms_total"] for r in rows if r["config"] == "single")
+print(f"slowest single-image forward: {slow:.0f} ms")
+assert slow < 3000, "far slower than the estimate: check the fla / causal_conv1d kernels before the full run"
 EOF
+uv run python -c "import importlib.util as u; print({m: bool(u.find_spec(m)) for m in ('kernels', 'fla', 'causal_conv1d')})"
 
 echo "== $(date -u) full run"
 uv run jev-inspection vlm --model $MODEL --out $OUT || { echo "!! $MODEL failed"; exit 1; }

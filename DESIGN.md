@@ -397,6 +397,10 @@ both configs, about 1.5 h with setup, about US$2 at the 26 Sep L40S rate (~US$1.
 `scripts/pod_clef.sh clef` needs an 80 GB card (54.7 GB of weights): roughly 3 h with the download,
 US$5 to 8 depending on the card's current rate (not checked). Run Clef-Flash first: if it is near
 chance, the 27B run is still worth its cost only as "does size buy vision", and that is Luis's call.
+Both estimates assume the fast kernels for Qwen3.5's linear-attention layers: transformers 5.17 takes
+`chunk_gated_delta_rule` and `causal_conv1d` from the kernels hub and falls back to pure torch when it
+cannot, and the `vlm` extra pins neither (none of `kernels`, `fla`, `causal_conv1d` is in the local
+venv). The smoke gate prints which are present and aborts if a single-image forward takes over 3 s.
 
 **What would change the post.** If F0 or L0 is within the CI of B0, the finding is "the System One
 head neither helps nor hurts vision", as with Jev-Omni on BLINK/MMStar. If clearly below B0, the
