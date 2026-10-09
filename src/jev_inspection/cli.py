@@ -14,20 +14,20 @@ def main():
 
 
 @main.command()
-@click.option("--model", type=click.Choice(["jev", "base", "rsijev"]), required=True)
+@click.option("--model", type=click.Choice(["jev", "base", "rsijev-4b", "rsijev-27b"]), required=True)
 @click.option("--config", "configs", multiple=True, default=visa.CONFIGS, type=click.Choice(visa.CONFIGS))
 @click.option("--root", type=Path, default=visa.DEFAULT_ROOT)
 @click.option("--out", type=Path, default=Path("results"))
 @click.option("--category", "categories", multiple=True, type=click.Choice(visa.CATEGORIES))
 @click.option("--limit", type=int, help="first N normals and N anomalies per category (smoke test)")
 @click.option("--device", default="cuda")
-@click.option("--server", default="http://localhost:8000", help="rsijev only: URL of a running rsi-jev server")
-@click.option("--server-model", default="jev-latest", help="rsijev only: the request's model field")
+@click.option("--server", default="http://localhost:8000", help="rsijev-* only: URL of a running rsi-jev server")
+@click.option("--server-model", default="jev-latest", help="rsijev-* only: the request's model field")
 def vlm(model, configs, root, out, categories, limit, device, server, server_model):
     """Score the test set with Jev-Omni or Gemma 4 zero-shot (GPU pod), or RSI-Jev over HTTP."""
-    if model == "rsijev":  # added after the pre-registered run; single-image config only
+    if model.startswith("rsijev"):  # added after the pre-registered run; single-image config only
         from .rsijev import run as run_rsijev
-        run_rsijev(server, server_model, root, out, limit, categories)
+        run_rsijev(model, server, server_model, root, out, limit, categories)
         return
     from .vlm import run
     run(model, configs, visa.ORDERS, root, out, device, limit, categories)
@@ -70,11 +70,11 @@ def patchcore(root, out, categories, ks, seeds, backbone, image_size, maps_for, 
 @click.option("--patchcore-file", default="patchcore_wide_resnet50_2.jsonl")
 @click.option("--category", "categories", multiple=True, type=click.Choice(visa.CATEGORIES))
 @click.option("--bootstrap", default=2000)
-@click.option("--rsijev", is_flag=True, help="add RSI-Jev (R0, post hoc) -> results/summary_rsijev.json")
+@click.option("--rsijev", is_flag=True, help="add RSI-Jev v6.1-VL 4B and 27B (R0, R1; post hoc) -> results/summary_rsijev.json")
 def score(root, results, patchcore_file, categories, bootstrap, rsijev):
     """Primary endpoint, k*, triage and breakdowns -> results/summary.json."""
     from .score import summarise
-    vlm_files = ["jev_visa.jsonl", "base_visa.jsonl"] + (["rsijev_visa.jsonl"] if rsijev else [])
+    vlm_files = ["jev_visa.jsonl", "base_visa.jsonl"] + (["rsijev_4b_visa.jsonl", "rsijev_27b_visa.jsonl"] if rsijev else [])
     s = summarise(root, [results / f for f in vlm_files], results / patchcore_file,
                   B=bootstrap, categories=categories or visa.CATEGORIES)
     (results / ("summary_rsijev.json" if rsijev else "summary.json")).write_text(json.dumps(s, indent=1))

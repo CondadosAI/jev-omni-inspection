@@ -1,18 +1,21 @@
-"""RSI-Jev v4.0-VL through its HTTP server. Added after the pre-registered run (see DESIGN.md).
+"""RSI-Jev v6.1-VL 4B and 27B through their HTTP server. Added after the pre-registered run (see DESIGN.md).
 
 RSI-Jev serves Jev's `POST /v1/systemone` request, plus an `images` list of data URLs. It is a
-separate model (Qwen3.5-2B base), so it cannot go through the in-process path in vlm.py; this
-module sends the same frozen prompt over HTTP instead:
+separate model, so it cannot go through the in-process path in vlm.py; this module sends the
+same frozen prompt over HTTP instead:
 
-    rsi-jev serve shgao/rsi-jev-v4.0-vl-qwen3.5-2b --port 8000
-    jev-inspection vlm --model rsijev --server http://localhost:8000
+    rsi-jev serve v6.1-vl-4b --port 8000
+    jev-inspection vlm --model rsijev-4b --server http://localhost:8000
+    rsi-jev serve v6.1-vl-27b --effort auto --port 8000
+    jev-inspection vlm --model rsijev-27b --server http://localhost:8000
 
 The state and question are the frozen ones from visa.prompt(); the two options go in as a
 choice question in the listed order, so both option orders are asked as for the other VLMs.
 The score saved per image is the log-odds of "defective" against "all good" from the served
 (calibrated) probabilities. Photos are scaled to fit 1,536 px and sent as PNG.
 
-One JSON line per (image, config, option order); resumable on that key. Single-image config only.
+One JSON line per (image, config, option order) in results/<model>_visa.jsonl (dashes as
+underscores); resumable on that key. Single-image config only.
 """
 from __future__ import annotations
 
@@ -30,6 +33,10 @@ from . import visa
 
 MAX_SIDE = 1536
 LETTERS = "AB"
+
+
+def results_file(name: str) -> str:
+    return name.replace("-", "_") + "_visa.jsonl"
 
 
 def data_url(path: Path) -> str:
@@ -53,9 +60,9 @@ def ask(server: str, model: str, state: str, question: str, options: list[str], 
     return [probs[k] for k in LETTERS[:len(options)]], resp.get("usage", {}).get("input_tokens")
 
 
-def run(server, model, root: Path, out_dir: Path, limit=None, categories=None):
+def run(name, server, model, root: Path, out_dir: Path, limit=None, categories=None):
     out_dir.mkdir(parents=True, exist_ok=True)
-    out = out_dir / "rsijev_visa.jsonl"
+    out = out_dir / results_file(name)
     done = {json.loads(line)["key"] for line in out.open()} if out.exists() else set()
     tests = [i for i in visa.load(root) if i.split == "test" and (not categories or i.obj in categories)]
     if limit:
@@ -65,7 +72,7 @@ def run(server, model, root: Path, out_dir: Path, limit=None, categories=None):
             if seen[(i.obj, i.label)] <= limit:
                 kept.append(i)
         tests = kept
-    logger.info(f"[rsijev] {len(tests)} test images x 2 orders via {server}")
+    logger.info(f"[{name}] {len(tests)} test images x 2 orders via {server}")
     with out.open("a") as fh:
         for n_done, item in enumerate(tests):
             url = None
@@ -78,10 +85,10 @@ def run(server, model, root: Path, out_dir: Path, limit=None, categories=None):
                 probs, n_tokens = ask(server, model, p.state, p.question, list(p.options), url)
                 lp = [math.log(max(x, 1e-12)) for x in probs]
                 d = p.defective_index
-                rec = {"key": key, "model": "rsijev", "image": item.image, "obj": item.obj,
+                rec = {"key": key, "model": name, "image": item.image, "obj": item.obj,
                        "label": item.label, "types": item.types, "config": "single", "order": order,
                        "scores": lp, "logodds_defective": lp[d] - lp[1 - d], "n_tokens": n_tokens}
                 fh.write(json.dumps(rec) + "\n")
                 fh.flush()
             if n_done % 100 == 0:
-                logger.info(f"[rsijev] {n_done}/{len(tests)} {item.obj}")
+                logger.info(f"[{name}] {n_done}/{len(tests)} {item.obj}")
