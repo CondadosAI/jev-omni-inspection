@@ -17,11 +17,23 @@ The pre-registration, including the frozen prompt and every departure from it, i
 | PatchCore 256 px, k = 1 / 8 / 16 | 1–16 | 80.8 / 84.2 / 85.7 |
 | PatchCore 256 px, all | 449–904 | 90.2 (89.0–91.4) |
 | PatchCore 512 px, k = 1 / 4 / 16 | 1–16 | 84.5 / 89.7 / 92.4 |
+| RSI-Jev v6.1-VL 4B, test photo only (added after the pre-registered design) | 0 | 81.0 (79.1–82.7) |
+| RSI-Jev v6.1-VL 27B, test photo only (added after the pre-registered design) | 0 | 88.1 (86.7–89.5) |
 
 k\* (the first k whose paired-bootstrap interval on the difference is above zero) is 8 against
 Jev-Omni and 16 against Gemma 4 at anomalib's default 256 px (pre-registered), and 1 and 4 at
 512 px (an ablation added after the run). `results/summary.json` holds the 256 px run,
 `results/summary_r512.json` the ablation.
+
+The two RSI-Jev v6.1-VL rows were added after the pre-registered design, by the RSI-Jev authors,
+and are not part of the pre-registered comparison. They use the same frozen prompt, split, option
+orders and statistics; per-image scores are in `results/rsijev_4b_visa.jsonl` and
+`results/rsijev_27b_visa.jsonl` (R0 and R1), the summary in `results/summary_rsijev.json`. Against
+PatchCore 256 px, k\* is 8 for the 4B; for the 27B no k up to 64 is above it, and `all` is. Caveats:
+they read about 1,040 input tokens per photo, against about 350 for Jev-Omni and Gemma 4; VisA is not
+among their fine-tuning sources, but their base models' (Qwen3.5-4B-Base, Qwen3.8-27B) pretraining
+data cannot be checked; the 4B scores 39.2 on pipe_fryum (it calls most good parts defective) and
+80.1 on chewinggum, and the 27B is below both VLMs on macaroni1.
 
 ## Layout
 
@@ -29,6 +41,7 @@ Jev-Omni and 16 against Gemma 4 at anomalib's default 256 px (pre-registered), a
 src/jev_inspection/
   visa.py        official 1cls split, the frozen prompt, the frozen draws
   vlm.py         Jev-Omni head and Gemma 4 digit readout -> float64 log-odds, both option orders
+  rsijev.py      RSI-Jev v6.1-VL 4B and 27B over their HTTP server (Jev's request plus images), added after the run
   patchcore.py   anomalib's PatchcoreModel on k good parts
   score.py       macro AUROC, paired bootstrap, k*, cross-fitted triage, Holm
   cli.py         jev-inspection {vlm, patchcore, probe, score, step0}
@@ -61,6 +74,17 @@ uv run jev-inspection score --results results
 uv run pytest                      # the end-to-end test needs VisA under VISA_ROOT
 ```
 
+RSI-Jev v6.1-VL 4B and 27B (added after the run; they are served over HTTP, so no GPU stack here):
+
+```bash
+pip install "rsi-jev[fast,vision] @ git+https://github.com/Shanghua-Gao/RSI-Jev@fc982bbd3fb185af2ce629091588cb640400dafb"
+rsi-jev serve v6.1-vl-4b --port 8000
+uv run jev-inspection vlm --model rsijev-4b --server http://localhost:8000
+rsi-jev serve v6.1-vl-27b --effort auto --port 8000     # one 96 GB GPU
+uv run jev-inspection vlm --model rsijev-27b --server http://localhost:8000
+uv run jev-inspection score --results results --rsijev    # -> results/summary_rsijev.json
+```
+
 The VisA archive is downloaded from the official URL and checked against
 sha256 `2eb8690c803ab37de0324772964100169ec8ba1fa3f7e94291c9ca673f40f362`.
 
@@ -77,6 +101,8 @@ redistributed here, and each keeps its own terms:
 | [google/gemma-4-12B-it](https://huggingface.co/google/gemma-4-12B-it) | `707f0a3b` | Apache-2.0 on the model card, which also links the [Gemma 4 license page](https://ai.google.dev/gemma/docs/gemma_4_license) |
 | [timm/wide_resnet50_2.racm_in1k](https://huggingface.co/timm/wide_resnet50_2.racm_in1k) | `30f73ace` | Apache-2.0 on the model card; trained on ImageNet-1k, whose images have their own terms |
 | [timm/wide_resnet101_2.tv_in1k](https://huggingface.co/timm/wide_resnet101_2.tv_in1k) (sanity anchor only) | `bc795a74` | BSD-3-Clause on the model card; torchvision's ImageNet-1k weights |
+| [shgao/rsi-jev-v6.1-vl-4b](https://huggingface.co/shgao/rsi-jev-v6.1-vl-4b) (post-hoc row only) | `7f93b192` | Apache-2.0 on the model card |
+| [shgao/rsi-jev-v6.1-vl-27b](https://huggingface.co/shgao/rsi-jev-v6.1-vl-27b) (post-hoc row only) | `d0dccc05` | Apache-2.0 on the model card |
 | [anomalib](https://github.com/open-edge-platform/anomalib) | 2.6.2 (PyPI) | Apache-2.0 |
 | [RF-DETR](https://github.com/roboflow/rf-detr) base, COCO weights (day-0 demo only) | rfdetr 1.11.0 | Apache-2.0 |
 | [Lime sorting on conveyor belt in factory](https://www.pexels.com/video/lime-sorting-on-conveyor-belt-in-factory-32953325/), Comercial GB (day-0 demo only) | Pexels 32953325, 1080 × 1920, sha256 `2bec11f3…1d72` | [Pexels licence](https://www.pexels.com/license/); downloaded, not redistributed |

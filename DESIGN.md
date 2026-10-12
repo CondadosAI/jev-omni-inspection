@@ -338,3 +338,18 @@ So the pre-registered k\* = 8 is a property of anomalib's 256 px default, and th
 EFFICIENTAD (Appendix B.5): their 94.3 used WRN-101, 224×224, coreset 1 %, no crop,
 official patchcore-inspection code; our WRN-101 anchor at 256 / 10 % gave 90.5, so the
 anchor gap is not resolution and remains unexplained (implementation is the candidate).
+
+## Post-hoc addition: RSI-Jev v6.1-VL 4B and 27B (9 Oct 2026)
+
+Not pre-registered; contributed by the RSI-Jev authors after the run. RSI-Jev v6.1-VL 4B
+(Qwen3.5-4B-Base, `shgao/rsi-jev-v6.1-vl-4b`) and 27B (Qwen3.8-27B, `shgao/rsi-jev-v6.1-vl-27b`,
+served with `--effort auto`, which does not change image requests) on config "single" only, both
+option orders, the frozen prompt sent as a two-option choice to their `/v1/systemone` server
+(`src/jev_inspection/rsijev.py`). The score is the log-odds of "defective" from the served,
+calibrated probabilities; photos are scaled to fit 1,536 px. `jev-inspection score --rsijev` adds
+them as R0 and R1 and writes `results/summary_rsijev.json`; `results/summary.json` is unchanged.
+Macro AUROC 81.0 (79.1–82.7) for the 4B and 88.1 (86.7–89.5) for the 27B; k\* against PatchCore
+256 px is 8 and `all`. They use about 1,040 input tokens per photo against about 350 for A0/B0,
+VisA is not among their fine-tuning sources but their base models' pretraining data cannot be
+checked, the 4B scores 39.2 on pipe_fryum and 80.1 on chewinggum, and the 27B is below A0 and B0
+on macaroni1.
